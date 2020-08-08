@@ -45,7 +45,7 @@ INSTALLED_APPS = [
 
 ]
 
-# AUTH_USER_MODEL = 'account.User'
+AUTH_USER_MODEL = 'account.User'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -131,6 +131,14 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 # media files
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
+
+
+LOGIN_URL = 'login'
+LOGIN_REDIRECT_URL = '../'
+
+LOGIUT_URL = 'logout'
+LOGOUT_REDIRECT_URL = '../'
+
 
 # Third party apps configuration
 
