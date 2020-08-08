@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+    <div class="container p-5">
+        <div class="mx-auto mt-5" style="width: 400px;">
+            <div class="container border rounded bg-light">
+                <form method = 'POST' novalidate>
+                    <fieldset class="form-group">
+                        <legend class="border-bottom mb-4">Register as User Type</legend>
+                        {% comment %} <input type="hidden" name="next" value="{{ next }}"> {% endcomment %}
+                            <div class="form-group">
+                                <label for="usernameinput">Username</label>
+                                <input type="text" class="form-control" id="usernameinput" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="passwordinput">Password</label>
+                                <input type="password" class="form-control" id="passwordinput" required>
+                            </div>
+                    </fieldset>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-outline-info btn-block">Log in</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}
