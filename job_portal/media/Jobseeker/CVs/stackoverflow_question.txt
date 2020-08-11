@@ -1,0 +1,74 @@
+How to make user profile showing percentage complete # Title
+
+example(if user profile is complete is 25%, message: first of all complete your profile then do this"apply job")
+
+I have a user profile model. I followed(https://stackoverflow.com/questions/17278988/django-profile-showing-percentage-complete)
+
+class profile(models.Model):
+    user = models.OneToOneField(User, on_delete = models.CASCADE, primary_key=True)
+    random = models.CharField(max_length=50)
+    image = models.ImageField(upload_to="profile_pics")
+
+    def __str__(self):
+        return f'{self.user.username} profile'
+
+    def get_absolute_url(self):
+        return reverse('jobseeker:jobseeker_profile')
+
+
+
+    @property 
+    def percentage_complete(self):
+        percent = { 'random': 50, 'image': 50}
+        total = 0
+        if self.random:
+            total += percent.get('random', 0)
+        if self.image:
+            total += percent.get('image', 0)
+        return total
+
+
+# forms.py:
+class ProfileUpdateForm(forms.ModelForm):
+    random = forms.CharField(widget=forms.TextInput(
+        attrs={'class':'form-control', 'placeholder':'write whant you want'}
+        ), required=False, max_length=20)
+
+
+
+    class Meta():
+        model = profile
+        fields = ['random', 'image']
+
+
+# Views.py
+
+
+@method_decorator([login_required, jobseeker_required], name='dispatch')
+class profile_jobseeker(CreateView):
+    model = profile
+    form_class = ProfileUpdateForm
+    template_name = 'profile.html'
+    context_object_name = 'profile'
+
+
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super().form_valid(form)
+
+
+
+how to render percentage completion value in templates
+
+I used that way, I dont know this is good way or not.
+
+profile.html
+<h1>your profile is   {{ pfofile.percentage_complete }} complete</h1>
+
+
+
+
+
+
+ 

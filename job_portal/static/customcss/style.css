@@ -445,3 +445,17 @@ body{
     text-align: center;
 
 }
+
+
+.profile-pic-section{
+    height: auto;
+    width: auto;
+}
+
+.profile-pic img{
+    height: 200px;
+    width: 200px;
+}
+.username-online-acc{
+    height: auto;
+}

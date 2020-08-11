@@ -38,7 +38,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'ckeditor',
-    'taggit',
     'account.apps.AccountConfig',
     'crispy_forms',
     
@@ -138,6 +137,7 @@ LOGIN_REDIRECT_URL = '../'
 
 LOGIUT_URL = 'logout'
 LOGOUT_REDIRECT_URL = '../'
+
 
 
 # Third party apps configuration
