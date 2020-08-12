@@ -31,7 +31,7 @@
           {% if user.is_jobseeker %}
             <a class="navbar-brand mr-4" href="{% url 'jobseeker:jobseeker_dashboard' %}">Job Portal</a>
           {% else %}
-            <a class="navbar-brand mr-4" href="{% url 'employer:employer_profile' %}">Job Portal</a>
+            <a class="navbar-brand mr-4" href="{% url 'employer:employer_dashboard' %}">Job Portal</a>
           {% endif %}
         {% else %}
         <a class="navbar-brand mr-4" href="{% url 'index' %}">Job Portal</a>
@@ -117,7 +117,13 @@
 
 
 {% block content %}
-
+          {% if messages %}
+            {% for message in messages %}
+              <div class="alert alert-{{message.tags}}">
+                {{message}}
+              </div>
+            {% endfor %}
+          {% endif %}
   
 
 {% endblock content %}

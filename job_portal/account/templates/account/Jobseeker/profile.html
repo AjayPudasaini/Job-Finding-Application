@@ -23,10 +23,10 @@
                     <a class="nav-link" href="{% url 'jobseeker:jobseeker_dashboard' %}"> Dashboard <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url 'jobseeker:jobseeker_profile_detail' %}">Profile Detail</a>
+                    <a class="nav-link" href="{% url 'jobseeker:jobseeker_profile_detail' user.id  %}">Profile Detail</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url 'jobseeker:jobseeker_profile_add_skill' %}">Edit Profile</a>
+                    <a class="nav-link" href="{% url 'jobseeker:jobseeker_profile_add_detail'%}">Update Profile</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'logout' %}">Logout</a>
@@ -40,7 +40,8 @@
 
 
     {% block profilecontent %}
-        
+            <img src=" {{ user.employerprofile.CompanyLogo.url }} " class="rounded-circle inf-fluid" alt="logo">
+
     {% endblock profilecontent %}
 {% endblock content %}
 

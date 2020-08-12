@@ -123,43 +123,13 @@ class User(AbstractUser):
     is_jobseeker = models.BooleanField(default=False)
     
 
-
-class Skill(models.Model):
-    Name = models.CharField(max_length=50, blank=False, null= False, verbose_name='Skill')
-
-
-
-    def __str__(self):
-        return self.Name
-        
-    
-    def get_absolute_url(self):
-        return reverse("jobseeker:jobseeker_profile_add_category")
-    
-    
-
-
-class Category(models.Model):
-    Name = models.CharField(max_length=100, choices=JOB_CATEGORY_CHOICES)
-
-
-    def __str__(self):
-        return self.Name
-     
-    
-
-    def get_absolute_url(self):
-        return reverse("jobseeker:jobseeker_profile_add_detail")
-    
-
 class JobseekerProfile(models.Model):
-    user = models.OneToOneField(User, on_delete = models.CASCADE, primary_key = True)
+    user = models.OneToOneField(User, on_delete = models.CASCADE, primary_key = True, related_name='jobseekerprofile')
 
     # Basic Information
     FirstName = models.CharField(max_length=30, blank=False, null=False, verbose_name='First Name')
     LastName = models.CharField(max_length=30, blank=False, null=False, verbose_name='Last Name')
     Gender = models.CharField(max_length=20, choices=GENDER_CHOICE)
-    DateOffBorth = models.DateField(verbose_name='Date Of Birth')
     MarrigeStatus = models.CharField(max_length=20, choices=MARRIED_STATUS_CHOICES, verbose_name='Marrige Status')
     Religion = models.CharField(max_length=20, choices=RELIGION_CHOOSE)
     PhoneNumber = models.CharField(max_length=20, verbose_name='Phone Number')
@@ -167,7 +137,7 @@ class JobseekerProfile(models.Model):
     Nationality = models.CharField(max_length=30, choices=NATIONALITY_CHOOSE, verbose_name='Nationality')
     CurrentAddress = models.CharField(max_length=100, verbose_name='Current Address')
     PernamentAddress = models.CharField(max_length=100, verbose_name='Pernament Address')
-    ProfileImage = models.ImageField(upload_to = 'Jobseeker/Profile_Pictures', verbose_name='Profile Picture')
+    ProfileImage = models.ImageField(default='defaultusers.png', upload_to = 'Jobseeker/Profile_Pictures', verbose_name='Profile Picture')
    
     # Education Information
     Education = models.CharField(max_length=100, choices=EDUCATION_CHOICES, verbose_name='Education')
@@ -176,7 +146,7 @@ class JobseekerProfile(models.Model):
     NameOfInstitute = models.CharField(max_length=200, verbose_name='Name Of Institute')
 
     # skill
-    MySkill = models.ManyToManyField(Skill, verbose_name='My Skill')
+    MySkill = models.CharField(max_length=50, verbose_name='My Skill')
 
     # Past jobs
     WorkingExperience = models.IntegerField(default=0, verbose_name='Working Experience') 
@@ -185,7 +155,7 @@ class JobseekerProfile(models.Model):
     WorkedCompanyWebsite = models.URLField(max_length=200, verbose_name='Worked Company Website')
 
     # job category
-    JobCategory = models.ManyToManyField(Category, verbose_name='Job Category')
+    JobCategory = models.CharField(max_length=50, choices=JOB_CATEGORY_CHOICES, verbose_name='Job Category')
 
     # add language
     Language = models.CharField(max_length=20, choices=LANGUAGES_CHOICES)
@@ -199,7 +169,7 @@ class JobseekerProfile(models.Model):
     Instagram = models.URLField(max_length=100)
 
     # upload cv
-    UploadCv = models.FileField(upload_to='Jobseeker/CVs', verbose_name='Upload Your CV')
+    UploadCv = models.FileField(upload_to='Jobseeker/CVs',null=True,  verbose_name='Upload Your CV')
 
 
 
@@ -209,15 +179,15 @@ class JobseekerProfile(models.Model):
         return f'{self.user.username} profile'
 
 
-    def get_absolute_url(self):
-        return reverse("jobseeker:jobseeker_profile_detail")
+    # def get_absolute_url(self):
+    #     return reverse("jobseeker:jobseeker_profile_detail")
 
 
 
     
 
-    def save(self):
-        super().save()
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
 
         ProfilePic = Image.open(self.ProfileImage.path)
         if ProfilePic.height>300 or ProfilePic.width>300:
@@ -227,31 +197,18 @@ class JobseekerProfile(models.Model):
 
 
 
-    # @property 
-    # def percentage_complete(self):
-    #     percent = { 'name': 10, 'mobile': 50, 'website': 10, 'location': 10, 'birth_date': 10, 'gender': 10}
-    #     total = 0
-    #     if self.gender:
-    #         total += percent.get('gender', 0)
-    #     if self.name:
-    #         total += percent.get('name', 0)
-    #     #and so on
-    #     return "%s"%(total)
-
-
-
 
 
 class EmployerProfile(models.Model):
-    user = models.OneToOneField(User, on_delete = models.CASCADE, primary_key = True)
+    user = models.OneToOneField(User, on_delete = models.CASCADE, primary_key = True, related_name='employerrprofile')
     
     # Basic Information
     CompanyName = models.CharField(max_length=30, blank=False, null=False, verbose_name='Company Name')
-    CompanyLogo = models.ImageField(upload_to='Employer/Company_Logos', verbose_name='Company Logo')
-    CompanyCategory = models.ManyToManyField(Category, verbose_name='Company Category')
+    CompanyLogo = models.ImageField(default='defaultlogo.jpg', upload_to='Employer/Company_Logos', verbose_name='Company Logo')
+    CompanyCategory = models.CharField(max_length=50, choices=JOB_CATEGORY_CHOICES, verbose_name='Company Category')
     CompanyOwnership = models.CharField(max_length=30, choices=COMPANY_OWNERSHIP_CHOICES, verbose_name='Company Ownership')
     CompanyWebsite = models.URLField(max_length=100, verbose_name='Company Website')
-    CompanyEstablishDate = models.DateField(verbose_name='Company Established Date')
+    CompanyEstablishDate = models.DateField(null=True, blank=True, verbose_name='Company Established Date')
     AboutCompany = RichTextField(null=True, verbose_name='About Company')
 
     # Contact Detail
@@ -275,9 +232,14 @@ class EmployerProfile(models.Model):
         return f'{self.user.username} profile'
 
 
+    def get_absolute_url(self):
+        return reverse("employer:employer_profile_detail")
+    
 
-    def save(self):
-        super().save()
+
+
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
 
         logo = Image.open(self.CompanyLogo.path)
         if logo.height>60 or logo.width>60:

@@ -1,8 +1,8 @@
-{% extends 'account/jobseeker/profile.html' %}
+{% extends 'account/Employer/employer_profile.html' %}
 {% load static %}
 
 
-{% block profilecontent %}
+{% block profilecontents %}
    <div class="container border bg-white p-5 mt-5 mb-5">
         <div class="container">
             <div class="row">
@@ -10,24 +10,25 @@
                     <div class="border rounded bg-light profile-pic-section">
     
                         <div class="profile-pic pt-4 justify-content-center d-flex ">
-                            <img src=" {{ user.jobseekerprofile.ProfileImage.url }} " class="rounded-circle inf-fluid" alt="profile-pic">
+                            <img src=" {{ user.employerrprofile.CompanyLogo.url }} " class="rounded-circle inf-fluid" alt="logo">
                         </div>
                         
                         <div class="username-online-acc border-top mt-3 w-100">
                             
                             <h6 class="username justify-content-center d-flex mt-1">@{{ user.username }}</h6>
-                            
+                            {% for links in profile %}
                             <div class="justify-content-center d-flex">
                                 <div class="p-2">
-                                    <a href="{{ profile.Facebook }}"><i class="fa fa-facebook"></i></a>
+                                    <a href="{{ links.Facebook }}"><i class="fa fa-facebook"></i></a>
                                 </div>
                                 <div class="p-2">
-                                    <a href="{{ profile.Twitter }}"><i class="fa fa-twitter"></i></a>
+                                    <a href="{{ links.Twitter }}"><i class="fa fa-twitter"></i></a>
                                 </div>
                                 <div class="p-2">
-                                    <a href="{{ profile.Instagram }}"><i class="fa fa-instagram"></i></a>
+                                    <a href="{{ links.Instagram }}"><i class="fa fa-instagram"></i></a>
                                 </div>
                             </div>
+                            {% endfor %}
                             
     
     
@@ -44,10 +45,10 @@
                                 <a href="" class="btn ml-auto">Edit Account</a>
                             </div>
 
-                            {% for profile in profile %}
+                            {% for p in profile %}
                                 <tr>
                                     <th scope="row">First Name:</th>
-                                    <td>{{ profile.FirstName }}</td>
+                                    <td>{{ p.CompanyName }}</td>
                                 </tr>
                                 <tr>
                                     <th scope="row">Last Name:</th>
@@ -57,7 +58,14 @@
                                     <th scope="row">Gender:</th>
                                     <td>{{ profile.Gender }}</td>
                                 </tr>
-                                
+                                <tr>
+                                    <th scope="row">Gender:</th>
+                                    <td>{{ profile.Gender }}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Date Of Birth:</th>
+                                    <td>{{ profile.DateOffBorth }}</td>
+                                </tr>
                                 <tr>
                                     <th scope="row">Marriage Status:</th>
                                     <td>{{ profile.MarrigeStatus }}</td>
@@ -164,4 +172,4 @@
 
     
 
-{% endblock profilecontent %}
+{% endblock profilecontents %}
