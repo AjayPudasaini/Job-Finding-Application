@@ -3,11 +3,12 @@ from django.http import HttpResponse
 from django.views.generic import CreateView, ListView, UpdateView, TemplateView, DeleteView
 from account.models import User, EmployerProfile, JobseekerProfile
 from account.forms import (JobseekerSignupForm, EmployerSignupForm, JobseekerProfileUpdateForm, UserUpdateForm, EmployerProfileUpdateForm)
-from django.contrib.auth import login,authenticate
+from django.contrib.auth import login,authenticate, update_session_auth_hash
 from account.decorators import jobseeker_required, employer_required
 from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+from django.contrib.auth.forms import PasswordChangeForm
 
 
 
@@ -104,22 +105,28 @@ def EmployerProfileUpdateView(request):
     return render(request, 'account/Employer/update_profile_detail.html' , contex)
 
 
-# @login_required
-# @employer_required
-# def EmployerProfileCreateView(request, user_id):
-#     instance = EmployerProfile.objects.get(user_id = user_id)
-#     if request.method == 'POST':
-#         employer_profile_form = EmployerProfileForm(request.POST, request.FILES, instance=instance)
-#         if employer_profile_form.is_valid():
-#             employer_profile_form.save()
-#             messages.success(request, 'Employer profile has been updated')
-#             return redirect('employer:employer_profile_detail', user_id = user_id )
-#     else:
-#         employer_profile_form = EmployerProfileForm(instance=instance)
-#     contex = {'profile':employer_profile_form}
-#     return render(request, 'account/Employer/update_profile_detail.html', contex)
-    
 
+@login_required
+@employer_required
+def EmployerSettings(request):
+    return render(request, 'account/Employer/settings.html')
+
+
+@login_required
+@employer_required
+def EmployerPasswordChange(request):
+    form = PasswordChangeForm(request.user)
+    if request.method == 'POST':
+        form = PasswordChangeForm(request.user, request.POST)
+        if form.is_valid():
+            form.save()
+            update_session_auth_hash(request, form.user)
+            return redirect('/')
+
+        else:
+            form = PasswordChangeForm(request.user)
+    contex = {'form':form}
+    return render(request, 'account/Employer/change_password.html', contex)
 
 
 
@@ -140,41 +147,6 @@ def JobseekerProfileDetailView(request, user_id):
     contex = {'profile':detail}
     return render(request, 'account/Jobseeker/profile_detail.html', contex)
 
-
-
-
-# @method_decorator([login_required, jobseeker_required], name='dispatch')
-# class JobseekerProfileCreateView(CreateView):
-#     model = JobseekerProfile
-#     form_class = JobseekerProfileUpdateForm
-#     template_name = 'account/Jobseeker/add_profile_detail.html'
-
-#     def form_valid(self, form):
-#         form.instance.user = self.request.user
-#         return super().form_valid(form)
-
-
-
-
-
-        
-
-# @login_required
-# @jobseeker_required
-# def JobseekerProfileUpdateView(request, user_id):
-#     # instance = JobseekerProfile.objects.get(user_id=user_id)
-#     if request.method == 'POST':
-#         profile_form = JobseekerProfileUpdateForm(request.POST, request.FILES, instance=instance)
-#         if profile_form.is_valid():
-#             profile_form.save()
-#             messages.success(request, f'Your Accounted has been updated!')
-#             return redirect('jobseeker:jobseeker_profile_detail', user_id=user_id)
-#         else:
-#             messages.error(request, f'Your Accounted has not updated!')
-#     else:
-#         profile_form = JobseekerProfileForm(request.POST, request.FILES, instance=instance)
-#     contex = {'profile_form': profile_form }
-#     return render(request, 'account/Jobseeker/edit.html', contex) 
 
 
 @login_required
@@ -208,8 +180,35 @@ class BrowseJobView(TemplateView):
 
 
 
+@login_required
+@jobseeker_required
+def JobseekerSetting(request):
+    return render(request, 'account/Jobseeker/settings.html')
 
 
+@login_required
+@jobseeker_required
+def JobseekerChangePassword(request):
+    form = PasswordChangeForm(user=request.user)
+    if request.method == 'POST':
+        form = PasswordChangeForm(request.user, request.POST)
+        if form.is_valid():
+            form.save()
+            update_session_auth_hash(request, form.user)
+            return redirect('/')
+        else:
+            form = PasswordChangeForm(request.user)
+    contex = {'form':form}
+    return render(request, 'account/Jobseeker/change_password.html', contex)
+
+
+
+
+
+
+
+
+#  Both account delete
 @login_required
 def delete_acccount(request, id):
     uff = User.objects.get(id=id)

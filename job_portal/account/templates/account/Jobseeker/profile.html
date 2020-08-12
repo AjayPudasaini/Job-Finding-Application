@@ -32,7 +32,7 @@
                     <a class="nav-link" href="{% url 'logout' %}">Logout</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url 'delete_account' user.id %}">Delete My Account</a>
+                    <a class="nav-link" href="{% url 'jobseeker:jobseeker_profile_setting' %}">Settings</a>
                 </li>
             </ul>
         </div>
@@ -40,7 +40,6 @@
 
 
     {% block profilecontent %}
-            <img src=" {{ user.employerprofile.CompanyLogo.url }} " class="rounded-circle inf-fluid" alt="logo">
 
     {% endblock profilecontent %}
 {% endblock content %}

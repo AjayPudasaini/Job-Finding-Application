@@ -27,84 +27,81 @@ class JobseekerSignupForm(UserCreationForm):
 
     Gender = forms.ChoiceField(choices=GENDER_CHOICE,  required=True, label='Gender')
 
-    MarrigeStatus = forms.ChoiceField(choices=MARRIED_STATUS_CHOICES, required=True, label='Marriage Status')
+    # MarrigeStatus = forms.ChoiceField(choices=MARRIED_STATUS_CHOICES, required=True, label='Marriage Status')
 
-    Religion = forms.ChoiceField(choices=RELIGION_CHOOSE, required=True, label='Religion')
+    # Religion = forms.ChoiceField(choices=RELIGION_CHOOSE, required=True, label='Religion')
 
-    PhoneNumber = forms.CharField(widget=forms.NumberInput(
-        attrs={'class':'form-control', 'placeholder': 'enter your personal phone number'}
-        ), max_length=20, required=True, label='Phone Number')
+    # PhoneNumber = forms.CharField(widget=forms.NumberInput(
+    #     attrs={'class':'form-control', 'placeholder': 'enter your personal phone number'}
+    #     ), max_length=20, required=True, label='Phone Number')
 
-    Nationality = forms.ChoiceField(choices=NATIONALITY_CHOOSE, required=True, label='Nationality')
+    # Nationality = forms.ChoiceField(choices=NATIONALITY_CHOOSE, required=True, label='Nationality')
 
-    CurrentAddress = forms.CharField(widget=forms.TextInput(
-        attrs={'class': 'form-control', 'placeholder':'enter current address'}
-        ), required=True, max_length=100, label='Current Address')
+    # CurrentAddress = forms.CharField(widget=forms.TextInput(
+    #     attrs={'class': 'form-control', 'placeholder':'enter current address'}
+    #     ), required=True, max_length=100, label='Current Address')
 
-    PernamentAddress = forms.CharField(widget=forms.TextInput(
-        attrs={'class': 'form-control', 'placeholder':'enter pernament address'}
-        ), required=True, max_length=100, label='Pernament Address')
+    # PernamentAddress = forms.CharField(widget=forms.TextInput(
+    #     attrs={'class': 'form-control', 'placeholder':'enter pernament address'}
+    #     ), required=True, max_length=100, label='Pernament Address')
 
 
-    Education = forms.ChoiceField(choices=EDUCATION_CHOICES, required=True)
+    # Education = forms.ChoiceField(choices=EDUCATION_CHOICES, required=True)
 
-    EducationProgram = forms.CharField(widget=forms.TextInput(
-        attrs={'class': 'form-control', 'placeholder':'enter education program eg. ComputerScience'}
-        ), required=True, max_length=100, label='Education Program')
+    # EducationProgram = forms.CharField(widget=forms.TextInput(
+    #     attrs={'class': 'form-control', 'placeholder':'enter education program eg. ComputerScience'}
+    #     ), required=True, max_length=100, label='Education Program')
 
-    EducationBoard = forms.ChoiceField(choices=EDUCATION_BOARD_CHOICES, required=True, label='Education Board')
+    # EducationBoard = forms.ChoiceField(choices=EDUCATION_BOARD_CHOICES, required=True, label='Education Board')
 
-    NameOfInstitute = forms.CharField(widget=forms.TextInput(
-        attrs={'class': 'form-control', 'placeholder':'enter education institute name'}
-        ), required=True, max_length=100, label='Name Of Institute')
+    # NameOfInstitute = forms.CharField(widget=forms.TextInput(
+    #     attrs={'class': 'form-control', 'placeholder':'enter education institute name'}
+    #     ), required=True, max_length=100, label='Name Of Institute')
 
 
     MySkill = forms.CharField(widget=forms.TextInput(
         attrs={'class':'form-control', 'placeholder':'enter your skill'}
         ), required=False, label='My Skill')
 
-    WorkingExperience = forms.IntegerField(max_value=40, min_value=0, label='Working Experience')
+    # WorkingExperience = forms.IntegerField(max_value=40, min_value=0, label='Working Experience')
 
 
-    WorkedCompanyName = forms.CharField(widget=forms.TextInput(
-        attrs={'class': 'form-control', 'placeholder':'enter past worked conpany name'}
-        ), required=True, max_length=200, label='Worked Company Name')
+    # WorkedCompanyName = forms.CharField(widget=forms.TextInput(
+    #     attrs={'class': 'form-control', 'placeholder':'enter past worked conpany name'}
+    #     ), required=True, max_length=200, label='Worked Company Name')
 
-    WorkedCompanyWebsite = forms.CharField(widget=forms.URLInput(
-        attrs={'class':'form-contol', 'placeholder': 'eg. https://www.softwarica.com'}
-    ), max_length=100, required=False, label='Company Website')
+    # WorkedCompanyWebsite = forms.CharField(widget=forms.URLInput(
+    #     attrs={'class':'form-contol', 'placeholder': 'eg. https://www.softwarica.com'}
+    # ), max_length=100, required=False, label='Company Website')
 
 
     JobCategory = forms.ChoiceField(choices=JOB_CATEGORY_CHOICES, required=False, label='Job Category')
 
 
-    Language = forms.ChoiceField(choices=LANGUAGES_CHOICES, required=True, label='Language')
+    # Language = forms.ChoiceField(choices=LANGUAGES_CHOICES, required=True, label='Language')
 
     AboutMe = forms.CharField(widget=forms.Textarea(
         attrs={'class': 'form-control', 'placeholder': 'describe about yourself'}
         ), required=True, min_length=10, label='About Me')
 
 
-    Facebook = forms.CharField(widget=forms.URLInput(
-        attrs={'class':'form-contol', 'placeholder': 'eg. https://www.facebook.com/user'}
-        ), max_length=100, required=False, label='Facebook')
+    # Facebook = forms.CharField(widget=forms.URLInput(
+    #     attrs={'class':'form-contol', 'placeholder': 'eg. https://www.facebook.com/user'}
+    #     ), max_length=100, required=False, label='Facebook')
 
-    Twitter = forms.CharField(widget=forms.URLInput(
-        attrs={'class':'form-contol', 'placeholder': 'eg. https://www.twitter.com/user'}
-        ), max_length=100, required=False, label='Twitter')
+    # Twitter = forms.CharField(widget=forms.URLInput(
+    #     attrs={'class':'form-contol', 'placeholder': 'eg. https://www.twitter.com/user'}
+    #     ), max_length=100, required=False, label='Twitter')
 
-    Instagram = forms.CharField(widget=forms.URLInput(
-        attrs={'class':'form-contol', 'placeholder': 'eg. https://www.instagram.com/user'}
-        ), max_length=100, required=False, label='Instagram')
+    # Instagram = forms.CharField(widget=forms.URLInput(
+    #     attrs={'class':'form-contol', 'placeholder': 'eg. https://www.instagram.com/user'}
+    #     ), max_length=100, required=False, label='Instagram')
 
     
     class Meta:
         model = User
-        fields = ['username', 'FirstName', 'LastName', 'Email','Gender','MarrigeStatus',
-                 'Religion', 'PhoneNumber', 'Nationality', 'CurrentAddress', 'PernamentAddress',
-                 'Religion', 'Education', 'EducationProgram', 'EducationBoard', 'NameOfInstitute', 'MySkill', 
-                 'WorkingExperience', 'WorkedCompanyName', 'WorkedCompanyWebsite', 'JobCategory',
-                 'Language', 'AboutMe', 'Facebook', 'Twitter', 'Instagram', 'password1', 'password2', ]
+        fields = ['username', 'FirstName', 'LastName', 'Email','Gender', 'MySkill', 
+                 'AboutMe', 'JobCategory']
 
 
     @transaction.atomic
@@ -116,28 +113,28 @@ class JobseekerSignupForm(UserCreationForm):
         jobseekerprofile.FirstName = self.cleaned_data.get('FirstName')
         jobseekerprofile.LastName = self.cleaned_data.get('LastName')
         jobseekerprofile.Gender = self.cleaned_data.get('Gender')
-        jobseekerprofile.MarrigeStatus = self.cleaned_data.get('MarrigeStatus')
-        jobseekerprofile.Religion = self.cleaned_data.get('Religion')
-        jobseekerprofile.PhoneNumber = self.cleaned_data.get('PhoneNumber')
+        # jobseekerprofile.MarrigeStatus = self.cleaned_data.get('MarrigeStatus')
+        # jobseekerprofile.Religion = self.cleaned_data.get('Religion')
+        # jobseekerprofile.PhoneNumber = self.cleaned_data.get('PhoneNumber')
         jobseekerprofile.Email = self.cleaned_data.get('Email')
-        jobseekerprofile.Nationality = self.cleaned_data.get('Nationality')
-        jobseekerprofile.CurrentAddress = self.cleaned_data.get('CurrentAddress')
-        jobseekerprofile.PernamentAddress = self.cleaned_data.get('PernamentAddress')
-        jobseekerprofile.Education = self.cleaned_data.get('Education')
-        jobseekerprofile.EducationProgram = self.cleaned_data.get('EducationProgram')
-        jobseekerprofile.EducationBoard = self.cleaned_data.get('EducationBoard')
-        jobseekerprofile.NameOfInstitute = self.cleaned_data.get('NameOfInstitute')
+        # jobseekerprofile.Nationality = self.cleaned_data.get('Nationality')
+        # jobseekerprofile.CurrentAddress = self.cleaned_data.get('CurrentAddress')
+        # jobseekerprofile.PernamentAddress = self.cleaned_data.get('PernamentAddress')
+        # jobseekerprofile.Education = self.cleaned_data.get('Education')
+        # jobseekerprofile.EducationProgram = self.cleaned_data.get('EducationProgram')
+        # jobseekerprofile.EducationBoard = self.cleaned_data.get('EducationBoard')
+        # jobseekerprofile.NameOfInstitute = self.cleaned_data.get('NameOfInstitute')
         jobseekerprofile.MySkill = self.cleaned_data.get('MySkill')
-        jobseekerprofile.WorkingExperience = self.cleaned_data.get('WorkingExperience')
-        jobseekerprofile.WorkedField = self.cleaned_data.get('WorkedField')
-        jobseekerprofile.WorkedCompanyName = self.cleaned_data.get('WorkedCompanyName')
-        jobseekerprofile.WorkedCompanyWebsite = self.cleaned_data.get('WorkedCompanyWebsite')
+        # jobseekerprofile.WorkingExperience = self.cleaned_data.get('WorkingExperience')
+        # jobseekerprofile.WorkedField = self.cleaned_data.get('WorkedField')
+        # jobseekerprofile.WorkedCompanyName = self.cleaned_data.get('WorkedCompanyName')
+        # jobseekerprofile.WorkedCompanyWebsite = self.cleaned_data.get('WorkedCompanyWebsite')
         jobseekerprofile.JobCategory = self.cleaned_data.get('JobCategory')
-        jobseekerprofile.Language = self.cleaned_data.get('Language')
+        # jobseekerprofile.Language = self.cleaned_data.get('Language')
         jobseekerprofile.AboutMe = self.cleaned_data.get('AboutMe')
-        jobseekerprofile.Facebook = self.cleaned_data.get('Facebook')
-        jobseekerprofile.Twitter = self.cleaned_data.get('Twitter')
-        jobseekerprofile.Instagram = self.cleaned_data.get('Instagram')
+        # jobseekerprofile.Facebook = self.cleaned_data.get('Facebook')
+        # jobseekerprofile.Twitter = self.cleaned_data.get('Twitter')
+        # jobseekerprofile.Instagram = self.cleaned_data.get('Instagram')
         jobseekerprofile.save()
         return user
 

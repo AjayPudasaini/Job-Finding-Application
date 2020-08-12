@@ -15,11 +15,10 @@ urlpatterns = [
 
     path('jobseeker/', include(([
         path('dashboard', JobseekerDashboardView.as_view(), name = 'jobseeker_dashboard'),
-        # path('profile/detail', JobseekerProfileDetailView.as_view(), name = 'jobseeker_profile_detail'),
         path('profile/detail/<int:user_id>', views.JobseekerProfileDetailView, name = 'jobseeker_profile_detail'),
-        # path('profile/add/skill', views.skillCreateView, name = 'jobseeker_profile_add_skill'),
-        # path('profile/add/detail', JobseekerProfileCreateView.as_view(), name = 'jobseeker_profile_add_detail'),
         path('profile/update/detail', views.JobseekerProfileUpdateView, name = 'jobseeker_profile_add_detail'),
+        path('profile/settings', views.JobseekerSetting, name = 'jobseeker_profile_setting'),
+        path('profile/change/password', views.JobseekerChangePassword, name = 'jobseeker_change_password'),
     ], 'account.views' ), namespace='jobseeker')),
 
 
@@ -27,6 +26,8 @@ urlpatterns = [
         path('dashboard', EmployerProfileView.as_view(), name = 'employer_dashboard'),
         path('profile/detail/<int:user_id>', views.EmployerProfileDetailView, name = 'employer_profile_detail'),
         path('profile/update/detail/', views.EmployerProfileUpdateView, name = 'employer_profile_update_detail'),
+        path('profile/settings', views.EmployerSettings, name = 'employer_settings'),
+        path('profile/change/password', views.EmployerPasswordChange, name = 'employer_change_password')
     ], 'account.views' ), namespace='employer')),
     
     path('login', auth_views.LoginView.as_view(template_name='register/login.html'), name='login'),

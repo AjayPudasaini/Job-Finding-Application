@@ -39,130 +39,60 @@
     
                 <div class="col-8">
                     <div class="container">
+                        <div class="table-heading d-flex">
+                            <h6 class="mr-auto">Account Detail</h6>
+                            <a href="" class="btn ml-auto">Edit Account</a>
+                        </div>
+                        {% for p in profile %}
                         <table class="table table-hover">
-                            <div class="table-heading d-flex">
-                                <h6 class="mr-auto">Account Detail</h6>
-                                <a href="" class="btn ml-auto">Edit Account</a>
-                            </div>
-
-                            {% for p in profile %}
                                 <tr>
-                                    <th scope="row">First Name:</th>
+                                    <th scope="row">Company Name:</th>
                                     <td>{{ p.CompanyName }}</td>
                                 </tr>
                                 <tr>
-                                    <th scope="row">Last Name:</th>
-                                    <td>{{ profile.LastName }}</td>
+                                    <th scope="row">Company Category:</th>
+                                    <td>{{ profile.CompanyCategory }}</td>
                                 </tr>
                                 <tr>
-                                    <th scope="row">Gender:</th>
-                                    <td>{{ profile.Gender }}</td>
+                                    <th scope="row">Company Ownership:</th>
+                                    <td>{{ profile.CompanyOwnership }}</td>
                                 </tr>
                                 <tr>
-                                    <th scope="row">Gender:</th>
-                                    <td>{{ profile.Gender }}</td>
+                                    <th scope="row">Company Website:</th>
+                                    <td>{{ profile.CompanyWebsite }}</td>
                                 </tr>
                                 <tr>
-                                    <th scope="row">Date Of Birth:</th>
-                                    <td>{{ profile.DateOffBorth }}</td>
+                                    <th scope="row">Company Establish Date:</th>
+                                    <td>{{ profile.CompanyEstablishDate }}</td>
+                                </tr>
+                                
+                                <tr>
+                                    <th scope="row">Company Address:</th>
+                                    <td>{{ profile.CompanyAddress }}</td>
                                 </tr>
                                 <tr>
-                                    <th scope="row">Marriage Status:</th>
-                                    <td>{{ profile.MarrigeStatus }}</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">Religion:</th>
-                                    <td>{{ profile.Religion }}</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">Phone Number:</th>
-                                    <td>{{ profile.PhoneNumber }}</td>
+                                    <th scope="row">Telphone Number:</th>
+                                    <td>{{ profile.TelNo }}</td>
                                 </tr>
                                 <tr>
                                     <th scope="row">Email:</th>
                                     <td>{{ profile.Email }}</td>
                                 </tr>
                                 <tr>
-                                    <th scope="row">Nationality:</th>
-                                    <td>{{ profile.Nationality }}</td>
+                                    <th scope="row">MobileNo:</th>
+                                    <td>{{ profile.MobileNo }}</td>
                                 </tr>
+                            
                                 <tr>
-                                    <th scope="row">Current Address:</th>
-                                    <td>{{ profile.CurrentAddress }}</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">Pernament Address:</th>
-                                    <td>{{ profile.PernamentAddress }}</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">Education:</th>
-                                    <td>{{ profile.Education }}</td>
+                                    <th scope="row">About Company:</th>
+                                    <td>{{ profile.AboutCompany|safe }}</td>
                                 </tr>
 
-                                <tr>
-                                    <th scope="row">Education Program:</th>
-                                    <td>{{ profile.EducationProgram }}</td>
-                                </tr>
-
-                                <tr>
-                                    <th scope="row">Education Board:</th>
-                                    <td>{{ profile.EducationBoard }}</td>
-                                </tr>
-
-                                <tr>
-                                    <th scope="row">Name Of Institute:</th>
-                                    <td>{{ profile.NameOfInstitute }}</td>
-                                </tr>
-
-                                <tr>
-                                    <th scope="row">Education:</th>
-                                    <td>{{ profile.Education }}</td>
-                                </tr>
-
-                                <tr>
-                                    <th scope="row">My Skill:</th>
-                                    <td>{{ profile.MySkill }}</td>
-                                </tr>
-
-                                <tr>
-                                    <th scope="row">Working Experience:</th>
-                                    <td>{{ profile.WorkingExperience }}</td>
-                                </tr>
-
-                                <tr>
-                                    <th scope="row">Worked Field:</th>
-                                    <td>{{ profile.WorkedField }}</td>
-                                </tr>
-
-                                <tr>
-                                    <th scope="row">Worked Company Name:</th>
-                                    <td>{{ profile.WorkedCompanyName }}</td>
-                                </tr>
-
-                                <tr>
-                                    <th scope="row">WorkedCompanyWebsite:</th>
-                                    <td>{{ profile.WorkedCompanyWebsite }}</td>
-                                </tr>
-
-                                <tr>
-                                    <th scope="row">Job Category:</th>
-                                    <td>{{ profile.JobCategory }}</td>
-                                </tr>
-
-                                <tr>
-                                    <th scope="row">Language:</th>
-                                    <td>{{ profile.Language }}</td>
-                                </tr>
-
-                                <tr>
-                                    <th scope="row">About Me:</th>
-                                    <td>{{ profile.AboutMe|safe }}</td>
-                                </tr>
-
-                            {% endfor %}
+                            
                             
                             
                         </table>
+                    {% endfor %}
                     </div>
                 </div>
             </div>
