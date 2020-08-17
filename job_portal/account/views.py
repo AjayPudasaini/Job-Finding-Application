@@ -22,6 +22,8 @@ def index(request):
         return render(request, 'account/home.html')
 
 
+def register_as(request):
+    return render(request, 'register/register_as.html')
 
 # Jobseeker Signup
 

@@ -3,6 +3,7 @@ from django.contrib.auth.models import AbstractUser
 from ckeditor.fields import RichTextField
 from PIL import Image
 from django.urls import reverse
+from taggit.managers import TaggableManager
 
 
 
@@ -121,6 +122,7 @@ COMPANY_OWNERSHIP_CHOICES = (
 class User(AbstractUser):
     is_employer = models.BooleanField(default=False)
     is_jobseeker = models.BooleanField(default=False)
+    email = models.CharField(max_length=256, verbose_name='Email')
     
 
 class JobseekerProfile(models.Model):
@@ -133,7 +135,6 @@ class JobseekerProfile(models.Model):
     MarrigeStatus = models.CharField(max_length=20, choices=MARRIED_STATUS_CHOICES, verbose_name='Marrige Status')
     Religion = models.CharField(max_length=20, choices=RELIGION_CHOOSE)
     PhoneNumber = models.CharField(max_length=20, verbose_name='Phone Number')
-    Email = models.EmailField(max_length=30, null=False, verbose_name='Email Address')
     Nationality = models.CharField(max_length=30, choices=NATIONALITY_CHOOSE, verbose_name='Nationality')
     CurrentAddress = models.CharField(max_length=100, verbose_name='Current Address')
     PernamentAddress = models.CharField(max_length=100, verbose_name='Pernament Address')
@@ -146,7 +147,7 @@ class JobseekerProfile(models.Model):
     NameOfInstitute = models.CharField(max_length=200, verbose_name='Name Of Institute')
 
     # skill
-    MySkill = models.CharField(max_length=50, verbose_name='My Skill')
+    MySkill = TaggableManager(verbose_name='My Skill')
 
     # Past jobs
     WorkingExperience = models.IntegerField(default=0, verbose_name='Working Experience') 

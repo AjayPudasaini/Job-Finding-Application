@@ -33,6 +33,12 @@
                         <button type="submit" class="btn btn-outline-info btn-block">Log in</button>
                     </div>
                 </form>
+                <div class="border-top pt-3">
+                    <small class="text-muted">I don't have an account <a class="ml-2" href="{% url 'register_as' %}"> Sign up! </a></small>
+                </div>
+                <div class="border-top pt-3">
+                    <small class="text-muted"><a class="ml-2" href="{% url 'password_reset' %}"> Forgot password </a></small>
+                </div>
             </div>
         </div>
     </div>

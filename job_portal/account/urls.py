@@ -6,12 +6,12 @@ from account.views import (JobseekerSignupView, EmployerSignupView,
 from django.contrib.auth import views as auth_views
 
 
-
 urlpatterns = [
     path('', views.index, name = 'index'),
     path('browse/jobs', BrowseJobView.as_view(), name = 'browse_job'),
     path('account/jobseeker/register', JobseekerSignupView.as_view(), name = 'register-jobseeker'),
     path('account/employer/register', EmployerSignupView.as_view(), name = 'register-employer'),
+    path('register-as', views.register_as, name = 'register_as'),
 
     path('jobseeker/', include(([
         path('dashboard', JobseekerDashboardView.as_view(), name = 'jobseeker_dashboard'),
@@ -32,6 +32,10 @@ urlpatterns = [
     
     path('login', auth_views.LoginView.as_view(template_name='register/login.html'), name='login'),
     path('logout', auth_views.LogoutView.as_view(template_name='register/logout.html'), name='logout'),
+    path('password-reset', auth_views.PasswordResetView.as_view(template_name='register/passwords/password_reset.html'), name='password_reset'),
+    path('password-reset/done', auth_views.PasswordResetDoneView.as_view(template_name='register/passwords/password_reset_done.html'), name='password_reset_done'),
+    path('password-reset-confirm/<uidb64>/<token>', auth_views.PasswordResetConfirmView.as_view(template_name='register/passwords/password_reset_confirm.html'), name='password_reset_confirm'),
+    path('password-reset-reset', auth_views.PasswordResetCompleteView.as_view(template_name='register/passwords/password_reset_complete.html'), name='password_reset_complete'),
     path('delete/account/<int:id>', views.delete_acccount, name='delete_account')
 
 ]
