@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'ckeditor',
     'account.apps.AccountConfig',
     'crispy_forms',
+    'taggit'
     
 
 ]
@@ -144,3 +145,15 @@ LOGOUT_REDIRECT_URL = '../'
 # Third party apps configuration
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+
+
+# Email
+# EMAIL_BACKEND = "django.core.mail.backends.filebase.EmailBackend"
+# EMAIL_FILE_PATH = os.path.join(BASE_DIR, "sent_mail")
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER =   'your gemail account' 
+EMAIL_HOST_PASSWORD =  'your gmail password'  # if got any error follow this tutorial https://stackoverflow.com/questions/63435540/how-to-reset-password-using-django-and-gmail?noredirect=1#comment112173773_63435540
