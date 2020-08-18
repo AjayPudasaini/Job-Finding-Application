@@ -24,11 +24,6 @@ class JobseekerSignupForm(UserCreationForm):
     Gender = forms.ChoiceField(choices=GENDER_CHOICE,  required=True, label='Gender')
 
 
-    MySkill = forms.CharField(widget=forms.TextInput(
-        attrs={'class':'form-control', 'placeholder':'enter your skill'}
-        ), required=False, label='My Skill')
-
-
     JobCategory = forms.ChoiceField(choices=JOB_CATEGORY_CHOICES, required=False, label='Job Category')
 
 
@@ -40,7 +35,7 @@ class JobseekerSignupForm(UserCreationForm):
 
     class Meta:
         model = User
-        fields = ['username', 'email', 'FirstName', 'LastName', 'Gender', 'MySkill', 
+        fields = ['username', 'email', 'FirstName', 'LastName', 'Gender', 
                  'AboutMe', 'JobCategory']
 
 
@@ -151,7 +146,6 @@ class EmployerSignupForm(UserCreationForm):
         employerprofile.CompanyName = self.cleaned_data.get('CompanyName')
         employerprofile.CompanyCategory = self.cleaned_data.get('CompanyCategory')
         employerprofile.CompanyWebsite = self.cleaned_data.get('CompanyWebsite')
-        employerprofile.Email = self.cleaned_data.get('Email')
         employerprofile.AboutCompany = self.cleaned_data.get('AboutCompany')
         employerprofile.save()
         return user

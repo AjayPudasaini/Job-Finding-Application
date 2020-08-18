@@ -37,8 +37,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'ckeditor',
+
     'account.apps.AccountConfig',
+    'jobs.apps.JobsConfig',
+
+
+    'ckeditor',
     'crispy_forms',
     'taggit'
     
@@ -155,5 +159,5 @@ EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER =   'your gemail account' 
-EMAIL_HOST_PASSWORD =  'your gmail password'  # if got any error follow this tutorial https://stackoverflow.com/questions/63435540/how-to-reset-password-using-django-and-gmail?noredirect=1#comment112173773_63435540
+EMAIL_HOST_USER =  'ajayapudasaini999@gmail.com' #os.environ.get('EMAIL_USER')
+EMAIL_HOST_PASSWORD =  'puymghgfixootsmp' #os.environ.get('EMAIL_PASS')
