@@ -89,7 +89,7 @@ Gender = (
 
 
 class JobPost(models.Model):
-    job_post_by = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete = models.CASCADE)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete = models.CASCADE)
 
     JobTitle = models.CharField(max_length=500, null=False, blank=False, verbose_name='Job Title')
     Location = models.CharField(max_length=200, choices=LOCATION_CHOOSE, null=False)
@@ -98,16 +98,21 @@ class JobPost(models.Model):
     EndSalary = models.FloatField(default=0.00, null=True, verbose_name='Salary End With')
     JobLevel = models.CharField(max_length=200, choices=Job_Level_Choices, null=True, verbose_name='Job Level')
     AvaliableTime = models.CharField(max_length=200, choices=JOB_AVALIABLE_TIME, null=True, verbose_name='Avaliable Time')
-    JobShift = models.CharField(max_length=100, choices=WORKING_SHIFTS, null=True, verbose_name='Job Shift')
-    RequiredEducation = models.CharField(max_length=200, choices=EDUCATION_CHOICES, null=True, verbose_name='Required Educations')
-    RequiredExperience = models.IntegerField(default=0, null=True, verbose_name='Required Experience')
-    RequiredSkill = TaggableManager(verbose_name='Required Skills')
-    JobCategory = models.CharField(max_length=200, choices=JOB_CATEGORY_CHOICES, null=False, verbose_name='Job Category')
-    Gender = models.CharField(max_length=50, choices=Gender, default='Both', null=True)
-    JobDescreptions = RichTextField(verbose_name='Job Descriptions', null=False)
-    HiringBanner = models.ImageField(default='DefaultHireBanner.jpg', upload_to='Employer/Hire Banners', null=True , verbose_name='Hiring Banner')
+    JobShift = models.CharField(max_length=100, blank=False, choices=WORKING_SHIFTS, null=True, verbose_name='Job Shift')
+    RequiredEducation = models.CharField(max_length=200, blank=False, choices=EDUCATION_CHOICES, null=True, verbose_name='Required Educations')
+    RequiredExperience = models.IntegerField(default=0, blank=False, null=True, verbose_name='Required Experience')
+    RequiredSkill = TaggableManager(verbose_name='Required Skills', blank=False)
+    JobCategory = models.CharField(max_length=200, choices=JOB_CATEGORY_CHOICES, null=False, blank=False, verbose_name='Job Category')
+    Gender = models.CharField(max_length=50, blank=False, choices=Gender, default='Both', null=True, verbose_name='Required Gender')
+    JobDescreptions = RichTextField(verbose_name='Job Descriptions', blank=False, null=False)
+    HiringBanner = models.ImageField(default='DefaultHireBanner.jpg', upload_to='Employer/Hire Banners', null=True , blank=False, verbose_name='Hiring Banner')
 
 
-    JobPostDate = models.DateTimeField(default=timezone.now)
+    JobPostDate = models.DateTimeField(default=timezone.now, blank=False)
     JobExpiryDate = models.DateTimeField()
+
+
+    def get_absolute_url(self):
+        return reverse("jobs_employer:my_job_list")
+    
 
