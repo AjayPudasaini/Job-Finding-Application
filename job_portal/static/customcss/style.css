@@ -315,6 +315,49 @@ body{
 
 
 
+
+
+.media{
+    background-color: rgb(253, 253, 253);
+    color: rgb(39, 37, 35);
+    border: 1px solid rgb(177, 169, 169);
+    width: 80%;
+    height: auto;
+    margin-left: 16%;
+    border-radius: 5px;
+    
+
+}
+.account-img{
+    width: 60px;
+    height: 60px;
+}
+.medias-body{
+    /* margin-left: -6%; */
+    float: right;
+    margin-right: 65%;
+}
+.media-body{
+    margin-left: 6%;
+    margin-right: 2%;
+}
+.article-metadata{
+    border-bottom: 1px solid rgb(216, 197, 197);
+}
+.article-metadata a{
+    text-decoration: none;
+    font-size: 20px;
+    color: rgb(185, 137, 224);
+    text-transform: capitalize;
+  }
+.media-body h2 a{
+    font-size: 25px;
+    text-decoration: none;
+    color: rgb(66, 70, 69);
+
+}
+
+
 /* login page */
 
 .login_as_by i{
@@ -329,6 +372,72 @@ body{
 
 
 
+.company-banner{
+    height: 300px;
+    width: 100%;
+    background-color: blue;
+}
+.company-banner img{
+    height: 300px;
+    width: 760px;
+}
+
+
+
+
+.company-logo{
+    height: 100px;
+    width: 100px;
+}
+.company-logo img{
+    height: 100px;
+    width: 100px;
+}
+
+.button-view-company-profile{
+    border-radius: 5px;
+    background-color: transparent;
+    border: 1px solid black;
+    outline: none;
+    /*padding: 8px;*/
+    height: 30px;
+    width: auto;
+}
+.button-view-company-profile:hover{
+    border-color: orange;
+    background-color: red;
+    color: white;
+}
+
+.button-save-job{
+    border: 1px solid black;
+    outline: none;
+    background-color: transparent;
+    padding: 8px;
+    margin-left: 10%;
+}
+.button-save-job:hover{
+    border: none;
+    border-radius: 2px;
+    background-color: darkblue; 
+    color: white;
+}
+
+.button-apply-job{
+    background-color: orange;
+    border: none;
+    color: white;
+    margin-left: 10%;
+}
+.button-apply-job:hover{
+    background-color: red;
+    color: white;
+    border: none;
+    border-radius: 2px;
+}
+
+.table-borderless th{border:0;}
+.table-borderless td{border:0;}
 
 
 

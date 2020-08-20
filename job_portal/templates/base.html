@@ -29,12 +29,12 @@
 
         {% if user.is_authenticated %}
           {% if user.is_jobseeker %}
-            <a class="navbar-brand mr-4" href="{% url 'jobseeker:jobseeker_dashboard' %}">Job Portal</a>
+            <a class="navbar-brand mr-4" href="{% url 'jobseeker:jobseeker_dashboard' %}">SMARTKTM Jobs</a>
           {% else %}
-            <a class="navbar-brand mr-4" href="{% url 'employer:employer_dashboard' %}">Job Portal</a>
+            <a class="navbar-brand mr-4" href="{% url 'employer:employer_dashboard' %}">SMARTKTM Jobs</a>
           {% endif %}
         {% else %}
-        <a class="navbar-brand mr-4" href="{% url 'index' %}">Job Portal</a>
+        <a class="navbar-brand mr-4" href="{% url 'index' %}">SMARTKTM Jobs</a>
         {% endif %}
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
             <i class="fa fa-bars"></i>

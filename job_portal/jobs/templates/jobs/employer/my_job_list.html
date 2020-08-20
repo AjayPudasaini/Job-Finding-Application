@@ -4,14 +4,48 @@
 
 
 {% block profilecontents %}
-     <div class="container p-5">
-      <div class="row">
-          <div class="col-12">
-                <div class="container border rounded bg-light">
-                    My job list
-                </div>                   
+       
+{% for i in mypost %}
+  <div class="container p-2 mt-3 mb-3">
+    <article class="media content-section mt-1 ">
+      <img class="rounded-circle account-img p-1" src="{{ i.user.employerrprofile.CompanyLogo.url }}"/>
+      <div class="media-body mr-3">
+        <div class="article-metadata">
+          <a class="mr-2" href="">{{i.user}}</a>
+          <small class="text-muted">{{i.JobPostDate|date:"F d, Y"}}</small>
+        </div>
+        <h2><a class="article-title" href="{% url 'jobs_employer:my_job_detail' i.user.username i.id %}">{{ i.JobTitle|safe }}</a></h2>
+        <p class="article-content">{{i.JobDescreptions|safe|slice:":200"}}...</p>
+        <div class="media-footer border rounded">
           </div>
+        </div>
       </div>
-  </div>    
-  
+      
+    </article>
+    
+  </div>
+ {% endfor %} 
+    <!-- paginator -->
+    <div class="container mt-3 ml-5 mr-5">
+    {% if is_paginated %}
+    {% if page_obj.has_previous %}
+    <a class="btn btn-outline-info mb-4" href="?page=1">First</a>
+    <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.previous_page_number }}">Previous</a>
+    {% endif %}
+
+    {% for num in page_obj.paginator.page_range %}
+    {% if page_obj.number == num %}
+        <a class="btn btn-info mb-4" href="?page={{ num }}">{{ num }}</a>
+    {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+        <a class="btn btn-outline-info mb-4" href="?page={{ num }}">{{ num }}</a>
+    {% endif %}
+    {% endfor %}
+
+    {% if page_obj.has_next %}
+    <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.next_page_number }}">Next</a>
+    <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.paginator.num_pages }}">Last</a>
+    {% endif %}
+    {% endif %}
+    </div>
+
 {% endblock profilecontents %}

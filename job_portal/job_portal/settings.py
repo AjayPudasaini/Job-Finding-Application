@@ -161,3 +161,26 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER =  'ajayapudasaini999@gmail.com' #os.environ.get('EMAIL_USER')
 EMAIL_HOST_PASSWORD =  'puymghgfixootsmp' #os.environ.get('EMAIL_PASS')
+
+
+
+
+
+# import smtplib
+# fromaddr = 'ajayapudasaini999@gmail.com'
+# toaddrs = 'shusrulz@gmail.com'
+# msg = "\r\n".join([
+#     "From: ajayapudasaini999@gmail.com",
+#     "To: shusrulz@gmail.com",
+#     "Subject: Just a message",
+#     "",
+#     "Why, oh why"
+# ])
+# EMAIL_USER = 'ajayapudasaini999@gmail.com'
+# EMAIL_PASSWORD = 'puymghgfixootsmp'
+# server = smtplib.SMTP('smtp.gmail.com:587')
+# server.ehlo()
+# server.starttls()
+# server.login(EMAIL_USER, EMAIL_PASSWORD)
+# server.sendmail(fromaddr, toaddrs, msg)
+# server.quit()

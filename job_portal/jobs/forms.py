@@ -50,7 +50,7 @@ class job_post_form(forms.ModelForm):
         fields = ['JobTitle','Location', 'NumberOfVacancies', 'SalaryStart', 
                     'EndSalary', 'JobLevel', 'AvaliableTime', 'RequiredSkill', 
                     'JobShift', 'RequiredEducation', 'RequiredExperience', 'JobCategory', 
-                    'Gender', 'JobDescreptions', 'HiringBanner', 'JobExpiryDate']
+                    'Gender', 'JobDescreptions', 'JobSpecification', 'HiringBanner', 'JobExpiryDate']
 
 
     # def __init__(self, *args, **kwargs):

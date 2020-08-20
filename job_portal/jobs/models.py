@@ -3,10 +3,12 @@ from ckeditor.fields import RichTextField
 from django.urls import reverse
 from taggit.managers import TaggableManager
 from account.models import JOB_CATEGORY_CHOICES, EDUCATION_CHOICES
-from django.contrib.auth.models import User
 from django.conf import settings
 from django.utils import timezone
 from django.core.validators import MaxValueValidator, MinValueValidator
+from account.models import User
+from PIL import Image
+
 
 
 
@@ -89,7 +91,7 @@ Gender = (
 
 
 class JobPost(models.Model):
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete = models.CASCADE)
+    user = models.ForeignKey(User, on_delete = models.CASCADE)
 
     JobTitle = models.CharField(max_length=500, null=False, blank=False, verbose_name='Job Title')
     Location = models.CharField(max_length=200, choices=LOCATION_CHOOSE, null=False)
@@ -105,6 +107,7 @@ class JobPost(models.Model):
     JobCategory = models.CharField(max_length=200, choices=JOB_CATEGORY_CHOICES, null=False, blank=False, verbose_name='Job Category')
     Gender = models.CharField(max_length=50, blank=False, choices=Gender, default='Both', null=True, verbose_name='Required Gender')
     JobDescreptions = RichTextField(verbose_name='Job Descriptions', blank=False, null=False)
+    JobSpecification = RichTextField(verbose_name='Job Specification', blank=False, null=True)
     HiringBanner = models.ImageField(default='DefaultHireBanner.jpg', upload_to='Employer/Hire Banners', null=True , blank=False, verbose_name='Hiring Banner')
 
 
@@ -113,6 +116,17 @@ class JobPost(models.Model):
 
 
     def get_absolute_url(self):
-        return reverse("jobs_employer:my_job_list")
+        return reverse("jobs_employer:my_job_list", kwargs={'username':self.user.username})
+
     
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+
+        HireBanner = Image.open(self.HiringBanner.path)
+        if HireBanner.height>400 or HireBanner.width>760:
+            output_size = (400, 760)
+            HireBanner.thumbnail(output_size)
+            HireBanner.save(self.HiringBanner.path)
+    
+
 
