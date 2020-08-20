@@ -159,6 +159,7 @@ EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
+<<<<<<< HEAD
 EMAIL_HOST_USER =  'ajayapudasaini999@gmail.com' #os.environ.get('EMAIL_USER')
 EMAIL_HOST_PASSWORD =  'puymghgfixootsmp' #os.environ.get('EMAIL_PASS')
 
@@ -184,3 +185,12 @@ EMAIL_HOST_PASSWORD =  'puymghgfixootsmp' #os.environ.get('EMAIL_PASS')
 # server.login(EMAIL_USER, EMAIL_PASSWORD)
 # server.sendmail(fromaddr, toaddrs, msg)
 # server.quit()
+=======
+
+EMAIL_HOST_USER =   'your gemail account' # like ' hardikgurung95@gmail.com' as a string
+EMAIL_HOST_PASSWORD =  'your gmail password' # like "mygmailaddress'spassword" as a string # if got any error follow this tutorial https://stackoverflow.com/questions/63435540/how-to-reset-password-using-django-and-gmail?noredirect=1#comment112173773_63435540
+
+EMAIL_HOST_USER =  os.environ.get('EMAIL_USER')
+EMAIL_HOST_PASSWORD =  os.environ.get('EMAIL_PASS')
+
+>>>>>>> c09bb213d05ea76fa6e4980663473a9b9798d54f
