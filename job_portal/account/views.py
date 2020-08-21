@@ -13,11 +13,12 @@ from django.contrib.auth.forms import PasswordChangeForm
 
 
 def index(request):
+    user = User.objects.filter(username='username')
     if request.user.is_authenticated:
         if request.user.is_jobseeker:
             return redirect('jobseeker:jobseeker_dashboard')
         else:
-            return redirect('employer:employer_dashboard')
+            return redirect('employer:employer_profile_update_detail')
     else:
         return render(request, 'account/home.html')
 
@@ -69,9 +70,9 @@ class EmployerSignupView(CreateView):
 
 # Employer Profiling
 
-@method_decorator([login_required, employer_required], name='dispatch')
-class EmployerProfileView(TemplateView):
-    template_name = 'account/Employer/dashboard.html'
+# @method_decorator([login_required, employer_required], name='dispatch')
+# class EmployerProfileView(TemplateView):
+#     template_name = 'account/Employer/dashboard.html'
 
 
 

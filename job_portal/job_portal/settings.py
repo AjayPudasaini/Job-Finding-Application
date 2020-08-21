@@ -155,42 +155,12 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 # Email
 # EMAIL_BACKEND = "django.core.mail.backends.filebase.EmailBackend"
 # EMAIL_FILE_PATH = os.path.join(BASE_DIR, "sent_mail")
-EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
-<<<<<<< HEAD
-EMAIL_HOST_USER =  'ajayapudasaini999@gmail.com' #os.environ.get('EMAIL_USER')
-EMAIL_HOST_PASSWORD =  'puymghgfixootsmp' #os.environ.get('EMAIL_PASS')
+EMAIL_BACKEND = os.environ.get('EMAIL_BACKEND')
+EMAIL_HOST = os.environ.get('EMAIL_HOST')
+EMAIL_PORT = os.environ.get('EMAIL_PORT')
+EMAIL_USE_TLS = os.environ.get('EMAIL_USE_TLS')
+EMAIL_HOST_USER =  os.environ.get('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD =  os.environ.get('EMAIL_HOST_PASSWORD')
 
 
 
-
-
-# import smtplib
-# fromaddr = 'ajayapudasaini999@gmail.com'
-# toaddrs = 'shusrulz@gmail.com'
-# msg = "\r\n".join([
-#     "From: ajayapudasaini999@gmail.com",
-#     "To: shusrulz@gmail.com",
-#     "Subject: Just a message",
-#     "",
-#     "Why, oh why"
-# ])
-# EMAIL_USER = 'ajayapudasaini999@gmail.com'
-# EMAIL_PASSWORD = 'puymghgfixootsmp'
-# server = smtplib.SMTP('smtp.gmail.com:587')
-# server.ehlo()
-# server.starttls()
-# server.login(EMAIL_USER, EMAIL_PASSWORD)
-# server.sendmail(fromaddr, toaddrs, msg)
-# server.quit()
-=======
-
-EMAIL_HOST_USER =   'your gemail account' # like ' hardikgurung95@gmail.com' as a string
-EMAIL_HOST_PASSWORD =  'your gmail password' # like "mygmailaddress'spassword" as a string # if got any error follow this tutorial https://stackoverflow.com/questions/63435540/how-to-reset-password-using-django-and-gmail?noredirect=1#comment112173773_63435540
-
-EMAIL_HOST_USER =  os.environ.get('EMAIL_USER')
-EMAIL_HOST_PASSWORD =  os.environ.get('EMAIL_PASS')
-
->>>>>>> c09bb213d05ea76fa6e4980663473a9b9798d54f

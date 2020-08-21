@@ -9,31 +9,21 @@
             <table class="table">
                 <thead>
                   <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Employer</th>
-                    <th scope="col">Last</th>
-                    <th scope="col">Handle</th>
+                    <th scope="col">Id</th>
+                    <th scope="col">Title</th>
+                    <th scope="col">Views</th>
+                    <th scope="col">Share</th>
                   </tr>
                 </thead>
                 <tbody>
+                {% for post in mypost %}
                   <tr>
-                    <th scope="row">1</th>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
+                    <th scope="row"><a class="article-title" href="{% url 'jobs_employer:my_job_detail' post.user.username post.id %}">{{ post.id }}</th>
+                    <td><a class="article-title" href="{% url 'jobs_employer:my_job_detail' post.user.username post.id %}">{{ post.JobTitle|safe }}</a></td>
+                    <td>500</td>
+                    <td>50</td>
                   </tr>
-                  <tr>
-                    <th scope="row">2</th>
-                    <td>Jacob</td>
-                    <td>Thornton</td>
-                    <td>@fat</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">3</th>
-                    <td>Larry</td>
-                    <td>the Bird</td>
-                    <td>@twitter</td>
-                  </tr>
+                {% endfor %}
                 </tbody>
             </table>
         </div>

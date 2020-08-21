@@ -31,7 +31,7 @@
           {% if user.is_jobseeker %}
             <a class="navbar-brand mr-4" href="{% url 'jobseeker:jobseeker_dashboard' %}">SMARTKTM Jobs</a>
           {% else %}
-            <a class="navbar-brand mr-4" href="{% url 'employer:employer_dashboard' %}">SMARTKTM Jobs</a>
+            <a class="navbar-brand mr-4" href="">SMARTKTM Jobs</a>
           {% endif %}
         {% else %}
         <a class="navbar-brand mr-4" href="{% url 'index' %}">SMARTKTM Jobs</a>

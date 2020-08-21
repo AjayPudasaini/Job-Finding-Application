@@ -23,16 +23,16 @@ class JobPostCreateView(CreateView):
         form.instance.user = self.request.user
         return super().form_valid(form)
 
-@method_decorator([login_required, employer_required], name='dispatch')
-class MyJobListView(ListView):
-    model = JobPost
-    template_name = 'jobs/employer/my_job_list.html'
-    context_object_name = 'mypost'
-    # paginate_by = 5
+# @method_decorator([login_required, employer_required], name='dispatch')
+# class MyJobListView(ListView):
+#     model = JobPost
+#     template_name = 'jobs/employer/my_job_list.html'
+#     context_object_name = 'mypost'
+#     # paginate_by = 5
 
-    def get_queryset(self):
-        user = get_object_or_404(User, username=self.kwargs.get('username'))
-        return JobPost.objects.filter(user=user).order_by('-JobPostDate')
+#     def get_queryset(self):
+#         user = get_object_or_404(User, username=self.kwargs.get('username'))
+#         return JobPost.objects.filter(user=user).order_by('-JobPostDate')
 
 @method_decorator([login_required, employer_required], name='dispatch')
 class MyJobDetailView(DetailView):
@@ -41,10 +41,18 @@ class MyJobDetailView(DetailView):
     context_object_name = 'mypost'
 
     
-    # def get_queryset(self):
-    #     user = get_object_or_404(User, username=self.kwargs.get('username'))
-    #     return JobPost.objects.filter(user=user).order_by('-JobPostDate')
 
+
+@method_decorator([login_required, employer_required], name='dispatch')
+class EmployerDashboard(ListView):
+    model = JobPost
+    template_name = 'account/Employer/dashboard.html'
+    context_object_name = 'mypost'
+    paginate_by = 5
+
+    def get_queryset(self):
+        user = get_object_or_404(User, username=self.kwargs.get('username'))
+        return JobPost.objects.filter(user=user).order_by('-JobPostDate')
 
 
 
