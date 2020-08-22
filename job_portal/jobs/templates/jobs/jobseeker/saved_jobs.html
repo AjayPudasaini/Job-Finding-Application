@@ -1,0 +1,58 @@
+{% extends 'account/jobseeker/profile.html' %}
+{% load static %}
+
+
+{% block profilecontent %}
+    
+
+    <main>
+        
+        <div class="container job-list bg-white mt-5 mb-5 p-3">
+
+                    <div class="container-fluid p-0 main">
+                        {% for jobs in SavedJobs %}
+                            <div class="job-post-item bg-light p-4 d-block d-md-flex align-items-center mb-4">               
+                              <div class="mb-4 mb-md-0 mr-5">
+                                <div class="job-post-item-header d-flex align-items-center">
+                                  <a href="{% url 'jobs_detail' jobs.id %}"><h2 class="mr-3 text-black h3">{{ jobs.JobTitle }}</h2></a>
+                                  <div class="badge-wrap">
+                                   <span class="bg-secondary text-white badge py-2 px-3">{{ jobs.AvaliableTime }}</span>
+                                  </div>
+                                </div>
+                                <div class="job-post-item-body d-block d-md-flex">
+                                  <div class="mr-3"><i class="fa fa-building"></i><a href="">{{ jobs.user.employerrprofile.CompanyName }}</a></div>
+                                  <div><i class="fa fa-map-marker"></i> <span>{{ jobs.Location }}</span></div>
+                                </div>
+                              </div>
+                
+                              <div class="ml-auto d-flex">
+                                <a href="" class="btn btn-primary py-2 mr-1"><i class="fa fa-plus"></i> Apply Job</a>
+                              </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    <div class="container-fluid p-0 border footer">
+                        <div class="row d-flex">
+                            <div class="ml-auto">
+                                <ul class="pagination mr-3">
+                                    <li class="page-item">
+                                        <a class="page-link" href="#" aria-label="Previous">
+                                          <span aria-hidden="true">&laquo;</span>
+                                        </a>
+                                    </li>
+                                    <li class="page-item"><a class="page-link" href="#">1</a></li>
+                                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                    <li class="page-item">
+                                        <a class="page-link" href="#" aria-label="Next">
+                                          <span aria-hidden="true">&raquo;</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+        </div>
+    </main>
+
+{% endblock profilecontent %}
+

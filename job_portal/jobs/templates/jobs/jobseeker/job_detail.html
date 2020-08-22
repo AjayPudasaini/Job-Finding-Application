@@ -113,7 +113,11 @@
         <div class="job-specification border mb-2 bg-white">
           <div class="row p-2 d-flex">
             <a href="" class="btn button-apply-job"><i class="fa fa-plus"></i> Apply Now</a>
-            <a href="" class="btn button-save-job"><i class="fa fa-save"></i> Save Job</a>
+            {% if is_save %}
+                <a href="{% url 'save_jobs' mypost.id %}" class="btn btn-secondary ml-5"><i class="fa fa-save"></i> Saved Job</a>
+            {% else %}
+            <a href="{% url 'save_jobs' mypost.id %}" class="btn button-save-job"><i class="fa fa-save"></i> Save Job</a>
+            {% endif %}
           </div>
         </div>
 
@@ -140,7 +144,11 @@
             <h6 class="border-bottom p-0">Job Action</h6>
             <div class="btns d-flex mt-4">
                 <a href="" class="btn button-apply-job"><i class="fa fa-plus"></i> Apply Now</a>
-                <a href="" class="btn button-save-job"><i class="fa fa-save"></i> Save Job</a>
+                {% if is_save %}
+                <a href="{% url 'save_jobs' mypost.id %}" class="btn btn-secondary ml-5"><i class="fa fa-save"></i> Saved Job</a>
+                {% else %}
+                <a href="{% url 'save_jobs' mypost.id %}" class="btn button-save-job"><i class="fa fa-save"></i> Save Job</a>
+                {% endif %}
             </div>
           </div>
         </div>

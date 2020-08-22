@@ -1,4 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
+from django.http import HttpResponseRedirect, HttpResponse
+from django.urls import reverse
 from jobs.forms import job_post_form
 from account.decorators import jobseeker_required, employer_required
 from django.contrib.auth.decorators import login_required
@@ -126,5 +128,28 @@ def BrowseJobView(request):
 
 def BrowseJobDetail(request, id):
     jobs = JobPost.objects.get(id = id)
-    contex = {'mypost':jobs}
+    is_SaveJob = False
+    if jobs.SaveJob.filter(id=request.user.jobseekerprofile.user_id).exists():
+        is_SaveJob = True
+    contex = {'mypost':jobs, 'is_save':is_SaveJob}
     return render(request, 'jobs/jobseeker/job_detail.html', contex)
+
+
+@login_required
+@jobseeker_required
+def SaveJobs(request, id):
+    jobpost = get_object_or_404(JobPost, id=id)
+    if jobpost.SaveJob.filter(id=request.user.jobseekerprofile.user_id).exists():
+        jobpost.SaveJob.remove(request.user.jobseekerprofile.user_id)
+    else:
+        jobpost.SaveJob.add(request.user.jobseekerprofile.user_id)
+    return redirect('jobs_detail', id) #HttpResponseRedirect(jobpost.get_absolute_url())
+
+
+@login_required
+@jobseeker_required
+def ViewSavedJobs(request):
+    user = request.user.jobseekerprofile.user_id
+    saved_jobs = JobPost.objects.filter(SaveJob=user)
+    contex = {'SavedJobs':saved_jobs}
+    return render(request, 'jobs/jobseeker/saved_jobs.html', contex)

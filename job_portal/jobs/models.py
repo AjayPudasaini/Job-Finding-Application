@@ -108,10 +108,12 @@ class JobPost(models.Model):
     JobDescreptions = RichTextField(verbose_name='Job Descriptions', blank=False, null=False)
     JobSpecification = RichTextField(verbose_name='Job Specification', blank=False, null=True)
     HiringBanner = models.ImageField(default='DefaultHireBanner.jpg', upload_to='Employer/Hire Banners', null=True , blank=False, verbose_name='Hiring Banner')
+    SaveJob = models.ManyToManyField(User, related_name='savejob', blank=True)
 
 
     JobPostDate = models.DateTimeField(default=timezone.now, blank=False)
     JobExpiryDate = models.DateTimeField()
+
 
     def __str__(self):
         return self.JobTitle
