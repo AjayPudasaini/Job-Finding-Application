@@ -94,29 +94,6 @@ def is_valid_queryparm(parm):
 
 def BrowseJobView(request):
     jobs = JobPost.objects.all()
-    # search jobs
-    title = request.GET.get('title')
-    if is_valid_queryparm(title):
-        jobs = jobs.filter(JobTitle__icontains = title)
-
-    location = request.GET.get('location')
-    if is_valid_queryparm(location):
-        jobs = jobs.filter(Location__icontains = location)
-
-    # filter jobs
-    # parttime = request.GET.get('parttime')
-    # if is_valid_queryparm(parttime):
-    #     jobs = jobs.filter(AvaliableTime = parttime)
-
-    startsalary = request.GET.get('startsalary')
-    if is_valid_queryparm(startsalary):
-        jobs = jobs.filter(SalaryStart__icontains=startsalary)
-
-    endsalary = request.GET.get('endsalary')
-    if is_valid_queryparm(endsalary):
-        jobs = jobs.filter(EndSalary__icontains=endsalary)
-
-    
 
     # search jobs
     title = request.GET.get('title')
@@ -134,9 +111,6 @@ def BrowseJobView(request):
     # filter jobs
     filter = FilterTime(request.GET, queryset=jobs)
     jobs = filter.qs
-    # parttime = request.GET.get(filter)
-    # if is_valid_queryparm(parttime):
-    #     jobs = jobs.filter(AvaliableTime = parttime)
 
     startsalary = request.GET.get('startsalary')
     if is_valid_queryparm(startsalary):
