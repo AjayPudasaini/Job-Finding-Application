@@ -1,7 +1,6 @@
 from django.db import models
 from ckeditor.fields import RichTextField
 from django.urls import reverse
-from taggit.managers import TaggableManager
 from account.models import JOB_CATEGORY_CHOICES, EDUCATION_CHOICES
 from django.conf import settings
 from django.utils import timezone
@@ -103,7 +102,7 @@ class JobPost(models.Model):
     JobShift = models.CharField(max_length=100, blank=False, choices=WORKING_SHIFTS, null=True, verbose_name='Job Shift')
     RequiredEducation = models.CharField(max_length=200, blank=False, choices=EDUCATION_CHOICES, null=True, verbose_name='Required Educations')
     RequiredExperience = models.IntegerField(default=0, blank=False, null=True, verbose_name='Required Experience')
-    RequiredSkill = TaggableManager(verbose_name='Required Skills', blank=False)
+    RequiredSkill = models.CharField(max_length=250, verbose_name='Required Skills', blank=False, null=True)
     JobCategory = models.CharField(max_length=200, choices=JOB_CATEGORY_CHOICES, null=False, blank=False, verbose_name='Job Category')
     Gender = models.CharField(max_length=50, blank=False, choices=Gender, default='Both', null=True, verbose_name='Required Gender')
     JobDescreptions = RichTextField(verbose_name='Job Descriptions', blank=False, null=False)

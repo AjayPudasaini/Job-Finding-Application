@@ -1,8 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load crispy_forms_tags %}
 
-{% block dashboardnavbar %}
-{% endblock dashboardnavbar %}
 
 {% block content %}
     
@@ -23,6 +22,11 @@
                                     <div class="form-group search-job-form">
                                         <div class="form-field">
                                             <input type="text" class="form-control" name='location' id='location' placeholder="Location">
+                                        </div>
+                                    </div>
+                                    <div class="form-group search-job-form">
+                                        <div class="form-field">
+                                            <input type="text" class="form-control" name='yourskill' id='your skill' placeholder="your skill eg: Adobe Photodhop">
                                         </div>
                                     </div> 
                                     <div class="form-group">
@@ -51,35 +55,31 @@
                     <div class="main">
                         <form action="{% url 'browse_job' %}" method='GET'>
                             <div class="form-row  p-3">
-                                <div class="form-group form-check col-md-6">
-                                    <input type="checkbox" class="form-check-input" name = "parttime" id="parttime">
-                                    <label class="form-check-label" for="parttime">Part Time</label>
+                                <div class="form-group">
+
+                                    {{ time.form|crispy }}
+
                                 </div>
-                                <div class="form-group form-check col-md-6">
-                                    <input type="checkbox" class="form-check-input" name='fulltime' id="fulltime">
-                                    <label class="form-check-label" for="fulltime">Full Time</label>
-                                </div>
-                                <div class="form-group form-check col-md-6">
-                                    <input type="checkbox" class="form-check-input" name="internship" id="internship">
-                                    <label class="form-check-label" for="internship">Iternship</label>
-                                </div>
+
+                            
                                 
 
                                 
 
 
                             </div>
-                            <small>Filter by salary, F:Slary = "start salary" and E:Salary = "End Salary" </small><br>
+                            <small>Filter by salary, "start salary" and "End Salary" </small><br>
                             <div class="form-row mt-2">
                             
                                 <div class="form-group col-md-6">
-                                    <input type="text" class="form-control" name='startsalary' id='startsalary' placeholder="F:Salary">
+                                    <input type="text" class="form-control" name='startsalary' id='startsalary' placeholder="15000">
                                 </div>
 
                                 <div class="form-group col-md-6">
-                                    <input type="text" class="form-control" name='endsalary' id='endsalary' placeholder="E:Salary">
+                                    <input type="text" class="form-control" name='endsalary' id='endsalary' placeholder="25000">
                                 </div>
                             </div>
+
                             
                             <button type="submit" class="btn">Filter</button>
                         </form>
@@ -114,6 +114,9 @@
                        
                     </div>
                     <div class="container-fluid p-0 main">
+
+                        
+
                         {% for jobs in Jobs %}
                             <div class="job-post-item bg-light p-4 d-block d-md-flex align-items-center mb-4">               
                               <div class="mb-4 mb-md-0 mr-5">

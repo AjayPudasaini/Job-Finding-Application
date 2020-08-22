@@ -3,7 +3,6 @@ from django.contrib.auth.models import AbstractUser
 from ckeditor.fields import RichTextField
 from PIL import Image
 from django.urls import reverse
-from taggit.managers import TaggableManager
 
 
 
@@ -147,7 +146,7 @@ class JobseekerProfile(models.Model):
     NameOfInstitute = models.CharField(max_length=200, verbose_name='Name Of Institute')
 
     # skill
-    MySkill = TaggableManager(verbose_name='My Skill')
+    MySkill = models.CharField(max_length=250, verbose_name='My Skill', null=True)
 
     # Past jobs
     WorkingExperience = models.IntegerField(default=0, verbose_name='Working Experience') 

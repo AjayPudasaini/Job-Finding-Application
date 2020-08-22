@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'ckeditor',
     'crispy_forms',
     'taggit',
+    'django_filters',   
 ]
 
 AUTH_USER_MODEL = 'account.User'
@@ -110,13 +111,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
-
-# CKEDITOR_CONFIGS = {
-# 'awesome_ckeditor': {
-# 'toolbar': 'Basic',
-# },
-# }
 
 
 
