@@ -95,19 +95,30 @@
                                 </div>
                                 <div class="ml-auto">
                                     <ul class="pagination mr-3">
-                                        <li class="page-item">
-                                            <a class="page-link" href="#" aria-label="Previous">
-                                              <span aria-hidden="true">&laquo;</span>
-                                            </a>
-                                        </li>
-                                        <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                        <li class="page-item">
-                                            <a class="page-link" href="#" aria-label="Next">
-                                              <span aria-hidden="true">&raquo;</span>
-                                            </a>
-                                        </li>
+                                        {% if Jobs.has_previous %}
+                                <li class="page-item"><a class="page-link" href="?page=1">First</a></li>
+                                    <li class="page-item">
+                                        <a class="page-link" href="?page={{ Jobs.previous_page_number }}" aria-label="Previous">
+                                          <span aria-hidden="true">&laquo;</span>
+                                        </a>
+                                    </li>
+                                {% endif %}
+                                    {% for num in Jobs.paginator.page_range %}
+                                    {% if Jobs.number == num %}
+                                        <li class="page-item"><a class="page-link" href="?page={{ num }}">{{ num }}</a></li>
+                                    {% elif num > Jobs.number|add:'-3' and num < Jobs.number|add:'3' %}
+                                        <li class="page-item"><a class="page-link" href="?page={{ num }}">{{ num }}</a></li>
+                                    {% endif %}
+                                    {% endfor %}
+                                    
+                                    {% if Jobs.has_next %}
+                                    <li class="page-item">
+                                        <a class="page-link" href="?page={{ Jobs.next_page_number }}" aria-label="Next">
+                                          <span aria-hidden="true">&raquo;</span>
+                                        </a>
+                                    </li>
+                                    <li class="page-item"><a class="page-link" href="?page={{ Jobs.paginator.num_pages }}">Last</a></li>
+                                    {% endif %}
                                     </ul>
                                 </div>
                             </div>
@@ -140,21 +151,33 @@
                     </div>
                     <div class="container-fluid p-0 border footer">
                         <div class="row d-flex">
-                            <div class="ml-auto">
-                                <ul class="pagination mr-3">
+                            <div class="ml-auto mt-3">
+                                <ul class="pagination mr-5">
+                                {% if Jobs.has_previous %}
+                                <li class="page-item"><a class="page-link" href="?page=1">First</a></li>
                                     <li class="page-item">
-                                        <a class="page-link" href="#" aria-label="Previous">
+                                        <a class="page-link" href="?page={{ Jobs.previous_page_number }}" aria-label="Previous">
                                           <span aria-hidden="true">&laquo;</span>
                                         </a>
                                     </li>
-                                    <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                {% endif %}
+                                    {% for num in Jobs.paginator.page_range %}
+                                    {% if Jobs.number == num %}
+                                        <li class="page-item"><a class="page-link" href="?page={{ num }}">{{ num }}</a></li>
+                                    {% elif num > Jobs.number|add:'-3' and num < Jobs.number|add:'3' %}
+                                        <li class="page-item"><a class="page-link" href="?page={{ num }}">{{ num }}</a></li>
+                                    {% endif %}
+                                    {% endfor %}
+                                    
+                                    {% if Jobs.has_next %}
                                     <li class="page-item">
-                                        <a class="page-link" href="#" aria-label="Next">
+                                        <a class="page-link" href="?page={{ Jobs.next_page_number }}" aria-label="Next">
                                           <span aria-hidden="true">&raquo;</span>
                                         </a>
                                     </li>
+                                    <li class="page-item"><a class="page-link" href="?page={{ Jobs.paginator.num_pages }}">Last</a></li>
+                                    {% endif %}
+                                    
                                 </ul>
                             </div>
                         </div>

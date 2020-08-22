@@ -95,7 +95,8 @@ def is_valid_queryparm(parm):
 
 
 def BrowseJobView(request):
-    jobs = JobPost.objects.all()
+    jobs = JobPost.objects.all().order_by('-JobPostDate')
+    print(jobs)
 
     # search jobs
     title = request.GET.get('title')
@@ -121,6 +122,11 @@ def BrowseJobView(request):
     endsalary = request.GET.get('endsalary')
     if is_valid_queryparm(endsalary):
         jobs = jobs.filter(EndSalary__icontains=endsalary)
+
+
+    paginator = Paginator(jobs, 3, orphans=1)
+    page_number = request.GET.get('page')
+    jobs = paginator.get_page(page_number)
 
     contex = {'Jobs':jobs, 'time':filter}
     return render(request, 'jobs/jobseeker/browse_job.html', contex)
