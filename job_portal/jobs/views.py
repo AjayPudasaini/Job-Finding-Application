@@ -10,6 +10,8 @@ from account.models import User
 from django.core.paginator import Paginator
 from django.utils.decorators import method_decorator
 from jobs.filers import FilterTime
+from django.contrib.auth.mixins import UserPassesTestMixin
+
 
 
 
@@ -39,32 +41,13 @@ class JobPostCreateView(CreateView):
         form.instance.user = self.request.user
         return super().form_valid(form)
 
-# @method_decorator([login_required, employer_required], name='dispatch')
-# class MyJobListView(ListView):
-#     model = JobPost
-#     template_name = 'jobs/employer/my_job_list.html'
-#     context_object_name = 'mypost'
-#     # paginate_by = 5
-
-#     def get_queryset(self):
-#         user = get_object_or_404(User, username=self.kwargs.get('username'))
-#         return JobPost.objects.filter(user=user).order_by('-JobPostDate')
-
-@method_decorator([login_required, employer_required], name='dispatch')
-class MyJobDetailView(DetailView):
-    model = JobPost
-    template_name = 'jobs/employer/my_job_detail.html'
-    context_object_name = 'mypost'
-
-    
-
 
 @method_decorator([login_required, employer_required], name='dispatch')
 class EmployerDashboard(ListView):
     model = JobPost
     template_name = 'account/Employer/dashboard.html'
     context_object_name = 'mypost'
-    paginate_by = 5
+    paginate_by = 10
 
     def get_queryset(self):
         user = get_object_or_404(User, username=self.kwargs.get('username'))
@@ -73,8 +56,61 @@ class EmployerDashboard(ListView):
 
 
 
-# def MyJobDetailView(request):
-#     myjobs = JobPost.objects.filter()
+
+
+@method_decorator([login_required, employer_required], name='dispatch')
+class MyJobDetailView(UserPassesTestMixin, DetailView):
+    model = JobPost
+    template_name = 'jobs/employer/my_job_detail.html'
+    context_object_name = 'mypost'
+
+    def test_func(self):
+        jobpost = self.get_object()
+        if self.request.user == jobpost.user:
+            return True
+        return False
+
+    
+
+
+# Job Updateing Views
+@method_decorator([login_required, employer_required], name='dispatch')
+class MyJobUpdateView(UserPassesTestMixin, UpdateView):
+    model = JobPost
+    form_class = job_post_form
+    template_name = 'jobs/employer/job_post.html'
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super().form_valid(form)
+    
+    def test_func(self):
+        jobpost = self.get_object()
+        if self.request.user == jobpost.user:
+            return True
+        return False
+
+
+# job delete view
+@method_decorator([login_required, employer_required], name='dispatch')
+class MyJobDeleteView(UserPassesTestMixin, DeleteView):
+    model = JobPost
+    template_name = 'jobs/employer/my_job_delete.html'
+    success_url = '/'
+
+    def test_func(self):
+        jobpost = self.get_object()
+        if self.request.user == jobpost.user:
+            return True
+        return False
+
+    
+
+    
+
+
+
+
 
 
 
@@ -124,7 +160,7 @@ def BrowseJobView(request):
         jobs = jobs.filter(EndSalary__icontains=endsalary)
 
 
-    paginator = Paginator(jobs, 3, orphans=1)
+    paginator = Paginator(jobs, 30, orphans=5)
     page_number = request.GET.get('page')
     jobs = paginator.get_page(page_number)
 

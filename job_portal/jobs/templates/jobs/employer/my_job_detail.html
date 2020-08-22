@@ -110,12 +110,6 @@
             {{ mypost.JobSpecification|safe }}
           </div>
         </div>
-        <div class="job-specification border mb-2 bg-white">
-          <div class="row p-2 d-flex">
-            <a href="" class="btn button-apply-job disabled" aria-disabled="true"><i class="fa fa-plus"></i> Apply Now</a>
-            <a href="" class="btn button-save-job disabled" aria-disabled="true"><i class="fa fa-save"></i> Save Job</a>
-          </div>
-        </div>
 
         <div class="job-specification border mb-5 bg-white">
           <div class="row">
@@ -139,7 +133,14 @@
           <div class="job-action border bg-white p-3">
             <h6 class="border-bottom p-0">Job Action</h6>
             <div class="btns d-flex mt-4">
-                <a href="" class="btn button-apply-job disabled" aria-disabled="true"><i class="fa fa-plus"></i> Apply Now</a>
+            {% if mypost.user == user %}
+                <a href="{% url 'jobs_employer:my_job_delete' mypost.id %}" class="btn button-apply-job"><i class="fa fa-trash"></i> Delete</a>
+                <a href="{% url 'jobs_employer:my_job_update' mypost.id %}" class="btn button-save-job"><i class="fa fa-edit"></i> Edit</a>
+            {% endif %}
+            </div>
+            
+            <div class="btns d-flex mt-4">
+                <a href="" class="btn button-apply-job disabled" aria-disabled="true"><i class="fa fa-plus"></i> Apply Job</a>
                 <a href="" class="btn button-save-job disabled" aria-disabled="true"><i class="fa fa-save"></i> Save Job</a>
             </div>
           </div>

@@ -6,9 +6,9 @@
 {% block profilecontents %}
      <div class="container p-5">
       <div class="row">
-          <div class="col-12">
-                <div class="container border rounded bg-light">
-                    <form method = 'POST'>
+          <div class="col-12 bg-white">
+                <div class="container rounded">
+                    <form method = 'POST', autocomplete=off>
                     {% csrf_token %}
                         <fieldset class="form-group">
                             <legend class="border-bottom mb-4">Job Post</legend>
@@ -18,7 +18,7 @@
                             </div>
                         </fieldset>
                         <div class="form-group">
-                            <button type="submit" class="btn btn-outline-info btn-block">Save</button>
+                            <button type="submit" class="btn btn-outline-info btn-block">Post Job</button>
                         </div>
                     </form>
                 </div>                   

@@ -2,7 +2,7 @@ from django.urls import path, include
 from account import views
 from account.views import (JobseekerSignupView, EmployerSignupView,
                              JobseekerDashboardView, 
-                             JobseekerProfileUpdateView)
+                             JobseekerProfileUpdateView, EmployerProfileOverview)
 
 from jobs.views import (EmployerDashboard)
 from django.contrib.auth import views as auth_views
@@ -24,6 +24,7 @@ urlpatterns = [
 
 
     path('employer/', include(([
+        path('overview', EmployerProfileOverview.as_view(), name = 'employer_overview'),
         path('dashboard/<str:username>', EmployerDashboard.as_view(), name = 'employer_dashboard'),
         path('profile/detail/<int:user_id>', views.EmployerProfileDetailView, name = 'employer_profile_detail'),
         path('profile/update/detail/', views.EmployerProfileUpdateView, name = 'employer_profile_update_detail'),

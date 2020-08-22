@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container mt-5">
+
+    <div class="card mt-5">
+        <div class="card-header">
+            User Account Delete
+        </div>
+        <div class="card-body">
+            <div class="alert alert-danger" role="alert">
+                Are you sure want to pernamantely delete "{{ object.JobTitle }}" Job Posts
+
+            </div>
+            <form method="POST">
+                {% csrf_token %}
+                    <a href="{% url 'jobs_employer:my_job_detail' object.user.username object.id  %}" class="btn btn-outline-info">Cancel</a>
+                    <button type="submit" class="btn btn-danger">
+                    Yes, Delete
+                    </button>
+            </form>
+
+        </div>
+        
+        
+    </div>
+</div>
+{% endblock content %}

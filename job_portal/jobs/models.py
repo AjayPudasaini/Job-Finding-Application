@@ -120,7 +120,7 @@ class JobPost(models.Model):
     
 
     def get_absolute_url(self):
-        return reverse("jobs_employer:my_job_list", kwargs={'username':self.user.username})
+        return reverse("employer:employer_dashboard", kwargs={'username':self.user.username})
 
     
     def save(self, *args, **kwargs):

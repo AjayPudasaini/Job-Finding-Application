@@ -19,7 +19,7 @@ def index(request):
         if request.user.is_jobseeker:
             return redirect('jobseeker:jobseeker_dashboard')
         else:
-            return redirect('employer:employer_profile_update_detail')
+            return redirect('employer:employer_overview')
     else:
         contex = {'Jobs':jobs}
         return render(request, 'account/home.html', contex)
@@ -72,9 +72,9 @@ class EmployerSignupView(CreateView):
 
 # Employer Profiling
 
-# @method_decorator([login_required, employer_required], name='dispatch')
-# class EmployerProfileView(TemplateView):
-#     template_name = 'account/Employer/dashboard.html'
+@method_decorator([login_required, employer_required], name='dispatch')
+class EmployerProfileOverview(TemplateView):
+    template_name = 'account/Employer/overview.html'
 
 
 
