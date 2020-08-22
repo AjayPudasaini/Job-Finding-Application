@@ -9,7 +9,7 @@ from account.models import ( GENDER_CHOICE, EDUCATION_CHOICES,
                                 NATIONALITY_CHOOSE, EDUCATION_BOARD_CHOICES, LANGUAGES_CHOICES )
 
 
-
+from ckeditor.widgets import CKEditorWidget
 
 # Jobseeker Signup Form
 class JobseekerSignupForm(UserCreationForm):
@@ -27,9 +27,9 @@ class JobseekerSignupForm(UserCreationForm):
     JobCategory = forms.ChoiceField(choices=JOB_CATEGORY_CHOICES, required=False, label='Job Category')
 
 
-    AboutMe = forms.CharField(widget=forms.Textarea(
+    AboutMe = forms.CharField(widget=CKEditorWidget(
         attrs={'class': 'form-control', 'placeholder': 'describe about yourself'}
-        ), required=True, min_length=10, label='About Me')
+        ),label='About Me')
 
 
 

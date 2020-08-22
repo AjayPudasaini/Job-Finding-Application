@@ -197,17 +197,12 @@ body{
     color: blue;
 }
 .hot-job-text{
-    /* height: 50px; */
     background-color: white;
     color: black;
     margin-top: 80px;
     margin-bottom: 30px;
-    /* align-items: center; */
-    /* text-align: center!important; */
-    /* margin-left: 50%; */
 }
 .hot-job-text h3{
-    /* text-align: center!important; */
     text-transform: uppercase;
     font-family: Bookman Old Style;
 }
@@ -215,9 +210,19 @@ body{
     margin-top: 30px;
 }
 .hot_jobs_card{
-    border-color: chartreuse!important;
-    
+    border-color: chartreuse!important;   
 }
+
+.card-logo{
+    height: 60px;
+    width: 60px;
+}
+
+.card-logo img{
+    height: 60px;
+    width: 60px;
+}
+
 .hot_jobs_card:hover{
     border-top: 1px solid rgb(115, 238, 84)!important ;
     border-left: black!important;
@@ -259,6 +264,11 @@ body{
 
 .fullcontent{
     padding:80px;
+}
+
+
+.cke_1{
+    width:100%;
 }
 
 

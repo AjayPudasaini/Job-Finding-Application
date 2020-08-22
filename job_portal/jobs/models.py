@@ -114,6 +114,9 @@ class JobPost(models.Model):
     JobPostDate = models.DateTimeField(default=timezone.now, blank=False)
     JobExpiryDate = models.DateTimeField()
 
+    def __str__(self):
+        return self.JobTitle
+    
 
     def get_absolute_url(self):
         return reverse("jobs_employer:my_job_list", kwargs={'username':self.user.username})
@@ -127,6 +130,9 @@ class JobPost(models.Model):
             output_size = (400, 760)
             HireBanner.thumbnail(output_size)
             HireBanner.save(self.HiringBanner.path)
+
+
+   
     
 
 

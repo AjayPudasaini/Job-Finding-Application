@@ -15,6 +15,11 @@
 
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
 
+  <script type="text/javascript" src="{% static "ckeditor/ckeditor-init.js" %}"></script>
+  <script type="text/javascript" src="{% static "ckeditor/ckeditor/ckeditor.js" %}"></script>
+
+   {% comment %} <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v8.0" nonce="1UFRngv2"></script> {% endcomment %}
+
 
   <title>Job Finding Application</title>
 
@@ -29,7 +34,7 @@
 
         {% if user.is_authenticated %}
           {% if user.is_jobseeker %}
-            <a class="navbar-brand mr-4" href="{% url 'jobseeker:jobseeker_dashboard' %}">SMARTKTM Jobs</a>
+            <a class="navbar-brand mr-4" href="{% url 'homes' %}">SMARTKTM Jobs</a>
           {% else %}
             <a class="navbar-brand mr-4" href="">SMARTKTM Jobs</a>
           {% endif %}
@@ -158,9 +163,17 @@
         <hr color="White">
         <div class="legal">
           <ul>
-            <li><a href="">Register</a></li>
-            <li><a href="">Login</a></li>
-            <li><a href="#">Search Jobs</a></li>
+            <li><a href="{% url 'register-jobseeker' %}">Register</a></li>
+            {% if user.is_authenticated %}
+            {% if user.is_jobseeker %}
+            <li><a href="{% url 'logout' %}">Logout</a></li>
+            {% else %}
+            <li><a href="{% url 'login' %}">Login</a></li>
+            {% endif %}
+            {% else %}
+            <li><a href="{% url 'login' %}">Login</a></li>
+            {% endif %}
+            <li><a href="{% url 'browse_job' %}">Search Jobs</a></li>
             <li><a href="#">FAQ</a></li>
 
           </ul>
@@ -171,11 +184,18 @@
         <hr color="White">
         <div class="usefullinks">
           <ul>
-            <li><a href="">Register</a></li>
-            <li><a href="">Login</a></li>
+            <li><a href="{% url 'register-employer' %}">Register</a></li>
+            {% if user.is_authenticated %}
+            {% if user.is_employer %}
+            <li><a href="{% url 'logout' %}">Logout</a></li>
+            {% else %}
+            <li><a href="{% url 'login' %}">Login</a></li>
+            {% endif %}
+            {% else %}
+            <li><a href="{% url 'login' %}">Login</a></li>
+            {% endif %}
 
-            <li><a href="">Post Job</a></li>
-            <li><a href="">Requirement Service</a></li>
+            <li><a href="{% url 'jobs_employer:job_post' %}">Post Job</a></li>
             <li><a href="">FAQ</a></li>
           </ul>
         </div>

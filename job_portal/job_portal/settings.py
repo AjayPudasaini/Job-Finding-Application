@@ -45,9 +45,7 @@ INSTALLED_APPS = [
 
     'ckeditor',
     'crispy_forms',
-    'taggit'
-    
-
+    'taggit',
 ]
 
 AUTH_USER_MODEL = 'account.User'
@@ -111,6 +109,16 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
+
+
+
+# CKEDITOR_CONFIGS = {
+# 'awesome_ckeditor': {
+# 'toolbar': 'Basic',
+# },
+# }
+
+
 
 
 # Internationalization

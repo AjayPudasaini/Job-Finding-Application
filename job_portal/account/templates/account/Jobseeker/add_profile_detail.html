@@ -6,8 +6,8 @@
 {% block profilecontent %}
      <div class="container p-5">
       <div class="row">
-          <div class="col-12">
-                <div class="container border rounded bg-light">
+          <div class="col-8">
+                <div class="border rounded bg-white">
                     <form method = 'POST' enctype="multipart/form-data">
                     {% csrf_token %}
                         <fieldset class="form-group">
@@ -18,12 +18,18 @@
                                 {{ p_form|crispy }}
                             </div>
                         </fieldset>
-                        <div class="form-group">
+                        <div class="form-group pl-3 pr-3">
                             <button type="submit" class="btn btn-outline-info btn-block">Save</button>
                         </div>
                     </form>
                 </div>                   
           </div>
+
+          <div class="col-4 bg-white">
+            bhnjmk,
+          </div>
+
+
       </div>
     </div>    
   

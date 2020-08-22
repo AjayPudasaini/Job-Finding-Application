@@ -10,6 +10,19 @@ from django.utils.decorators import method_decorator
 
 
 
+
+
+
+class JobLists(ListView):
+    model = JobPost
+    template_name = 'account/home.html'
+    context_object_name = 'Jobs'
+    paginate_by = 20
+    ordering = '-JobPostDate'
+
+
+
+
 # For employer's views 
 
 
@@ -59,3 +72,34 @@ class EmployerDashboard(ListView):
 
 # def MyJobDetailView(request):
 #     myjobs = JobPost.objects.filter()
+
+
+
+
+
+# for Jobseeker
+
+# class BrowseJobView(ListView):
+#     model = JobPost
+#     template_name = 'jobs/jobseeker/browse_job.html'
+#     context_object_name = 'Jobs'
+#     paginate_by = 20
+
+
+def is_valid_queryparm(parm):
+    return parm != '' and parm is not None
+
+
+
+def BrowseJobView(request):
+    jobs = JobPost.objects.all()
+
+    
+    contex = {'Jobs':jobs}
+    return render(request, 'jobs/jobseeker/browse_job.html', contex)
+
+
+def BrowseJobDetail(request, id):
+    jobs = JobPost.objects.get(id = id)
+    contex = {'mypost':jobs}
+    return render(request, 'jobs/jobseeker/job_detail.html', contex)

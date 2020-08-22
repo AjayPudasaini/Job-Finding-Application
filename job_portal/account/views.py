@@ -9,18 +9,20 @@ from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.contrib.auth.forms import PasswordChangeForm
+from jobs.models import JobPost
 
 
 
 def index(request):
-    user = User.objects.filter(username='username')
+    jobs = JobPost.objects.all()
     if request.user.is_authenticated:
         if request.user.is_jobseeker:
             return redirect('jobseeker:jobseeker_dashboard')
         else:
             return redirect('employer:employer_profile_update_detail')
     else:
-        return render(request, 'account/home.html')
+        contex = {'Jobs':jobs}
+        return render(request, 'account/home.html', contex)
 
 
 def register_as(request):
@@ -176,10 +178,6 @@ def JobseekerProfileUpdateView(request):
 
 
 
-
-@method_decorator([login_required, jobseeker_required], name='dispatch')
-class BrowseJobView(TemplateView):
-    template_name = 'browse_job.html'
 
 
 

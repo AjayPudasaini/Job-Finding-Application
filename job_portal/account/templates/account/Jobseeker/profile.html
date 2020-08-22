@@ -22,17 +22,17 @@
                 <li class="nav-item active">
                     <a class="nav-link" href="{% url 'jobseeker:jobseeker_dashboard' %}"> Dashboard <span class="sr-only">(current)</span></a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'jobseeker:jobseeker_profile_detail' user.id  %}">Profile Detail</a>
+                <li class="nav-item active">
+                    <a class="nav-link" href="{% url 'jobseeker:jobseeker_profile_detail' user.id  %}">Profile <span class="sr-only">(current)</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'jobseeker:jobseeker_profile_add_detail'%}">Update Profile</a>
+                <li class="nav-item active">
+                    <a class="nav-link" href="">Saved Job <span class="sr-only">(current)</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+                <li class="nav-item active">
+                    <a class="nav-link" href="{% url 'logout' %}">Logout <span class="sr-only">(current)</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'jobseeker:jobseeker_profile_setting' %}">Settings</a>
+                <li class="nav-item active">
+                    <a class="nav-link" href="{% url 'jobseeker:jobseeker_profile_setting' %}">Settings <span class="sr-only">(current)</a>
                 </li>
             </ul>
         </div>

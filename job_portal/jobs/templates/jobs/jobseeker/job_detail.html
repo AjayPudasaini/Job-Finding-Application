@@ -1,9 +1,9 @@
-{% extends 'account/Employer/employer_profile.html' %}
+{% extends 'base.html' %}
 {% load static %}
 {% comment %} {% load crispy_forms_tags %} {% endcomment %}
 
 
-{% block profilecontents %}
+{% block content %}
 
 
 
@@ -17,7 +17,7 @@
       <div class="company-profile mt-4 bg-white p-3">
         <div class="row bg-white profile-section no-gutters">
           <div class="col-md-3 mt-3 company-logo">
-            <img src="{{ object.user.employerrprofile.CompanyLogo.url }}" class="img-fluid rounded-circle">
+            <img src="{{ mypost.user.employerrprofile.CompanyLogo.url }}" class="img-fluid rounded-circle">
           </div>
 
           <div class="col-md-9 mt-3 company-name">
@@ -111,8 +111,8 @@
         </div>
         <div class="job-specification border mb-2 bg-white">
           <div class="row p-2 d-flex">
-            <a href="" class="btn button-apply-job disabled" aria-disabled="true"><i class="fa fa-plus"></i> Apply Now</a>
-            <a href="" class="btn button-save-job disabled" aria-disabled="true"><i class="fa fa-save"></i> Save Job</a>
+            <a href="" class="btn button-apply-job"><i class="fa fa-plus"></i> Apply Now</a>
+            <a href="" class="btn button-save-job"><i class="fa fa-save"></i> Save Job</a>
           </div>
         </div>
 
@@ -138,8 +138,8 @@
           <div class="job-action border bg-white p-3">
             <h6 class="border-bottom p-0">Job Action</h6>
             <div class="btns d-flex mt-4">
-                <a href="" class="btn button-apply-job disabled" aria-disabled="true"><i class="fa fa-plus"></i> Apply Now</a>
-                <a href="" class="btn button-save-job disabled" aria-disabled="true"><i class="fa fa-save"></i> Save Job</a>
+                <a href="" class="btn button-apply-job"><i class="fa fa-plus"></i> Apply Now</a>
+                <a href="" class="btn button-save-job"><i class="fa fa-save"></i> Save Job</a>
             </div>
           </div>
         </div>
@@ -148,4 +148,4 @@
   </div>
  </div>
 
-{% endblock profilecontents %}
+{% endblock content %}

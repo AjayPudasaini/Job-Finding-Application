@@ -1,14 +1,17 @@
 from django.urls import path, include
 from account import views
 from jobs import views as JobsView
-from account.views import (  BrowseJobView, JobseekerDashboardView, 
+from account.views import (JobseekerDashboardView, 
                              JobseekerProfileUpdateView)
 
-from jobs.views import ( JobPostCreateView, MyJobDetailView )
+from jobs.views import ( JobPostCreateView, MyJobDetailView, JobLists )
 from django.contrib.auth import views as auth_views
 
 
 urlpatterns = [
+    path('myhomes', JobLists.as_view(), name='homes'),
+    path('browse/jobs', JobsView.BrowseJobView, name = 'browse_job'),
+    path('job/detail/<int:id>', JobsView.BrowseJobDetail, name='jobs_detail'),
 
     path('employer/', include(([
         path('job/post', JobPostCreateView.as_view(), name='job_post'),
@@ -17,5 +20,7 @@ urlpatterns = [
 
 
     ], 'jobs.views'), namespace='jobs_employer')),
+
+    
 
 ]
