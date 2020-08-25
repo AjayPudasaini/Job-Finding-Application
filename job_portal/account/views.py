@@ -14,15 +14,13 @@ from jobs.models import JobPost
 
 
 def index(request):
-    jobs = JobPost.objects.all()
     if request.user.is_authenticated:
         if request.user.is_jobseeker:
-            return redirect('jobseeker:jobseeker_dashboard')
+            return redirect('homes')
         else:
             return redirect('employer:employer_overview')
     else:
-        contex = {'Jobs':jobs}
-        return render(request, 'account/home.html', contex)
+        return render(request, 'account/home.html')
 
 
 def register_as(request):
@@ -149,6 +147,8 @@ class JobseekerDashboardView(TemplateView):
 @jobseeker_required
 def JobseekerProfileDetailView(request, user_id):
     detail = JobseekerProfile.objects.filter(user_id=user_id)
+    # value = JobseekerProfile.percentage_complete+JobseekerProfile.email_value
+    # print(value)
     contex = {'profile':detail}
     return render(request, 'account/Jobseeker/profile_detail.html', contex)
 

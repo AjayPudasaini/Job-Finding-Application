@@ -133,6 +133,26 @@ class JobPost(models.Model):
             HireBanner.save(self.HiringBanner.path)
 
 
+
+
+class JobApply(models.Model):
+    user = models.ForeignKey(User, on_delete = models.CASCADE)
+    job = models.ForeignKey(JobPost, related_name='jobapplys', on_delete = models.CASCADE, verbose_name='Apply Job')
+    JobApplyReason = RichTextField()
+    ApplydDate = models.DateTimeField(default=timezone.now, verbose_name='Job Apply Date')
+
+
+    def get_absolute_url(self):
+        return reverse("browse_job")
+
+
+    class Meta():
+        ordering = ['-ApplydDate']
+    
+    
+
+
+
    
     
 

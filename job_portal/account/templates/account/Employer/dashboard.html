@@ -13,6 +13,7 @@
                     <th scope="col">Title</th>
                     <th scope="col">Views</th>
                     <th scope="col">Share</th>
+                    <th scope="col">Applicants</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -22,6 +23,7 @@
                     <td><a class="article-title" href="{% url 'jobs_employer:my_job_detail' post.user.username post.id %}">{{ post.JobTitle|safe }}</a></td>
                     <td>500</td>
                     <td>50</td>
+                    <td>5</td>
                   </tr>
                 {% endfor %}
                 </tbody>

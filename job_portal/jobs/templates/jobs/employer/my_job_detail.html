@@ -124,6 +124,8 @@
             </div>
         </div>
 
+        
+
       </div>
 
     </div>
@@ -147,6 +149,32 @@
         </div>
       </div>
     </div>
+
+      <div class="job-applied container border mb-5 bg-white">
+        <div class = "applicant-section border-bottom">
+          <h2 class="article-title ml-5 mt-3">Applicants</h2>
+        </div>
+          <div class="container pl-5 mt-3 pr-5 mb-3">
+                <article class="media-comment content-section mt-1 ">
+                  <div class="media-body">
+                  {% if not mypost.jobapplys.all %}
+                    No applicants yet..
+                    {% else %}
+                    {% for applicant in mypost.jobapplys.all %}
+                      <div class="article-metadata-username border-bottom">
+                        <img class="rounded-circle account-img mb-2" src="{% static 'Image/Logos/logo.png' %}" alt='applied by user'/>
+                        <a class="ml-2 " href="">{{ applicant.user.username }}</a>
+                        <small class="text-muted ml-2">{{ applicant.ApplydDate|timesince }}</small>            
+                      </div>
+                      <h2 class="article-title">Applied Reason</h2>
+                      <p class="article-content">{{ applicant.JobApplyReason|safe }}
+                      </p>
+                    {% endfor %}
+                  {% endif %}  
+                  </div>
+                </article>
+          </div>
+  </div>
   </div>
  </div>
 

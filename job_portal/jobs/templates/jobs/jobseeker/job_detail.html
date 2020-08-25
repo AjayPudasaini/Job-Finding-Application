@@ -1,11 +1,13 @@
 {% extends 'base.html' %}
 {% load static %}
-{% comment %} {% load crispy_forms_tags %} {% endcomment %}
+{% load is_already_applied %}
 
 
 {% block content %}
 
-
+{% if request.user.is_authenticated %}      
+  {% is_already_applied mypost request.user as is_applied %}                       
+{% endif %}
 
 <div class="container">
    <div class="row mt-5">
@@ -112,7 +114,13 @@
         </div>
         <div class="job-specification border mb-2 bg-white">
           <div class="row p-2 d-flex">
-            <a href="" class="btn button-apply-job"><i class="fa fa-plus"></i> Apply Now</a>
+            
+            {% if is_applied %}
+              <input type="button" class="btn btn-outline-white-primary ml-5" value="Already applied"/>
+            {% else %}
+              <a href="{% url 'job_apply' mypost.pk %}" class="btn button-apply-job"><i class="fa fa-plus"></i> Apply Now</a>
+            {% endif %}
+
             {% if is_save %}
                 <a href="{% url 'save_jobs' mypost.id %}" class="btn btn-secondary ml-5"><i class="fa fa-save"></i> Saved Job</a>
             {% else %}
@@ -143,7 +151,11 @@
           <div class="job-action border bg-white p-3">
             <h6 class="border-bottom p-0">Job Action</h6>
             <div class="btns d-flex mt-4">
-                <a href="" class="btn button-apply-job"><i class="fa fa-plus"></i> Apply Now</a>
+            {% if is_applied %}
+              <input type="button" class="btn btn-outline-white-primary" value="Already applied"/>
+            {% else %}
+              <a href="{% url 'job_apply' mypost.pk %}" class="btn button-apply-job"><i class="fa fa-plus"></i> Apply Now</a>
+            {% endif %}
                 {% if is_save %}
                 <a href="{% url 'save_jobs' mypost.id %}" class="btn btn-secondary ml-5"><i class="fa fa-save"></i> Saved Job</a>
                 {% else %}

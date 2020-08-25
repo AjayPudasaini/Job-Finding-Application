@@ -9,7 +9,7 @@ from django.contrib.auth import views as auth_views
 
 
 urlpatterns = [
-    path('', views.index, name = 'index'),
+    path('over', views.index, name = 'index'),
     path('account/jobseeker/register', JobseekerSignupView.as_view(), name = 'register-jobseeker'),
     path('account/employer/register', EmployerSignupView.as_view(), name = 'register-employer'),
     path('register-as', views.register_as, name = 'register_as'),

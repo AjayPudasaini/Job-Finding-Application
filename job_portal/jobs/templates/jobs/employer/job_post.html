@@ -11,7 +11,7 @@
                     <form method = 'POST', autocomplete=off>
                     {% csrf_token %}
                         <fieldset class="form-group">
-                            <legend class="border-bottom mb-4">Job Post</legend>
+                            <legend class="border-bottom mb-4">Job {{ post_type }}</legend>
                             <div class = "container">
                                 {{ form.media }}
                                 {{ form|crispy }}

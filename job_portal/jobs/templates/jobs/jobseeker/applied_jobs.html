@@ -1,0 +1,34 @@
+{% extends 'account/jobseeker/profile.html' %}
+{% load static %}
+
+
+{% block profilecontent %}
+    
+
+    <main>
+        
+        <div class="container job-list bg-white mt-5 mb-5 p-3">
+
+                    <div class="container-fluid p-0 main">
+                        {% for jobs in job %}
+                            <div class="job-post-item bg-light p-4 d-block d-md-flex align-items-center mb-4">               
+                              <div class="mb-4 mb-md-0 mr-5">
+                                <div class="job-post-item-header d-flex align-items-center">
+                                  <a href="{% url 'jobs_detail' jobs.job_id %}"><h2 class="mr-3 text-black h3">{{ jobs.job.JobTitle }}</h2></a>
+                                  <div class="badge-wrap">
+                                   <span class="bg-secondary text-white badge py-2 px-3">{{ jobs.job.AvaliableTime }}</span>
+                                  </div>
+                                </div>
+                                <div class="job-post-item-body d-block d-md-flex">
+                                  <div class="mr-3"><i class="fa fa-building"></i><a href="">{{ jobs.job.user.employerrprofile.CompanyName }}</a></div>
+                                  <div><i class="fa fa-map-marker"></i> <span>{{ jobs.job.Location }}</span></div>
+                                </div>
+                              </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+        </div>
+    </main>
+
+{% endblock profilecontent %}
+

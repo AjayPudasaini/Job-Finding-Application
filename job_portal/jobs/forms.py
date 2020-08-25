@@ -1,6 +1,6 @@
 from django import forms
 from django.forms import ModelForm
-from jobs.models import JobPost
+from jobs.models import JobPost, JobApply
 from account.models import(JOB_CATEGORY_CHOICES, EDUCATION_CHOICES)
 from jobs.models import (LOCATION_CHOOSE, WORKING_SHIFTS, Job_Level_Choices,
                         JOB_AVALIABLE_TIME, Gender)
@@ -66,7 +66,10 @@ class job_post_form(forms.ModelForm):
 
     
 
-
+class JobApplyForm(forms.ModelForm):
+    class Meta():
+        model = JobApply
+        fields = ['JobApplyReason']
     
 
 

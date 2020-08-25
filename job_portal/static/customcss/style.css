@@ -338,12 +338,19 @@ body{
     
 
 }
+.media-comment{
+    background-color: rgb(253, 253, 253);
+    color: rgb(39, 37, 35);
+    width: 100%;
+    height: auto;
+    border-radius: 5px; 
+}
+
 .account-img{
     width: 60px;
     height: 60px;
 }
 .medias-body{
-    /* margin-left: -6%; */
     float: right;
     margin-right: 65%;
 }
@@ -368,17 +375,9 @@ body{
 }
 
 
-/* login page */
-
-.login_as_by i{
-    font-size: xx-large;
+.progress{
+    height: 40px !important;
 }
-.or_login_as{
-    /* border: 1px solid black; */
-    /* border-radius: 50%; */
-    margin-top: 5px;;
-}
-
 
 
 
@@ -554,6 +553,14 @@ body{
     color:black;
     transform: rotateY(360deg)!important;
 
+}
+
+.footer-navbar {
+    background-color: rgb(70, 67, 67);
+    color: #beb3b3 !important;
+}
+.linkcol{
+    color: #beb3b3 !important;
 }
 
 

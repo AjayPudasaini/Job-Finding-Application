@@ -76,7 +76,7 @@ class JobseekerSignupForm(UserCreationForm):
 class UserUpdateForm(forms.ModelForm):
     class Meta():
         model = User
-        fields = ['username']
+        fields = ['username', 'email']
 
 
 class JobseekerProfileUpdateForm(forms.ModelForm):

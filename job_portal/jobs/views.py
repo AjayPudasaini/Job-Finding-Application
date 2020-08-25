@@ -1,19 +1,17 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponseRedirect, HttpResponse
-from django.urls import reverse
-from jobs.forms import job_post_form
+from django.urls import reverse, reverse_lazy
+from jobs.forms import job_post_form, JobApplyForm
 from account.decorators import jobseeker_required, employer_required
 from django.contrib.auth.decorators import login_required
 from django.views.generic import View, TemplateView, CreateView, UpdateView, DetailView, DeleteView, ListView
-from jobs.models import JobPost
-from account.models import User
+from jobs.models import JobPost, JobApply
+from account.models import User, JobseekerProfile
 from django.core.paginator import Paginator
 from django.utils.decorators import method_decorator
 from jobs.filers import FilterTime
 from django.contrib.auth.mixins import UserPassesTestMixin
-
-
-
+from django.contrib import messages
 
 
 
@@ -36,6 +34,11 @@ class JobPostCreateView(CreateView):
     model = JobPost
     form_class = job_post_form
     template_name = 'jobs/employer/job_post.html'
+
+
+    def get_context_data(self, **kwargs):
+        kwargs['post_type'] = 'Post'
+        return super().get_context_data(**kwargs)
 
     def form_valid(self, form):
         form.instance.user = self.request.user
@@ -70,7 +73,9 @@ class MyJobDetailView(UserPassesTestMixin, DetailView):
             return True
         return False
 
-    
+
+
+ 
 
 
 # Job Updateing Views
@@ -79,6 +84,10 @@ class MyJobUpdateView(UserPassesTestMixin, UpdateView):
     model = JobPost
     form_class = job_post_form
     template_name = 'jobs/employer/job_post.html'
+
+    def get_context_data(self, **kwargs):
+        kwargs['post_type'] = 'Update'
+        return super().get_context_data(**kwargs)
 
     def form_valid(self, form):
         form.instance.user = self.request.user
@@ -115,14 +124,6 @@ class MyJobDeleteView(UserPassesTestMixin, DeleteView):
 
 
 
-
-# for Jobseeker
-
-# class BrowseJobView(ListView):
-#     model = JobPost
-#     template_name = 'jobs/jobseeker/browse_job.html'
-#     context_object_name = 'Jobs'
-#     paginate_by = 20
 
 
 def is_valid_queryparm(parm):
@@ -195,3 +196,64 @@ def ViewSavedJobs(request):
     saved_jobs = JobPost.objects.filter(SaveJob=user)
     contex = {'SavedJobs':saved_jobs}
     return render(request, 'jobs/jobseeker/saved_jobs.html', contex)
+
+
+
+
+
+@method_decorator([login_required, jobseeker_required], name='dispatch')
+class JobApplyCreateView(CreateView):
+    model = JobApply
+    form_class = JobApplyForm
+    template_name = 'jobs/jobseeker/job_apply.html'
+    context_object_name = 'job'
+    # fields = '__all__'
+
+
+    def get_success_url(self):
+        return reverse_lazy('jobs_detail', kwargs={'id': self.kwargs['pk']})
+
+    def form_valid(self, form):
+        applicant = JobApply.objects.filter(user_id=self.request.user.id, job_id=self.kwargs['pk'])
+        if applicant:
+            messages.info(self.request, 'You already applied for this job')
+            return HttpResponseRedirect(self.get_success_url())
+        form.instance.user = self.request.user
+        form.instance.job_id = self.kwargs['pk']
+        messages.success(self.request, 'Job has been Applied!')
+        print(messages)
+        return super().form_valid(form)
+
+
+@method_decorator([login_required, jobseeker_required], name='dispatch')
+class AppliedJobListView(ListView):
+    model = JobApply
+    template_name = 'jobs/jobseeker/applied_jobs.html'
+    context_object_name = 'job'
+
+    def get_queryset(self):
+        user = get_object_or_404(User, username=self.kwargs.get('username'))
+        return JobApply.objects.filter(user = user)
+    
+
+
+@method_decorator([login_required, employer_required], name='dispatch')
+class JobAppliedPerson(ListView):
+    model = JobApply
+    template_name = 'jobs/employer/jobs_applied.html'
+    context_object_name = 'jobseeker_applied'
+
+
+    def get_queryset(self):
+        job = get_object_or_404(JobPost, id = self.kwargs.get('id'))
+        return JobApply.objects.filter(job = job)
+    
+
+
+
+
+
+def JobseekerProfileView(request):
+    jobseeker = JobseekerProfile.objects.all()
+    contex = {'jobseeker':jobseeker}
+    return render(request, 'jobs/employer/jobseeker_list.html', contex)

@@ -122,7 +122,9 @@ class User(AbstractUser):
     is_employer = models.BooleanField(default=False)
     is_jobseeker = models.BooleanField(default=False)
     email = models.CharField(max_length=256, verbose_name='Email')
-    
+
+
+
 
 class JobseekerProfile(models.Model):
     user = models.OneToOneField(User, on_delete = models.CASCADE, primary_key = True, related_name='jobseekerprofile')
@@ -178,12 +180,6 @@ class JobseekerProfile(models.Model):
     def __str__(self):
         return f'{self.user.username} profile'
 
-
-    # def get_absolute_url(self):
-    #     return reverse("jobseeker:jobseeker_profile_detail")
-
-
-
     
 
     def save(self, *args, **kwargs):
@@ -194,6 +190,108 @@ class JobseekerProfile(models.Model):
             output_size = (300, 300)
             ProfilePic.thumbnail(output_size)
             ProfilePic.save(self.ProfileImage.path)
+
+
+
+    @property 
+    def percentage_complete(self):
+        percent = { 'FirstName': 1, 'LastName': 1,
+                     'Gender': 1, 'MarrigeStatus':1,
+                     'Religion':1, 'PhoneNumber':3,
+                     'Nationality':1, 'CurrentAddress':3,
+                     'PernamentAddress':3, 'ProfileImage':7,
+                     'Education':5, 'EducationProgram':5,
+                     'EducationBoard':5, 'NameOfInstitute':5,
+                     'MySkill':5, 'WorkingExperience':3,
+                     'WorkedField':3, 'WorkedCompanyName': 3,
+                     'WorkedCompanyWebsite':3, 'JobCategory':4,
+                     'Language':2, 'AboutMe': 10,
+                     'Facebook':1, 'Twitter':1, 'Instagram':1,
+                     'UploadCv':20}
+        total = 0
+        if self.FirstName:
+            total += percent.get('FirstName', 0)
+        if self.LastName:
+            total += percent.get('LastName', 0)
+
+        if self.Gender:
+            total += percent.get('Gender', 0)
+
+        if self.MarrigeStatus:
+            total += percent.get('MarrigeStatus', 0)
+
+        if self.Religion:
+            total += percent.get('Religion', 0)
+
+        if self.PhoneNumber:
+            total += percent.get('PhoneNumber', 0)
+
+        if self.Nationality:
+            total += percent.get('Nationality', 0)
+
+        if self.CurrentAddress:
+            total += percent.get('CurrentAddress', 0)
+
+        if self.PernamentAddress:
+            total += percent.get('PernamentAddress', 0)
+
+        if self.ProfileImage:
+            total += percent.get('ProfileImage', 0)
+
+        if self.Education:
+            total += percent.get('Education', 0)
+
+        if self.EducationProgram:
+            total += percent.get('EducationProgram', 0)
+
+        if self.EducationBoard:
+            total += percent.get('EducationBoard', 0)  
+
+        if self.NameOfInstitute:
+            total += percent.get('NameOfInstitute', 0)  
+
+        if self.EducationBoard:
+            total += percent.get('EducationBoard', 0)  
+
+        if self.MySkill:
+            total += percent.get('MySkill', 0)  
+
+        if self.WorkingExperience:
+            total += percent.get('WorkingExperience', 0)  
+
+        if self.WorkedField:
+            total += percent.get('WorkedField', 0)  
+
+        if self.WorkedCompanyName:
+            total += percent.get('WorkedCompanyName', 0)
+
+        if self.WorkedCompanyWebsite:
+            total += percent.get('WorkedCompanyWebsite', 0)
+
+        if self.JobCategory:
+            total += percent.get('JobCategory', 0)
+
+        if self.Language:
+            total += percent.get('Language', 0)
+
+        if self.AboutMe:
+            total += percent.get('AboutMe', 0) 
+
+        if self.Facebook:
+            total += percent.get('Facebook', 0) 
+
+        if self.Twitter:
+            total += percent.get('Twitter', 0) 
+
+        if self.Instagram:
+            total += percent.get('Instagram', 0)  
+
+        if self.UploadCv:
+            total += percent.get('UploadCv', 0)   
+        return total
+
+        
+
 
 
 
@@ -248,4 +346,68 @@ class EmployerProfile(models.Model):
             logo.save(self.CompanyLogo.path)
 
 
+            
+    @property 
+    def Company_percentage_complete(self):
+        percent = { 'CompanyName': 8, 'CompanyLogo': 7,
+                     'CompanyCategory': 8, 'CompanyOwnership':8,
+                     'CompanyWebsite':8, 'CompanyEstablishDate':5,
+                     'AboutCompany':13, 'CompanyAddress':5,
+                     'TelNo':5, 'MobileNo':7,
+                     'FirstName':5, 'LastName':5,
+                     'PhoneNumber':5, 'Email':5,
+                     'Facebook':5, 'Twitter':5, 'Instagram':5,}
+        total = 0
+        if self.CompanyName:
+            total += percent.get('CompanyName', 0)
+        if self.CompanyLogo:
+            total += percent.get('CompanyLogo', 0)
 
+        if self.CompanyOwnership:
+            total += percent.get('CompanyOwnership', 0)
+
+        if self.CompanyCategory:
+            total += percent.get('CompanyCategory', 0)
+
+        if self.CompanyWebsite:
+            total += percent.get('CompanyWebsite', 0)
+
+        if self.CompanyEstablishDate:
+            total += percent.get('CompanyEstablishDate', 0)
+
+        if self.AboutCompany:
+            total += percent.get('AboutCompany', 0)
+
+        if self.CompanyAddress:
+            total += percent.get('CompanyAddress', 0)
+
+        if self.TelNo:
+            total += percent.get('TelNo', 0)
+
+        if self.MobileNo:
+            total += percent.get('MobileNo', 0)
+
+        if self.FirstName:
+            total += percent.get('FirstName', 0)
+
+        if self.LastName:
+            total += percent.get('LastName', 0)
+
+        if self.PhoneNumber:
+            total += percent.get('PhoneNumber', 0)  
+
+        if self.Email:
+            total += percent.get('Email', 0)  
+
+        if self.Facebook:
+            total += percent.get('Facebook', 0)  
+
+        if self.Twitter:
+            total += percent.get('Twitter', 0)  
+
+        if self.Instagram:
+            total += percent.get('Instagram', 0)
+
+        return total
+
+        

@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    {% for jobseeker in jobseeker %}
+     <a href="" class="btn button-apply-job m-5"><i class="fa fa-plus"></i> {{ jobseeker.user.username }}</a>
+        {{ jobseeker.user.username }}
+        
+    {% endfor %}
+{% endblock content %}
