@@ -3,8 +3,8 @@
 
 {% block content %}
     {% for jobseeker in jobseeker %}
-     <a href="" class="btn button-apply-job m-5"><i class="fa fa-plus"></i> {{ jobseeker.user.username }}</a>
+     <a href="{% url 'jobseeker:jobseeker_profile_detail' jobseeker.user %}" class="btn button-apply-job m-5"><i class="fa fa-plus"></i> {{ jobseeker.user.username }}</a>
         {{ jobseeker.user.username }}
         
     {% endfor %}
-{% endblock content %}
+{% endblock content %}  

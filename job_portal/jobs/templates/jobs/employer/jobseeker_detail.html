@@ -1,26 +1,27 @@
-{% extends 'account/jobseeker/profile.html' %}
+{% extends 'account/Employer/employer_profile.html' %}
 {% load static %}
 
 
-{% block profilecontent %}
+{% block profilecontents %}
    <div class="container border bg-white p-5 mt-5 mb-5">
+   jobseeker detail
         <div class="container">
             <div class="row">
                 <div class="col-md-4">
                     <div class="border rounded bg-light profile-pic-section">
-    
+                        
                         <div class="profile-pic pt-4 justify-content-center d-flex ">
-                            <img src=" {{ user.jobseekerprofile.ProfileImage.url }} " class="rounded-circle inf-fluid" alt="profile-pic">
+                        {{ applicants.user.username }}
+                            <img src=" {{ applicant.user.jobseekerprofile.ProfileImage.url }} " class="rounded-circle inf-fluid" alt="profile-pic">
                         </div>
                         
                         <div class="username-online-acc border-top mt-3 w-100">
                             
-                            <h6 class="username justify-content-center d-flex mt-1"><i class="fa fa-user pr-2"></i> {{ user.username }}</h6>
+                            <h6 class="username justify-content-center d-flex mt-1"><i class="fa fa-user pr-2"></i> {{ applicant.user.username }}</h6>
                             <h6 class="username justify-content-center d-flex mt-1"><i class="fa fa-envelope pr-2"></i>{{ user.email }}</h6>
-                            {% for links in profile %}
                             <div class="justify-content-center d-flex">
                                 <div class="p-2">
-                                    <a href="{{ links.Facebook }}"><i class="fa fa-facebook"></i></a>
+                                    <a href="{{ .Facebook }}"><i class="fa fa-facebook"></i></a>
                                 </div>
                                 <div class="p-2">
                                     <a href="{{ links.Twitter }}"><i class="fa fa-twitter"></i></a>
@@ -29,36 +30,18 @@
                                     <a href="{{ links.Instagram }}"><i class="fa fa-instagram"></i></a>
                                 </div>
                             </div>
-                            {% endfor %}
                         </div>   
                     </div>
 
                    
                         
-                    {% for profile in profile %}
+                    
                     <div class="card mt-5 bg-light">
                         <div class="card-body p-0">
                             <h5 class="card-title border-bottom justify-content-center d-flex">About Me</h5>
-                            <p class="card-text pl-2 pr-2 pb-2">{{ profile.AboutMe|safe }}</p>
+                            <p class="card-text pl-2 pr-2 pb-2">{{ applicant.AboutMe|safe }}</p>
                         </div>
                     </div>
-
-
-                    {% if user.is_authenticated %}
-                        {% if user.is_jobseeker %}
-
-                        <div class="card mt-5 bg-light">
-                            <div class="card-body p-3">
-                                <h5 class="card-title border-bottom justify-content-center d-flex">My Profile</h5>
-                                <div class="progress">
-                                    <div class="progress-bar bg-success" role="progressbar" style="width: {{ profile.percentage_complete }}%;" aria-valuenow="{{ profile.percentage_complete }}" aria-valuemin="0" aria-valuemax="100">{{ profile.percentage_complete }}%</div>
-                                </div>
-                            </div>
-                        </div>
-                        {% endif %}
-                    {% endif %}
-
-
                     
                 </div>
     
@@ -69,13 +52,7 @@
                                 <table class="table table-hover table-responsive table-borderless border-0">
                                     <div class="table-heading d-flex">
                                         <h6 class="mr-auto">Account Detail</h6>
-                                        {% if user.is_authenticated %}
-                                            {% if user.is_jobseeker %}
-
-                                            <a href="{% url 'jobseeker:jobseeker_profile_add_detail' %}" class="btn ml-auto">Edit Account</a>
-                                            {% endif %}
-
-                                        {% endif %}
+                                        <a href="" class="btn ml-auto">Edit Account</a>
                                     </div>
         
                                     
@@ -176,9 +153,6 @@
                                             <th scope="row">Language:</th>
                                             <td>{{ profile.Language }}</td>
                                         </tr>
-        
-        
-                                    {% endfor %}
                                     
                                     
                                 </table>
@@ -190,4 +164,4 @@
             
         </div>
     </div>
-{% endblock profilecontent %}
+{% endblock profilecontents %}

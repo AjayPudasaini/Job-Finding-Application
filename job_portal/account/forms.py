@@ -10,6 +10,9 @@ from account.models import ( GENDER_CHOICE, EDUCATION_CHOICES,
 
 
 from ckeditor.widgets import CKEditorWidget
+from django.contrib import messages
+from django.shortcuts import HttpResponse
+import os
 
 # Jobseeker Signup Form
 class JobseekerSignupForm(UserCreationForm):
@@ -84,14 +87,6 @@ class JobseekerProfileUpdateForm(forms.ModelForm):
         model = JobseekerProfile
         fields = '__all__'
         exclude = ('user',)
-        
-
-
-
-
-
-
-
 
 
 # Employer Signup Form

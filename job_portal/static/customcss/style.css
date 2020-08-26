@@ -408,7 +408,7 @@ body{
     background-color: transparent;
     border: 1px solid black;
     outline: none;
-    /*padding: 8px;*/
+    text-decoration: none;
     height: 30px;
     width: auto;
 }
@@ -416,6 +416,7 @@ body{
     border-color: orange;
     background-color: red;
     color: white;
+    text-decoration: none;
 }
 
 .button-save-job{

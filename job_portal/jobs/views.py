@@ -12,7 +12,7 @@ from django.utils.decorators import method_decorator
 from jobs.filers import FilterTime
 from django.contrib.auth.mixins import UserPassesTestMixin
 from django.contrib import messages
-
+from jobs.decorators import complete_profile_required, complete_employer_profile
 
 
 
@@ -29,7 +29,7 @@ class JobLists(ListView):
 # For employer's views 
 
 
-@method_decorator([login_required, employer_required], name='dispatch')
+@method_decorator([login_required, employer_required, complete_employer_profile], name='dispatch')
 class JobPostCreateView(CreateView):
     model = JobPost
     form_class = job_post_form
@@ -201,7 +201,7 @@ def ViewSavedJobs(request):
 
 
 
-@method_decorator([login_required, jobseeker_required], name='dispatch')
+@method_decorator([login_required, jobseeker_required, complete_profile_required], name='dispatch')
 class JobApplyCreateView(CreateView):
     model = JobApply
     form_class = JobApplyForm
@@ -217,6 +217,7 @@ class JobApplyCreateView(CreateView):
         applicant = JobApply.objects.filter(user_id=self.request.user.id, job_id=self.kwargs['pk'])
         if applicant:
             messages.info(self.request, 'You already applied for this job')
+            # return redirect('jobs_detail', id=id)
             return HttpResponseRedirect(self.get_success_url())
         form.instance.user = self.request.user
         form.instance.job_id = self.kwargs['pk']
@@ -237,23 +238,30 @@ class AppliedJobListView(ListView):
     
 
 
-@method_decorator([login_required, employer_required], name='dispatch')
-class JobAppliedPerson(ListView):
-    model = JobApply
-    template_name = 'jobs/employer/jobs_applied.html'
-    context_object_name = 'jobseeker_applied'
 
 
-    def get_queryset(self):
-        job = get_object_or_404(JobPost, id = self.kwargs.get('id'))
-        return JobApply.objects.filter(job = job)
-    
+# def JobseekerProfileView(request):
+#     jobseeker = JobseekerProfile.objects.all()
+#     contex = {'jobseeker':jobseeker}
+#     return render(request, 'jobs/employer/jobseeker_list.html', contex)
+
+
+class JobseekerProfileView(ListView):
+    model = JobseekerProfile
+    template_name = 'jobs/employer/jobseeker_list.html'
+    context_object_name = 'jobseeker'
 
 
 
+# class ApplicantDetailView(DetailView):
+#     model = JobApply
+#     template_name = 'jobs/employer/jobseeker_detail.html'
+#     context_object_name = 'profile'
 
 
-def JobseekerProfileView(request):
-    jobseeker = JobseekerProfile.objects.all()
-    contex = {'jobseeker':jobseeker}
-    return render(request, 'jobs/employer/jobseeker_list.html', contex)
+def ApplicantDetailView(request, id):
+    applicant = JobApply.objects.filter(id=id)
+    print(applicant)
+    contex = {'applicant':applicant}
+    return render(request, 'jobs/employer/jobseeker_detail.html', contex)
+

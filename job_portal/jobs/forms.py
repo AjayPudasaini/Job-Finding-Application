@@ -20,11 +20,11 @@ class job_post_form(forms.ModelForm):
 
     SalaryStart = forms.FloatField(widget=forms.NumberInput(
         attrs={'class':'form-control', 'placeholder': 'Salary start with in rs'}
-    ), min_value=0, required=True, label='Start Salary')
+    ), min_value=0, required=False, label='Start Salary')
 
     EndSalary = forms.FloatField(widget=forms.NumberInput(
         attrs={'class':'form-control', 'placeholder': 'Salary end with in rs'}
-    ), min_value=0, required=True, label='End Salary')
+    ), min_value=0, required=False, label='End Salary')
 
     RequiredSkill = forms.CharField(widget=forms.TextInput(
         attrs={'class':'form-control', 'placeholder': 'Adobe Photoshop, Adobe InDesign'}
@@ -53,8 +53,8 @@ class job_post_form(forms.ModelForm):
 
     class Meta():
         model = JobPost
-        fields = ['JobTitle','Location', 'NumberOfVacancies', 'SalaryStart', 'RequiredExperience',  
-                    'EndSalary', 'JobLevel', 'AvaliableTime', 'RequiredSkill', 
+        fields = ['JobTitle','Location', 'NumberOfVacancies', 'SalaryStart',  
+                    'EndSalary', 'RequiredExperience',  'JobLevel', 'AvaliableTime', 'RequiredSkill', 
                     'JobShift', 'RequiredEducation', 'RequiredExperience', 'JobCategory', 
                     'Gender', 'JobDescreptions', 'JobSpecification', 'HiringBanner', 'JobExpiryDate']
 

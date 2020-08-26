@@ -136,7 +136,7 @@ class JobPost(models.Model):
 
 
 class JobApply(models.Model):
-    user = models.ForeignKey(User, on_delete = models.CASCADE)
+    user = models.ForeignKey(User, related_name='applyersname', on_delete = models.CASCADE)
     job = models.ForeignKey(JobPost, related_name='jobapplys', on_delete = models.CASCADE, verbose_name='Apply Job')
     JobApplyReason = RichTextField()
     ApplydDate = models.DateTimeField(default=timezone.now, verbose_name='Job Apply Date')
@@ -145,6 +145,9 @@ class JobApply(models.Model):
     def get_absolute_url(self):
         return reverse("browse_job")
 
+    def __str__(self):
+        return f'{self.user.username + self.job.JobTitle} applied'
+    
 
     class Meta():
         ordering = ['-ApplydDate']

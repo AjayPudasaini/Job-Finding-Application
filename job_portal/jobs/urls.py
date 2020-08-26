@@ -6,7 +6,7 @@ from account.views import (JobseekerDashboardView,
 
 from jobs.views import ( JobPostCreateView, MyJobDetailView, JobLists,
                          MyJobUpdateView, MyJobDeleteView, JobApplyCreateView,
-                         AppliedJobListView, JobAppliedPerson )
+                         AppliedJobListView, JobseekerProfileView )
 from django.contrib.auth import views as auth_views
 
 
@@ -25,8 +25,8 @@ urlpatterns = [
         path('my/jobs/<int:pk>/update', MyJobUpdateView.as_view(), name='my_job_update'),
         path('my/jobs/<int:pk>/delete', MyJobDeleteView.as_view(), name='my_job_delete'),
         path('my/jobs/public/preview/<str:username>/<int:pk>', MyJobDetailView.as_view(), name='my_job_detail'),
-        path('my/jobs/<int:id>/who/applied', JobAppliedPerson.as_view(), name='who_applied_job'),
-        path('jobseeker/profile', JobsView.JobseekerProfileView, name='jobseeker_profile')
+        path('jobseeker/profile', JobseekerProfileView.as_view(), name='jobseeker_profile'),
+        path('applicant/<int:id>/profile', JobsView.ApplicantDetailView, name='applicant_profile_detail')
 
 
     ], 'jobs.views'), namespace='jobs_employer')),

@@ -60,7 +60,7 @@
 
                 <tr>
                   <th scope="row">Salary:</th>
-                  <td>Rs. {{ mypost.SalaryStart }} - {{ mypost.EndSalary }}</td>
+                  <td> {% if mypost.SalaryStart and mypost.EndSalary > 0 %} Rs. {{ mypost.SalaryStart }} - {{ mypost.EndSalary }} Monthly {% else %} Negotiable {% endif %}</td>
                 </tr>
 
                 <tr>
@@ -162,8 +162,8 @@
                     {% else %}
                     {% for applicant in mypost.jobapplys.all %}
                       <div class="article-metadata-username border-bottom">
-                        <img class="rounded-circle account-img mb-2" src="{% static 'Image/Logos/logo.png' %}" alt='applied by user'/>
-                        <a class="ml-2 " href="">{{ applicant.user.username }}</a>
+                        <img class="rounded-circle account-img mb-2" src="{{ applicant.user.jobseekerprofile.ProfileImage.url }}" alt='applied by user'/>
+                        <a class="ml-2 " href="{{ applicant.user.jobseekerprofile.UploadCv.url }}" target="_blank">{{ applicant.user.username }}</a>
                         <small class="text-muted ml-2">{{ applicant.ApplydDate|timesince }}</small>            
                       </div>
                       <h2 class="article-title">Applied Reason</h2>

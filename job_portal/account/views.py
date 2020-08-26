@@ -147,8 +147,7 @@ class JobseekerDashboardView(TemplateView):
 @jobseeker_required
 def JobseekerProfileDetailView(request, user_id):
     detail = JobseekerProfile.objects.filter(user_id=user_id)
-    # value = JobseekerProfile.percentage_complete+JobseekerProfile.email_value
-    # print(value)
+    # print('names', detail)
     contex = {'profile':detail}
     return render(request, 'account/Jobseeker/profile_detail.html', contex)
 
