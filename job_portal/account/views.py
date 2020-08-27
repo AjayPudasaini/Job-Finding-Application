@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
-from django.views.generic import CreateView, ListView, UpdateView, TemplateView, DeleteView
+from django.views.generic import CreateView, ListView, UpdateView, TemplateView, DeleteView, DetailView
 from account.models import User, EmployerProfile, JobseekerProfile
 from account.forms import (JobseekerSignupForm, EmployerSignupForm, JobseekerProfileUpdateForm, UserUpdateForm, EmployerProfileUpdateForm)
 from django.contrib.auth import login,authenticate, update_session_auth_hash
@@ -18,7 +18,7 @@ def index(request):
         if request.user.is_jobseeker:
             return redirect('homes')
         else:
-            return redirect('employer:employer_overview')
+            return redirect('employer:employer_dashboard', username=request.user.username)
     else:
         return render(request, 'account/home.html')
 
@@ -42,7 +42,7 @@ class JobseekerSignupView(CreateView):
     def form_valid(self, form):
         user = form.save()
         login(self.request, user)
-        return redirect('jobseeker:jobseeker_dashboard')
+        return redirect('homes')
 
 
 
@@ -63,27 +63,26 @@ class EmployerSignupView(CreateView):
     def form_valid(self, form):
         user = form.save()
         login(self.request, user)
-        return redirect('employer:employer_dashboard')
+        return redirect('employer:employer_dashboard', username=request.user.username)
 
 
 
 
 # Employer Profiling
 
-@method_decorator([login_required, employer_required], name='dispatch')
-class EmployerProfileOverview(TemplateView):
-    template_name = 'account/Employer/overview.html'
+# @login_required
+# @employer_required
+# def EmployerProfileDetailView(request, user_id):
+#     detail = EmployerProfile.objects.filter(user_id=user_id)
+#     contex = {'profile':detail}
+#     return render(request, 'account/Employer/employer_profile_detail.html', contex)
 
 
-
-
-@login_required
-@employer_required
-def EmployerProfileDetailView(request, user_id):
-    detail = EmployerProfile.objects.filter(user_id=user_id)
-    contex = {'profile':detail}
-    return render(request, 'account/Employer/employer_profile_detail.html', contex)
-
+class EmoloyerProfileDetailView(DetailView):
+    model = EmployerProfile
+    context_object_name = 'profile'
+    template_name = 'account/Employer/employer_profile_detail.html'
+    pk_url_kwarg = 'user_id'
 
 
 
@@ -98,7 +97,7 @@ def EmployerProfileUpdateView(request):
             profile_form.save()
 
             messages.success(request, f'Your Accounted has been updated!')
-            return redirect('/')
+            return redirect('employer:employer_dashboard', username=request.user.username)
 
     else:
         username_form = UserUpdateForm(instance=request.user)
@@ -134,37 +133,37 @@ def EmployerPasswordChange(request):
 
 
 
+# @login_required
+# @jobseeker_required
+# def JobseekerProfileDetailView(request, user_id):
+#     detail = JobseekerProfile.objects.filter(user_id=user_id)
+#     # print('names', detail)
+#     contex = {'profile':detail}
+#     return render(request, 'account/Jobseeker/profile_detail.html', contex)
 
-# Jobseeker Profiling
 
-@method_decorator([login_required, jobseeker_required], name='dispatch')
-class JobseekerDashboardView(TemplateView):
-    template_name = 'account/Jobseeker/dashboard.html'
-
-
-
-@login_required
-@jobseeker_required
-def JobseekerProfileDetailView(request, user_id):
-    detail = JobseekerProfile.objects.filter(user_id=user_id)
-    # print('names', detail)
-    contex = {'profile':detail}
-    return render(request, 'account/Jobseeker/profile_detail.html', contex)
-
+class JobseekerProfileDetailView(DetailView):
+    model = JobseekerProfile
+    context_object_name = 'profile'
+    template_name = 'account/Jobseeker/profile_detail.html'
+    pk_url_kwarg = 'user_id'
 
 
 @login_required
 @jobseeker_required
 def JobseekerProfileUpdateView(request):
     if request.method == 'POST':
+        username_form = UserUpdateForm(request.POST, instance=request.user)
         profile_form = JobseekerProfileUpdateForm(request.POST, request.FILES, instance=request.user.jobseekerprofile)
-        if profile_form.is_valid():
-            request.user.username = request.POST['username']
-            request.user.save()
+        if profile_form.is_valid() and username_form.is_valid():
+            # request.user.username = request.POST['username']
+            # request.user.save()
+            username_form.save()
             profile_form.save()
 
             messages.success(request, f'Your Accounted has been updated!')
             return redirect('/')
+        messages.error(request, f'your profile has not updated')
 
     else:
         username_form = UserUpdateForm(instance=request.user)

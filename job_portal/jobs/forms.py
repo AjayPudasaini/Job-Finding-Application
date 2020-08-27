@@ -59,17 +59,16 @@ class job_post_form(forms.ModelForm):
                     'Gender', 'JobDescreptions', 'JobSpecification', 'HiringBanner', 'JobExpiryDate']
 
 
-    # def __init__(self, *args, **kwargs):
-    #     super(job_post_form, self).__init__(*args, **kwargs)
-    #     self.fields['JobExpiryDate'].widget = widgets.AdminSplitDateTime()
-
 
     
 
 class JobApplyForm(forms.ModelForm):
+    # JobApplyReason = forms.CharField(widget=forms.Textarea(), label='Why you choose this job')
     class Meta():
         model = JobApply
         fields = ['JobApplyReason']
+
+    widgets
     
 
 

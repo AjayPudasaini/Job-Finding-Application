@@ -17,38 +17,47 @@
                             
                             <h6 class="username justify-content-center d-flex mt-1"><i class="fa fa-user pr-2"></i> {{ user.username }}</h6>
                             <h6 class="username justify-content-center d-flex mt-1"><i class="fa fa-envelope pr-2"></i> {{ user.email }}</h6>
-                            {% for links in profile %}
-                                <div class="justify-content-center d-flex">
+                            <div class="justify-content-center d-flex">
+                                {% if not profile.Facebook %}
+                                
+                                {% else %}
                                     <div class="p-2">
-                                        <a href="{{ links.Facebook }}"><i class="fa fa-facebook"></i></a>
+                                        <a href="{{ profile.Facebook }}"><i class="fa fa-facebook"></i></a>
                                     </div>
-                                    <div class="p-2">
-                                        <a href="{{ links.Twitter }}"><i class="fa fa-twitter"></i></a>
-                                    </div>
-                                    <div class="p-2">
-                                        <a href="{{ links.Instagram }}"><i class="fa fa-instagram"></i></a>
-                                    </div>
+                                    {% endif %}
+                                    {% if not profile.Twitter %}
+                                    {% else %}
+                                        <div class="p-2">
+                                            <a href="{{ profile.Twitter }}"><i class="fa fa-twitter"></i></a>
+                                        </div>
+                                    {% endif %}
+                                    {% if not profile.Instagram %}
+                                    {% else %}
+                                        <div class="p-2">
+                                            <a href="{{ profile.Instagram }}"><i class="fa fa-instagram"></i></a>
+                                        </div>
+                                    {% endif %}
                                 </div>
-                            {% endfor %}
+                           
                         </div>
 
-                        {% for p in profile %}
+
 
                                
                     </div>
 
                     <div class="card mt-5 bg-light">
                         <div class="card-body p-0">
-                            <h5 class="card-title border-bottom justify-content-center d-flex">About Me</h5>
-                            <p class="card-text pl-2 pr-2 pb-2">{{ p.AboutCompany|safe }}</p>
+                            <h5 class="card-title border-bottom justify-content-center d-flex">About Company</h5>
+                            <p class="card-text pl-2 pr-2 pb-2">{{ profile.AboutCompany|safe }}</p>
                         </div>
                     </div> 
 
                     <div class="card mt-5 bg-light">
                         <div class="card-body p-3">
-                            <h5 class="card-title border-bottom justify-content-center d-flex">My Profile</h5>
+                            <h5 class="card-title border-bottom justify-content-center d-flex">Company Profile Value</h5>
                             <div class="progress">
-                                <div class="progress-bar bg-success" role="progressbar" style="width: {{ p.Company_percentage_complete }}%;" aria-valuenow="{{ p.Company_percentage_complete }}" aria-valuemin="0" aria-valuemax="100">{{ p.Company_percentage_complete }}%</div>
+                                <div class="progress-bar bg-success" role="progressbar" style="width: {{ profile.Company_percentage_complete }}%;" aria-valuenow="{{ profile.Company_percentage_complete }}" aria-valuemin="0" aria-valuemax="100">{{ profile.Company_percentage_complete }}%</div>
                             </div>
                         </div>
                     </div>
@@ -65,56 +74,53 @@
                         <table class="table table-hover table-responsive table-borderless border-0">
                                 <tr>
                                     <th scope="row">Company Name:</th>
-                                    <td>{{ p.CompanyName }}</td>
+                                    <td>{{ profile.CompanyName }}</td>
                                 </tr>
                                 <tr>
                                     <th scope="row">Company Category:</th>
-                                    <td>{{ p.CompanyCategory }}</td>
+                                    <td>{{ profile.CompanyCategory }}</td>
                                 </tr>
                                 <tr>
                                     <th scope="row">Company Ownership:</th>
-                                    <td>{{ p.CompanyOwnership }}</td>
+                                    <td>{{ profile.CompanyOwnership }}</td>
                                 </tr>
                                 <tr>
                                     <th scope="row">Company Website:</th>
-                                    <td> <a href="{{ p.CompanyWebsite }}"><i class="fa fa-web"></i>{{ p.CompanyWebsite }}</a></td>
+                                    <td> <a href="{{ profile.CompanyWebsite }}"><i class="fa fa-web"></i>{{ profile.CompanyWebsite }}</a></td>
                                 </tr>
                                 <tr>
                                     <th scope="row">Company Establish Date:</th>
-                                    <td>{{ p.CompanyEstablishDate }}</td>
+                                    <td>{{ profile.CompanyEstablishDate }}</td>
                                 </tr>
                                 
                                 <tr>
                                     <th scope="row">Company Address:</th>
-                                    <td>{{ p.CompanyAddress }}</td>
+                                    <td>{{ profile.CompanyAddress }}</td>
                                 </tr>
                                 <tr>
                                     <th scope="row">Telphone Number:</th>
-                                    <td>{{ p.TelNo }}</td>
+                                    <td>{{ profile.TelNo }}</td>
                                 </tr>
                                 <tr>
                                     <th scope="row">Offical MObile no:</th>
-                                    <td>{{ p.MobileNo }}</td>
+                                    <td>{{ profile.MobileNo }}</td>
                                 </tr>
                                 <tr>
                                     <th scope="row">Person Full Name:</th>
-                                    <td>{{ p.FirstName }} {{ p.LastName }} </td>
+                                    <td>{{ profile.FirstName }} {{ profile.LastName }} </td>
                                 </tr>
 
                                 <tr>
                                     <th scope="row">Personal mobile no:</th>
-                                    <td>{{ p.PhoneNumber }}</td>
+                                    <td>{{ profile.PhoneNumber }}</td>
                                 </tr>
 
                                 <tr>
                                     <th scope="row">Email:</th>
-                                    <td>{{ p.Email }}</td>
+                                    <td>{{ profile.Email }}</td>
                                 </tr>
                             
-                            
-                            
                         </table>
-                    {% endfor %}
                     </div>
                 </div>
             </div>

@@ -2,12 +2,12 @@
 {% load static %}
 {% load is_already_applied %}
 
-
 {% block content %}
 
 {% if request.user.is_authenticated %}      
-  {% is_already_applied mypost request.user as is_applied %}                       
+  {% is_already_applied mypost request.user as is_applied %} 
 {% endif %}
+
 
 <div class="container">
    <div class="row mt-5">
@@ -25,9 +25,9 @@
           <div class="col-md-9 mt-3 company-name">
             <h4> {{ mypost.user.employerrprofile.CompanyName }}</h4>
             <small>{{ mypost.user.employerrprofile.CompanyCategory }}</small><br>
-            <h6><i class="fa fa-map-marker"></i> Kathmandu</h6>
+            <h6><i class="fa fa-map-marker"></i> {{ mypost.user.employerrprofile.CompanyAddress }}</h6>
 
-            <a href="{{ mypost.user.employerrprofile.CompanyWebsite }}" target="_blank" class="button-view-company-profile">View company Profile</a>
+            <a href="{% url 'employer_detaillls' mypost.user.username mypost.user.id %}" target="_blank" class="button-view-company-profile">View company Profile</a>
           </div>
         </div>
       </div>
@@ -112,32 +112,43 @@
             {{ mypost.JobSpecification|safe }}
           </div>
         </div>
+
+        <div class="job-specification border mb-2 bg-white">
+          <div class="row">
+              
+              <div class="col-sm-4">
+                  <a href="{{ mypost.ApplyLink   }}" class="btn" target="_blank">Drop your cv in {{ mypost.ApplyLink }}</a>
+              </div>
+            </div>
+        </div>
+        
         <div class="job-specification border mb-2 bg-white">
           <div class="row p-2 d-flex">
             
             {% if is_applied %}
-              <input type="button" class="btn btn-outline-white-primary ml-5" value="Already applied"/>
+              <input type="button" class="btn btn-secondary ml-5" value="Already applied"/>
             {% else %}
               <a href="{% url 'job_apply' mypost.pk %}" class="btn button-apply-job"><i class="fa fa-plus"></i> Apply Now</a>
             {% endif %}
 
             {% if is_save %}
-                <a href="{% url 'save_jobs' mypost.id %}" class="btn btn-secondary ml-5"><i class="fa fa-save"></i> Saved Job</a>
+              <a href="{% url 'save_jobs' mypost.id %}" class="btn btn-secondary ml-5"><i class="fa fa-save"></i> Saved Job</a>
             {% else %}
-            <a href="{% url 'save_jobs' mypost.id %}" class="btn button-save-job"><i class="fa fa-save"></i> Save Job</a>
+              <a href="{% url 'save_jobs' mypost.id %}" class="btn button-save-job"><i class="fa fa-save"></i> Save Job</a>
             {% endif %}
           </div>
         </div>
+
+        
 
         <div class="job-specification border mb-5 bg-white">
           <div class="row">
               
               <div class="col-sm-4">
-                <a href="" class="btn disabled" aria-disabled="true"><i class="fa fa-eye"></i>Views(500)</a>
+                <a href="" class="btn disabled" aria-disabled="true"><i class="fa fa-eye"></i>Views({{ mypost.views }}) {{ clint_ip }}</a>
               </div>
               <div class="col-sm-4 ml-auto">
-              <div class="fb-share-button" data-href="http://127.0.0.1:8000/employer/my/jobs/public/preview/{{ user.username }}/{{ mypost.id }}" data-layout="button_count" data-size="large"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2F127.0.0.1%3A8000%2Femployer%2Fmy%2Fjobs%2Fpublic%2Fpreview%2FEmployerAjay%2F8&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Share</a></div>
-                {% comment %} <a href="#" class="btn"><i class="fa fa-share"></i>share</a> {% endcomment %}
+              <a href="#" class="btn"><i class="fa fa-facebook fa-lg"></i></a>
               </div>
             </div>
         </div>
@@ -152,14 +163,14 @@
             <h6 class="border-bottom p-0">Job Action</h6>
             <div class="btns d-flex mt-4">
             {% if is_applied %}
-              <input type="button" class="btn btn-outline-white-primary" value="Already applied"/>
+              <input type="button" class="btn btn-secondary" value="Already applied"/>
             {% else %}
               <a href="{% url 'job_apply' mypost.pk %}" class="btn button-apply-job"><i class="fa fa-plus"></i> Apply Now</a>
             {% endif %}
                 {% if is_save %}
-                <a href="{% url 'save_jobs' mypost.id %}" class="btn btn-secondary ml-5"><i class="fa fa-save"></i> Saved Job</a>
+                  <a href="{% url 'save_jobs' mypost.id %}" class="btn btn-secondary ml-5"><i class="fa fa-save"></i> Saved Job</a>
                 {% else %}
-                <a href="{% url 'save_jobs' mypost.id %}" class="btn button-save-job"><i class="fa fa-save"></i> Save Job</a>
+                  <a href="{% url 'save_jobs' mypost.id %}" class="btn button-save-job"><i class="fa fa-save"></i> Save Job</a>
                 {% endif %}
             </div>
           </div>

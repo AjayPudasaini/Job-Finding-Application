@@ -1,8 +1,8 @@
 from django.urls import path, include
 from account import views
-from account.views import (JobseekerSignupView, EmployerSignupView,
-                             JobseekerDashboardView, 
-                             JobseekerProfileUpdateView, EmployerProfileOverview)
+from account.views import (JobseekerSignupView, EmployerSignupView, 
+                             JobseekerProfileUpdateView, EmoloyerProfileDetailView,
+                             JobseekerProfileDetailView)
 
 from jobs.views import (EmployerDashboard)
 from django.contrib.auth import views as auth_views
@@ -15,8 +15,7 @@ urlpatterns = [
     path('register-as', views.register_as, name = 'register_as'),
 
     path('jobseeker/', include(([
-        path('dashboard', JobseekerDashboardView.as_view(), name = 'jobseeker_dashboard'),
-        path('profile/detail/<int:user_id>', views.JobseekerProfileDetailView, name = 'jobseeker_profile_detail'),
+        path('profile/detail/<int:user_id>', JobseekerProfileDetailView.as_view(), name = 'jobseeker_profile_detail'),
         path('profile/update/detail', views.JobseekerProfileUpdateView, name = 'jobseeker_profile_add_detail'),
         path('profile/settings', views.JobseekerSetting, name = 'jobseeker_profile_setting'),
         path('profile/change/password', views.JobseekerChangePassword, name = 'jobseeker_change_password'),
@@ -24,9 +23,8 @@ urlpatterns = [
 
 
     path('employer/', include(([
-        path('overview', EmployerProfileOverview.as_view(), name = 'employer_overview'),
         path('dashboard/<str:username>', EmployerDashboard.as_view(), name = 'employer_dashboard'),
-        path('profile/detail/<int:user_id>', views.EmployerProfileDetailView, name = 'employer_profile_detail'),
+        path('profile/detail/<int:user_id>', EmoloyerProfileDetailView.as_view(), name = 'employer_profile_detail'),
         path('profile/update/detail/', views.EmployerProfileUpdateView, name = 'employer_profile_update_detail'),
         path('profile/settings', views.EmployerSettings, name = 'employer_settings'),
         path('profile/change/password', views.EmployerPasswordChange, name = 'employer_change_password')

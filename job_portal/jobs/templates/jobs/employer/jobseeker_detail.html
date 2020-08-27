@@ -4,45 +4,50 @@
 
 {% block profilecontents %}
    <div class="container border bg-white p-5 mt-5 mb-5">
-   jobseeker detail
         <div class="container">
             <div class="row">
                 <div class="col-md-4">
                     <div class="border rounded bg-light profile-pic-section">
                         
                         <div class="profile-pic pt-4 justify-content-center d-flex ">
-                        {{ applicants.user.username }}
-                            <img src=" {{ applicant.user.jobseekerprofile.ProfileImage.url }} " class="rounded-circle inf-fluid" alt="profile-pic">
+                            <img src=" {{ profile.ProfileImage.url }} " class="rounded-circle inf-fluid" alt="profile-pic">
                         </div>
                         
                         <div class="username-online-acc border-top mt-3 w-100">
-                            
-                            <h6 class="username justify-content-center d-flex mt-1"><i class="fa fa-user pr-2"></i> {{ applicant.user.username }}</h6>
-                            <h6 class="username justify-content-center d-flex mt-1"><i class="fa fa-envelope pr-2"></i>{{ user.email }}</h6>
+                            <h6 class="username justify-content-center d-flex mt-1"><i class="fa fa-envelope pr-2"></i>{{ profile.user.email }}</h6>
                             <div class="justify-content-center d-flex">
+                            {% if not profile %}
+                            
+                            {% else %}
                                 <div class="p-2">
-                                    <a href="{{ .Facebook }}"><i class="fa fa-facebook"></i></a>
+                                    <a href="{{ profile.Facebook }}"><i class="fa fa-facebook"></i></a>
                                 </div>
                                 <div class="p-2">
-                                    <a href="{{ links.Twitter }}"><i class="fa fa-twitter"></i></a>
+                                    <a href="{{ profile.Twitter }}"><i class="fa fa-twitter"></i></a>
                                 </div>
                                 <div class="p-2">
-                                    <a href="{{ links.Instagram }}"><i class="fa fa-instagram"></i></a>
+                                    <a href="{{ profile.Instagram }}"><i class="fa fa-instagram"></i></a>
                                 </div>
+                            {% endif %}
+                                
                             </div>
                         </div>   
-                    </div>
+                    </div> 
 
-                   
-                        
                     
                     <div class="card mt-5 bg-light">
                         <div class="card-body p-0">
-                            <h5 class="card-title border-bottom justify-content-center d-flex">About Me</h5>
-                            <p class="card-text pl-2 pr-2 pb-2">{{ applicant.AboutMe|safe }}</p>
+                            <h5 class="card-title border-bottom justify-content-center d-flex">About</h5>
+                            <p class="card-text pl-2 pr-2 pb-2">{{ profile.AboutMe|safe }}</p>
                         </div>
-                    </div>
-                    
+                    </div> 
+
+                    <div class="card mt-5 bg-light">
+                        <div class="card-body p-0">
+                            <h5 class="card-title border-bottom justify-content-center d-flex">Cv</h5>
+                            <a href="{{ profile.UploadCv.url }}" class="btn button-apply-job" target="_blank"><i class="fa fa-download"></i> Download Cv </a>
+                        </div>
+                    </div> 
                 </div>
     
                 <div class="col-md-8">
@@ -52,7 +57,6 @@
                                 <table class="table table-hover table-responsive table-borderless border-0">
                                     <div class="table-heading d-flex">
                                         <h6 class="mr-auto">Account Detail</h6>
-                                        <a href="" class="btn ml-auto">Edit Account</a>
                                     </div>
         
                                     
@@ -153,7 +157,7 @@
                                             <th scope="row">Language:</th>
                                             <td>{{ profile.Language }}</td>
                                         </tr>
-                                    
+                                            
                                     
                                 </table>
                             </div>

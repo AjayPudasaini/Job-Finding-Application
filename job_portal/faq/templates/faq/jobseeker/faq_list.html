@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    <div class="container">
+        <div class="row bg-white m-5">
+            {% for faq in faqs %}
+                <div class="col-6 p-5">
+                    <li><a href="{% url 'jobseeker_faq:jobseeker_faq_detail' faq.id %}">{{ faq.question }}</a></li>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock content %}

@@ -88,15 +88,42 @@ body{
 }
 
 @media screen and (max-width: 767px) {
+    .slider-content{
+        position: absolute;
+        top: 150px;
+        color: #f0e8e8;
+        /*margin-left: 100px;*/
+        font-family: Calisto Mt;
+        z-index: 1;
+    
+    }
+    
+    
+    .slider-content h1{
+        font-size: 60px;
+    }
+    .slider-content h2{
+        margin-left: 10px;
+        font-size: 50px;
+    }
+    .slider-content h4{
+        margin-top: 20px;
+        margin-left: 10px;
+        font-size: 20px;
+    }
+
+
   .jobseeker{
     border: 2px solid #f0e8e8;
     font-size: 18px;
     color: white;
+    top: 50px;
     }
 
     .employeer{
     border: 2px solid #f0e8e8;
-    margin-left: 40px;
+    margin-top: 50px;
+    margin-right: 100px !important;
     font-size: 18px;
     color: #f0e8e8;
     }
@@ -104,11 +131,8 @@ body{
 }
 
 .as-used-by{
-    /*border: 1px solid #a5a5a4;*/
     top: 1px;
-    /*position: relative;*/
-    /*margin-top: -100px;*/
-    height: 80px;
+    height: auto;
     background-color: #cee0ce;
     display: inline-block;
 }
@@ -119,15 +143,21 @@ body{
 .company-logos{
     margin-top: -45px;
     margin-left: 120px;
+    opacity: 0.5;
 }
 .company-logos img{
     padding-left: 40px;
 }
 
 @media screen and (max-width: 1200px) {
+    .as-used-by{
+        font-family: BookmanOld Style;
+        height: auto;
+    }
     .as-used-by h4{
         font-family: BookmanOld Style;
         font-size: 18px;
+        height: auto;
     }
 
     .company-logos{
@@ -162,27 +192,20 @@ body{
     .as-used-by {
         border: 1px solid #a5a5a4;
         top: 1px;
-        /*position: relative;*/
-        /*margin-top: -100px;*/
-        height: 150px;
+        height: auto !important;
         background-color: #cee0ce;
         display: inline-block;
+        padding: 15px;
         }
         .company-logos img{
-        padding-left: 6px;
-        padding-top: 6px;
+        padding: 50px;
         height: 50px;
         width: 50px;
        }
        .as-used-by h4{
-        font-family: BookmanOld Style;
-        font-size: 20px;
+        display: none;
     }
 
-    .company-logos{
-        margin-top: -30px;
-        margin-left: 100px;
-    }
 
 }
 .services-section{
@@ -586,3 +609,187 @@ body{
 .username-online-acc{
     height: auto;
 }
+
+
+/* ################################################################### */
+/* how it works */
+
+
+.tops {
+    padding: 30px 100px 30px 100px;
+    position: absolute;
+    top: 200px;
+    text-align: center;
+    font-size: 35px;
+  }
+  .tops h1{
+    color: rgb(255, 255, 255);
+  }
+  
+  .tops p{
+    color: rgb(255, 255, 255);
+  }
+  
+  /* Container for flexboxes */
+.sectionsss {
+    display: -webkit-flex;
+    display: flex;
+    height:387px;
+    margin-top: 30px;
+  }
+  
+  /* Style the content */
+  .columns {
+    float: left;
+    width: 33.33%;
+    padding: 10px;
+    padding-left: 20px;
+    padding-right: 30px;
+    height: 200px; /* Should be removed. Only for demonstration */
+  }
+  article {
+    -webkit-flex: 3;
+    -ms-flex: 3;
+    flex: 3;
+    background-color: #f1f1f1;
+    padding-left: 90px;
+    padding-top: 50px;
+    padding-right: 150px;
+    width:400px;
+  }
+  
+  /* Style the footer */
+  
+  .rows h1{
+    padding-left: 100px;
+    padding-right: 100px;
+  }
+  .rows {
+    background-color: white;
+    margin-top: 20px;
+    padding: 10px;
+    text-align: center;
+    color:#1C2833 ;
+    font-style: normal;
+    height:500px;
+    font-size: 1.05rem;
+  }
+  
+  .rows h2 {
+    
+    color: rgb(81, 167, 219);
+      font-weight: normal;
+      font-style: normal;
+      text-transform: initial;
+      font-size: 1.45rem;
+  }
+  
+  .rows:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+  
+  .button2 {background-color: #008CBA;}
+  /* Responsive layout - makes the menu and the content (inside the section) sit on top of each other instead of next to each other */
+  @media (max-width: 600px) {
+    section {
+      -webkit-flex-direction: column;
+      flex-direction: column;
+    }
+  }
+
+
+  /* about us */
+  .about_content{
+    font-family: Arial, Helvetica, sans-serif;
+  }
+  
+  .sec {
+    display: -webkit-flex;
+    display: flex;
+    height:387px;
+    margin-top: 30px;
+  }
+  
+  
+  .abt {
+    -webkit-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+  
+    
+   
+  }
+  
+  .para {
+    -webkit-flex: 3;
+    -ms-flex: 3;
+    flex: 3;
+    background-color: #f1f1f1;
+    padding-left: 50px;
+    padding-top: 10px;
+    padding-right: 50px;
+    height: 400px;
+    margin-left: 10px;
+   
+  }
+  
+  
+  
+  .team:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+  
+  
+  .member {
+    float: left;
+    width: 21%;
+    padding: 0px 25px 20px 25px;
+    height: 240px;
+     border: 2px solid;
+    padding: 10px;
+    box-shadow: 5px 10px #888888;
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-top: 20px;
+  }
+  
+  
+  .team h1{
+    padding-left: 100px;
+    padding-right: 100px;
+  }
+  .team {
+    background-color: white;
+    margin-top: 20px;
+    padding: 10px;
+    text-align: center;
+    color:#1C2833 ;
+    font-style: normal;
+    height:600px;
+    font-size: 1.05rem;
+  }
+  
+  .team h2 {
+    
+    color: rgb(81, 167, 219);
+      font-weight: normal;
+      font-style: normal;
+      text-transform: initial;
+      font-size: 1.05rem;
+  }
+  
+  .team h3{
+    padding-top: 20px;
+  }
+  
+  
+  @media (max-width: 600px) {
+    section {
+      -webkit-flex-direction: column;
+      flex-direction: column;
+    }
+  }

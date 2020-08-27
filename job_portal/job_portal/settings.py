@@ -32,11 +32,11 @@ INSTALLED_APPS = [
     'jobs.apps.JobsConfig',
     'contact.apps.ContactConfig',
     'blog.apps.BlogConfig',
+    'faq.apps.FaqConfig',
 
 
     'ckeditor',
     'crispy_forms',
-    'taggit',
     'django_filters',   
 ]
 
@@ -128,7 +128,6 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 
 # media files
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-# my_file = os.path.join(BASE_DIR, str(GDRAT.xls))
 MEDIA_URL = '/media/'
 
 
@@ -156,3 +155,43 @@ EMAIL_PORT = config('EMAIL_PORT')
 EMAIL_USE_TLS = config('EMAIL_USE_TLS')
 EMAIL_HOST_USER =  config('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD =  config('EMAIL_HOST_PASSWORD')
+
+
+
+CKEDITOR_CONFIGS = {
+    'default': {
+        'toolbar': [
+            ['Undo', 'Redo',
+             '-', 'Bold', 'Italic', 'Underline', 'Strikethrough', 'Subscript', 'Superscript',
+             '-', 'Link', 'Unlink', 'Anchor',
+             '-', 'Format',
+             '-', 'Font',
+             '-', 'Size',
+             '-', 'Show Blocks',
+             '-', 'SpellChecker', 'Scayt',
+             '-', 'Maximize',
+             '-', 'NumberedList',
+             '-', 'BulletedList',
+             '-', 'Outdent',
+             '-', 'Indent',
+             '-', 'Increase Indent',
+             '-', 'Decrease Indent',
+             '-', 'JustifyLeft',
+             '-', 'JustifyCenter',
+             '-', 'JustifyRight',
+             '-', 'JustifyBlock',
+             '-', 'RemoveFormat',
+             '-', 'Source',
+             '-', 'Image',
+             '-', 'Smiley',
+             '-', 'Table',
+
+            ],
+        ],
+        'height': '100%',
+        'width': '100%',
+        'toolbarCanCollapse': False,
+    },
+}
+
+

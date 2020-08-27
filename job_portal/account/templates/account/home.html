@@ -1,13 +1,8 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block dashboardnavbar %}
-{% endblock dashboardnavbar %}
-
 {% block content %}
 
-{% block profilenavbar %}
-{% endblock profilenavbar %}
 
 
 <main>
@@ -31,8 +26,12 @@
             <h2>Job Portal in the world.</h2>
             <h4>Millions of peope trusted site</h4>
             <div class="register-as pl-5">
-            <a href="{% url 'register-jobseeker' %}" class="btn jobseeker">I am JobSeeker</a> 
-            <a href="{% url 'register-employer' %}" class="btn employeer">I am Employee</a>
+            {% if user.is_authenticated %}
+                <a href="{% url 'browse_job' %}" class="btn jobseeker">Browse Jobs</a> 
+            {% else %}
+                <a href="{% url 'register-jobseeker' %}" class="btn jobseeker">I am JobSeeker</a> 
+                <a href="{% url 'register-employer' %}" class="btn employeer">I am Employee</a>
+            {% endif %}
             </div>
         </div>     
         </div>
@@ -118,6 +117,9 @@
 
                 <div class="container-fluid p-5">
                     <div class="row d-flex ml-5 mr-5">
+                    {% if not Jobs %}
+                        Jobs are not avaliable in this portal yet... please visit later, again. Thank you!
+                    {% endif %}
                     {% for job in Jobs %}
                         <!-- 1 card -->
                         <div class="col-sm-3">
@@ -136,8 +138,8 @@
                                     </div>
                                 </div>
                             </div>
-                        </div> 
-                    {% endfor %}
+                        </div>
+                    {% endfor %} 
                     </div>
                 </div>  
         </section>
@@ -146,51 +148,6 @@
 
 
 
-
-        <!-- section job-category -->
-        <section class="container-fluid job-category-section bg-light">
-            <div class="container">
-                <div class="row d-flex">
-                <div class="job-Categories-text mx-auto">
-                    <h3>Browse top job categories</h3>
-                </div>
-                </div>
-            </div>
-            <div class="container-fluid p-5">
-                <div class="row ml-5 job-Categories-list">
-                <div class="col-sm-3 ">
-                    <li><a href="">Teaching/Education</a></li>
-                    <li><a href="">Civil Engineer</a></li>
-                    <li><a href="">Computer Enginner</a></li>
-                    <li><a href="">Aero Space Engineer</a></li>
-                    <li><a href="">Macnical Engineer</a></li>
-                </div>
-            
-                <div class="col-sm-3">
-                    <li><a href="">Bank</a></li>
-                    <li><a href="">Finance</a></li>
-                    <li><a href="">Branch</a></li>
-                    <li><a href="">CA</a></li>
-                    <li><a href="">Cashier</a></li>
-                </div>
-            
-                <div class="col-sm-3">
-                    <li><a href="">Graphic Design</a></li>
-                    <li><a href="">UI/UX Design</a></li>
-                    <li><a href="">Web Design & Development</a></li>
-                    <li><a href="">Wordpress</a></li>
-                    <li><a href="">Content Creator</a></li>
-                </div>
-            
-                <div class="col-sm-3">
-                    <li><a href="">Business Leader</a></li>
-                    <li><a href="">Marketing</a></li>
-                    <li><a href="">Digital Marketing</a></li>
-                    <li><a href="">See All</a></li>
-                </div>
-                </div>
-            </div>
-        </section>
 
 
         <!-- ad section and general,newspapper jobs -->

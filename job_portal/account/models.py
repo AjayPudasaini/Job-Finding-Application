@@ -3,8 +3,8 @@ from django.contrib.auth.models import AbstractUser
 from ckeditor.fields import RichTextField
 from PIL import Image
 from django.urls import reverse
-
-
+from django.core import validators
+from account.validators import validate_cv_extension, Validate_image_extension
 
 
 
@@ -132,46 +132,46 @@ class JobseekerProfile(models.Model):
     # Basic Information
     FirstName = models.CharField(max_length=30, blank=False, null=False, verbose_name='First Name')
     LastName = models.CharField(max_length=30, blank=False, null=False, verbose_name='Last Name')
-    Gender = models.CharField(max_length=20, choices=GENDER_CHOICE)
-    MarrigeStatus = models.CharField(max_length=20, choices=MARRIED_STATUS_CHOICES, verbose_name='Marrige Status')
-    Religion = models.CharField(max_length=20, choices=RELIGION_CHOOSE)
-    PhoneNumber = models.CharField(max_length=20, verbose_name='Phone Number')
-    Nationality = models.CharField(max_length=30, choices=NATIONALITY_CHOOSE, verbose_name='Nationality')
-    CurrentAddress = models.CharField(max_length=100, verbose_name='Current Address')
-    PernamentAddress = models.CharField(max_length=100, verbose_name='Pernament Address')
-    ProfileImage = models.ImageField(default='defaultusers.png', upload_to = 'Jobseeker/Profile_Pictures', verbose_name='Profile Picture')
+    Gender = models.CharField(max_length=20,blank=False, choices=GENDER_CHOICE)
+    MarrigeStatus = models.CharField(max_length=20, blank=True, choices=MARRIED_STATUS_CHOICES, verbose_name='Marrige Status')
+    Religion = models.CharField(max_length=20, blank=True, choices=RELIGION_CHOOSE)
+    PhoneNumber = models.CharField(max_length=20, blank=True, verbose_name='Phone Number')
+    Nationality = models.CharField(max_length=30, blank=True, choices=NATIONALITY_CHOOSE, verbose_name='Nationality')
+    CurrentAddress = models.CharField(max_length=100, blank=True, verbose_name='Current Address')
+    PernamentAddress = models.CharField(max_length=100, blank=True, verbose_name='Pernament Address')
+    ProfileImage = models.ImageField(default='defaultusers.png', blank=True, upload_to='Jobseeker/Profile_Pictures', verbose_name='Profile Picture', validators=[Validate_image_extension])
    
     # Education Information
-    Education = models.CharField(max_length=100, choices=EDUCATION_CHOICES, verbose_name='Education')
-    EducationProgram = models.CharField(max_length=200, verbose_name='Education Program')
-    EducationBoard = models.CharField(max_length=100, choices=EDUCATION_BOARD_CHOICES, verbose_name='Education Board')
-    NameOfInstitute = models.CharField(max_length=200, verbose_name='Name Of Institute')
+    Education = models.CharField(max_length=100, blank=True, choices=EDUCATION_CHOICES, verbose_name='Education')
+    EducationProgram = models.CharField(max_length=200, blank=True, verbose_name='Education Program')
+    EducationBoard = models.CharField(max_length=100, blank=True, choices=EDUCATION_BOARD_CHOICES, verbose_name='Education Board')
+    NameOfInstitute = models.CharField(max_length=200, blank=True, verbose_name='Name Of Institute')
 
     # skill
-    MySkill = models.CharField(max_length=250, verbose_name='My Skill', null=True)
+    MySkill = models.CharField(max_length=250, blank=True, verbose_name='My Skill', null=True)
 
     # Past jobs
-    WorkingExperience = models.IntegerField(default=0, verbose_name='Working Experience') 
-    WorkedField = models.CharField(max_length=50, null=True, verbose_name='Worked Related Fields')  
-    WorkedCompanyName = models.CharField(max_length=200, verbose_name='Worked Company Name')
-    WorkedCompanyWebsite = models.URLField(max_length=200, verbose_name='Worked Company Website')
+    WorkingExperience = models.IntegerField(default=0, blank=True, verbose_name='Working Experience') 
+    WorkedField = models.CharField(max_length=50, null=True, blank=True, verbose_name='Worked Related Fields')  
+    WorkedCompanyName = models.CharField(max_length=200, blank=True, verbose_name='Worked Company Name')
+    WorkedCompanyWebsite = models.URLField(max_length=200, blank=True, verbose_name='Worked Company Website')
 
     # job category
     JobCategory = models.CharField(max_length=50, choices=JOB_CATEGORY_CHOICES, verbose_name='Job Category')
 
     # add language
-    Language = models.CharField(max_length=20, choices=LANGUAGES_CHOICES)
+    Language = models.CharField(max_length=20, blank=True, choices=LANGUAGES_CHOICES)
 
     # about Me
     AboutMe = RichTextField(verbose_name='About Me')
 
     # Social account
-    Facebook = models.URLField(max_length=100)
-    Twitter = models.URLField(max_length=100)
-    Instagram = models.URLField(max_length=100)
+    Facebook = models.URLField(max_length=100, blank=True,)
+    Twitter = models.URLField(max_length=100, blank=True,)
+    Instagram = models.URLField(max_length=100, blank=True,)
 
     # upload cv
-    UploadCv = models.FileField(upload_to='Jobseeker/CVs',null=True,  verbose_name='Upload Your CV')
+    UploadCv = models.FileField(upload_to='Jobseeker/CVs',null=True, blank=True, validators=[validate_cv_extension],  verbose_name='Upload Your CV')
 
 
 
@@ -199,10 +199,10 @@ class JobseekerProfile(models.Model):
                      'Gender': 1, 'MarrigeStatus':1,
                      'Religion':1, 'PhoneNumber':3,
                      'Nationality':1, 'CurrentAddress':3,
-                     'PernamentAddress':3, 'ProfileImage':7,
+                     'PernamentAddress':3, 'ProfileImage':5,
                      'Education':5, 'EducationProgram':5,
                      'EducationBoard':5, 'NameOfInstitute':5,
-                     'MySkill':5, 'WorkingExperience':3,
+                     'MySkill':5, 'WorkingExperience':2,
                      'WorkedField':3, 'WorkedCompanyName': 3,
                      'WorkedCompanyWebsite':3, 'JobCategory':4,
                      'Language':2, 'AboutMe': 10,
@@ -302,28 +302,28 @@ class EmployerProfile(models.Model):
     
     # Basic Information
     CompanyName = models.CharField(max_length=30, blank=False, null=False, verbose_name='Company Name')
-    CompanyLogo = models.ImageField(default='defaultlogo.jpg', upload_to='Employer/Company_Logos', verbose_name='Company Logo')
-    CompanyCategory = models.CharField(max_length=50, choices=JOB_CATEGORY_CHOICES, verbose_name='Company Category')
-    CompanyOwnership = models.CharField(max_length=30, choices=COMPANY_OWNERSHIP_CHOICES, verbose_name='Company Ownership')
-    CompanyWebsite = models.URLField(max_length=100, verbose_name='Company Website')
+    CompanyLogo = models.ImageField(default='defaultlogo.jpg', blank=True, upload_to='Employer/Company_Logos', verbose_name='Company Logo', validators=[Validate_image_extension])
+    CompanyCategory = models.CharField(max_length=50, blank=True, choices=JOB_CATEGORY_CHOICES, verbose_name='Company Category')
+    CompanyOwnership = models.CharField(max_length=30, blank=True, choices=COMPANY_OWNERSHIP_CHOICES, verbose_name='Company Ownership')
+    CompanyWebsite = models.URLField(max_length=100, blank=True, verbose_name='Company Website')
     CompanyEstablishDate = models.DateField(null=True, blank=True, verbose_name='Company Established Date')
-    AboutCompany = RichTextField(null=True, verbose_name='About Company')
+    AboutCompany = RichTextField(null=True, blank=True, verbose_name='About Company')
 
     # Contact Detail
-    CompanyAddress = models.CharField(max_length=100, verbose_name='Company Address')
-    TelNo = models.CharField(max_length=15, verbose_name='TelePhone Number')
-    MobileNo = models.CharField(max_length=15, verbose_name='Mobile Number')
+    CompanyAddress = models.CharField(max_length=100, blank=True, verbose_name='Company Address')
+    TelNo = models.CharField(max_length=15, blank=True, verbose_name='TelePhone Number')
+    MobileNo = models.CharField(max_length=15, blank=True, verbose_name='Mobile Number')
 
     # Company Social Account
-    Facebook = models.URLField(max_length=100)
-    Twitter = models.URLField(max_length=100)
-    Instagram = models.URLField(max_length=100)
+    Facebook = models.URLField(max_length=100, blank=True,)
+    Twitter = models.URLField(max_length=100, blank=True,)
+    Instagram = models.URLField(max_length=100, blank=True,)
 
     # Company Person
     FirstName = models.CharField(max_length=30, blank=False, null=False, verbose_name='First Name')
     LastName = models.CharField(max_length=30, blank=False, null=False, verbose_name='Last Name')
-    PhoneNumber = models.CharField(max_length=20, verbose_name='Phone Number')
-    Email = models.EmailField(max_length=30, null=False)
+    PhoneNumber = models.CharField(max_length=20, blank=False, verbose_name='Phone Number')
+    Email = models.EmailField(max_length=30, null=False, blank=True,)
 
 
     def __str__(self):
@@ -349,8 +349,8 @@ class EmployerProfile(models.Model):
             
     @property 
     def Company_percentage_complete(self):
-        percent = { 'CompanyName': 8, 'CompanyLogo': 7,
-                     'CompanyCategory': 8, 'CompanyOwnership':8,
+        percent = { 'CompanyName': 5, 'CompanyLogo': 5,
+                     'CompanyCategory': 6, 'CompanyOwnership':6,
                      'CompanyWebsite':8, 'CompanyEstablishDate':5,
                      'AboutCompany':13, 'CompanyAddress':5,
                      'TelNo':5, 'MobileNo':7,

@@ -10,6 +10,9 @@
         <div class="container job-list bg-white mt-5 mb-5 p-3">
 
                     <div class="container-fluid p-0 main">
+                    {% if not SavedJobs %}
+                    You haven't any job yet... <a href="{% url 'browse_job' %}"><h2 class="mr-3 text-black h3">Browse Job</h2></a>
+                    {% else %}
                         {% for jobs in SavedJobs %}
                             <div class="job-post-item bg-light p-4 d-block d-md-flex align-items-center mb-4">               
                               <div class="mb-4 mb-md-0 mr-5">
@@ -30,28 +33,10 @@
                               </div>
                         </div>
                         {% endfor %}
+
+                    {% endif %}
                     </div>
-                    <div class="container-fluid p-0 border footer">
-                        <div class="row d-flex">
-                            <div class="ml-auto">
-                                <ul class="pagination mr-3">
-                                    <li class="page-item">
-                                        <a class="page-link" href="#" aria-label="Previous">
-                                          <span aria-hidden="true">&laquo;</span>
-                                        </a>
-                                    </li>
-                                    <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                    <li class="page-item">
-                                        <a class="page-link" href="#" aria-label="Next">
-                                          <span aria-hidden="true">&raquo;</span>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-        </div>
+                   
     </main>
 
 {% endblock profilecontent %}

@@ -6,7 +6,7 @@ from account.decorators import jobseeker_required, employer_required
 from django.contrib.auth.decorators import login_required
 from django.views.generic import View, TemplateView, CreateView, UpdateView, DetailView, DeleteView, ListView
 from jobs.models import JobPost, JobApply
-from account.models import User, JobseekerProfile
+from account.models import User, JobseekerProfile, EmployerProfile
 from django.core.paginator import Paginator
 from django.utils.decorators import method_decorator
 from jobs.filers import FilterTime
@@ -105,7 +105,11 @@ class MyJobUpdateView(UserPassesTestMixin, UpdateView):
 class MyJobDeleteView(UserPassesTestMixin, DeleteView):
     model = JobPost
     template_name = 'jobs/employer/my_job_delete.html'
-    success_url = '/'
+
+
+    def get_absolute_url(self):
+        return reverse("employer:employer_dashboard", kwargs={'username':self.user.username})
+
 
     def test_func(self):
         jobpost = self.get_object()
@@ -171,10 +175,15 @@ def BrowseJobView(request):
 
 def BrowseJobDetail(request, id):
     jobs = JobPost.objects.get(id = id)
+    visitor_ip_address = request.META.get("REMOTE_ADDR")
+    jobs.views = jobs.views + 1
+    jobs.save()
     is_SaveJob = False
-    if jobs.SaveJob.filter(id=request.user.jobseekerprofile.user_id).exists():
-        is_SaveJob = True
-    contex = {'mypost':jobs, 'is_save':is_SaveJob}
+    if request.user.is_authenticated:
+        if request.user.is_jobseeker:
+            if jobs.SaveJob.filter(id=request.user.jobseekerprofile.user_id).exists():
+                is_SaveJob = True
+    contex = {'mypost':jobs, 'is_save':is_SaveJob, 'clint_ip': visitor_ip_address}
     return render(request, 'jobs/jobseeker/job_detail.html', contex)
 
 
@@ -231,6 +240,7 @@ class AppliedJobListView(ListView):
     model = JobApply
     template_name = 'jobs/jobseeker/applied_jobs.html'
     context_object_name = 'job'
+    paginate_by = 5
 
     def get_queryset(self):
         user = get_object_or_404(User, username=self.kwargs.get('username'))
@@ -246,10 +256,36 @@ class AppliedJobListView(ListView):
 #     return render(request, 'jobs/employer/jobseeker_list.html', contex)
 
 
-class JobseekerProfileView(ListView):
+
+# visit jobseeker profile 
+@method_decorator([login_required], name='dispatch')
+class JobseekerProfileListView(ListView):
     model = JobseekerProfile
     template_name = 'jobs/employer/jobseeker_list.html'
     context_object_name = 'jobseeker'
+@method_decorator([login_required], name='dispatch')
+class JobseekerProfileDetailView(DetailView):
+    model = JobseekerProfile
+    template_name = 'jobs/employer/jobseeker_detail.html'
+    context_object_name = 'profile'
+
+
+# visit employer profile 
+@method_decorator([login_required], name='dispatch')
+class EmployerProfileListView(ListView):
+    model = EmployerProfile
+    template_name = 'jobs/jobseeker/employer_list.html'
+    context_object_name = 'employer'
+
+
+@method_decorator([login_required], name='dispatch')
+class EmployerProfileDetailView(DetailView):
+    model = EmployerProfile
+    template_name = 'jobs/jobseeker/employer_detail.html'
+    context_object_name = 'profile'
+
+
+
 
 
 
@@ -259,9 +295,33 @@ class JobseekerProfileView(ListView):
 #     context_object_name = 'profile'
 
 
-def ApplicantDetailView(request, id):
-    applicant = JobApply.objects.filter(id=id)
-    print(applicant)
-    contex = {'applicant':applicant}
-    return render(request, 'jobs/employer/jobseeker_detail.html', contex)
+# def ApplicantDetailView(request, user_id):
+#     applicant = User.objects.filter(applyersname__user_id=user_id)
+#     print(applicant)
+#     contex = {'applicant':applicant}
+#     return render(request, 'jobs/employer/jobseeker_detail.html', contex)
 
+
+# class ApplicantsListView(DetailView):
+#     model = JobApply
+#     template_name = 'jobs/employer/jobseeker_detail.html'
+#     context_object_name = 'applicant'
+
+#     def get_queryset(self):
+#         # jobs = Job.objects.filter(user_id=self.request.user.id)
+#         return self.model.objects.filter(job__user_id=self.request.user.id)
+
+
+
+
+
+
+
+# How it works template
+
+class HowItWorks(TemplateView):
+    template_name = 'how_it_works.html'
+
+
+class AboutSmartKTM(TemplateView):
+    template_name = 'about.html'

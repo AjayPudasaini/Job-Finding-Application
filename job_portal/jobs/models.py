@@ -4,9 +4,11 @@ from django.urls import reverse
 from account.models import JOB_CATEGORY_CHOICES, EDUCATION_CHOICES
 from django.conf import settings
 from django.utils import timezone
-from django.core.validators import MaxValueValidator, MinValueValidator
+from django.core.validators import MaxValueValidator, MinValueValidator, FileExtensionValidator
 from account.models import User
 from PIL import Image
+
+
 
 
 
@@ -107,8 +109,10 @@ class JobPost(models.Model):
     Gender = models.CharField(max_length=50, blank=False, choices=Gender, default='Both', null=True, verbose_name='Required Gender')
     JobDescreptions = RichTextField(verbose_name='Job Descriptions', blank=False, null=False)
     JobSpecification = RichTextField(verbose_name='Job Specification', blank=False, null=True)
+    ApplyLink = models.URLField(max_length=500, verbose_name='Job Apply Link', blank=True, null=True)
     HiringBanner = models.ImageField(default='DefaultHireBanner.jpg', upload_to='Employer/Hire Banners', null=True , blank=False, verbose_name='Hiring Banner')
     SaveJob = models.ManyToManyField(User, related_name='savejob', blank=True)
+    views = models.IntegerField(default=0)
 
 
     JobPostDate = models.DateTimeField(default=timezone.now, blank=False)
@@ -138,7 +142,7 @@ class JobPost(models.Model):
 class JobApply(models.Model):
     user = models.ForeignKey(User, related_name='applyersname', on_delete = models.CASCADE)
     job = models.ForeignKey(JobPost, related_name='jobapplys', on_delete = models.CASCADE, verbose_name='Apply Job')
-    JobApplyReason = RichTextField()
+    JobApplyReason = RichTextField(verbose_name='Why apply this job')
     ApplydDate = models.DateTimeField(default=timezone.now, verbose_name='Job Apply Date')
 
 

@@ -17,25 +17,36 @@
                             
                             <h6 class="username justify-content-center d-flex mt-1"><i class="fa fa-user pr-2"></i> {{ user.username }}</h6>
                             <h6 class="username justify-content-center d-flex mt-1"><i class="fa fa-envelope pr-2"></i>{{ user.email }}</h6>
-                            {% for links in profile %}
-                            <div class="justify-content-center d-flex">
-                                <div class="p-2">
-                                    <a href="{{ links.Facebook }}"><i class="fa fa-facebook"></i></a>
-                                </div>
-                                <div class="p-2">
-                                    <a href="{{ links.Twitter }}"><i class="fa fa-twitter"></i></a>
-                                </div>
-                                <div class="p-2">
-                                    <a href="{{ links.Instagram }}"><i class="fa fa-instagram"></i></a>
-                                </div>
-                            </div>
-                            {% endfor %}
+
+                                
+                                    <div class="justify-content-center d-flex">
+                                            {% if not profile.Facebook %}
+                             
+                                            {% else %}
+                                                <div class="p-2">
+                                                    <a href="{{ profile.Facebook }}"><i class="fa fa-facebook"></i></a>
+                                                </div>
+                                            {% endif %}
+                                            {% if not profile.Twitter %}
+                                            {% else %}
+                                                <div class="p-2">
+                                                    <a href="{{ profile.Twitter }}"><i class="fa fa-twitter"></i></a>
+                                                </div>
+                                            {% endif %}
+                                            {% if not profile.Instagram %}
+                                            {% else %}
+                                                <div class="p-2">
+                                                    <a href="{{ profile.Instagram }}"><i class="fa fa-instagram"></i></a>
+                                                </div>
+                                            {% endif %}
+                                    </div>
+                                
+
                         </div>   
                     </div>
 
                    
                         
-                    {% for profile in profile %}
                     <div class="card mt-5 bg-light">
                         <div class="card-body p-0">
                             <h5 class="card-title border-bottom justify-content-center d-flex">About Me</h5>
@@ -52,6 +63,24 @@
                                 <h5 class="card-title border-bottom justify-content-center d-flex">My Profile</h5>
                                 <div class="progress">
                                     <div class="progress-bar bg-success" role="progressbar" style="width: {{ profile.percentage_complete }}%;" aria-valuenow="{{ profile.percentage_complete }}" aria-valuemin="0" aria-valuemax="100">{{ profile.percentage_complete }}%</div>
+                                </div>
+                            </div>
+                        </div>
+                        {% endif %}
+                    {% endif %}
+
+
+                    {% if user.is_authenticated %}
+                        {% if user.is_jobseeker %}
+                        <div class="card mt-5 bg-light">
+                            <div class="card-body p-3">
+                                <h5 class="card-title border-bottom justify-content-center d-flex">My Cv</h5>
+                                <div class="">
+                                {% if not profile.UploadCv %}
+                                    You have not uploaded cv please upload first!
+                                {% else %}
+                                    <a href="{{ profile.UploadCv.url }}" class="btn button-apply-job" target="_blank"><i class="fa fa-download"></i> Download Cv </a>
+                                {% endif %}
                                 </div>
                             </div>
                         </div>
@@ -178,7 +207,7 @@
                                         </tr>
         
         
-                                    {% endfor %}
+
                                     
                                     
                                 </table>

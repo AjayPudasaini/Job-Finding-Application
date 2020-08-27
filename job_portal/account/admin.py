@@ -8,7 +8,70 @@ class UserAdmin(admin.ModelAdmin):
 
 @admin.register(JobseekerProfile)
 class JobseekerProfileAdmin(admin.ModelAdmin):
-    list_display = ['user_id', 'user','FirstName']
+    fieldsets = (
+        ('User', {
+            "fields": (
+                'user', 'FirstName', 'LastName'
+            ),
+        }),
+
+        ('Basic Personal Information', {
+            "fields": (
+                'MarrigeStatus','Gender','Religion','PhoneNumber','Nationality','CurrentAddress', 'PernamentAddress', 'ProfileImage'
+            ),
+        }),
+
+        ('Education Information', {
+            "fields": (
+                'Education','EducationProgram','EducationBoard', 'NameOfInstitute',
+            ),
+        }),
+        ('Skill', {
+            "fields": (
+                'MySkill',
+            ),
+        }),
+
+        ('Past Jobs', {
+            "fields": (
+                'WorkingExperience','WorkedField','WorkedCompanyName', 'WorkedCompanyWebsite'
+            ),
+        }),
+
+        ('Job Category', {
+            "fields": (
+                'JobCategory',
+            ),
+        }),
+
+        ('Language', {
+            "fields": (
+                'Language',
+            ),
+        }),
+
+        ('About', {
+            "fields": (
+                'AboutMe',
+            ),
+        }),
+
+        ('Personal Social Account', {
+            "fields": (
+                'Facebook','Twitter','Instagram'
+            ),
+        }),
+
+        ('Cvs', {
+            "fields": (
+                'UploadCv',
+            ),
+        }),
+
+
+        
+    )
+    
 
 
 
