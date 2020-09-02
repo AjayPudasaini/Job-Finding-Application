@@ -4,8 +4,8 @@
 {% block content %}
     <div class="container">
         <div class="row bg-white m-5 p-5">
-            <strong>Question: {{ faq.question }}</strong>
-            <p>Answer: {{ faq.answer|safe }} </p>
+            <strong>Question: {{ faq.question }}</strong><br>
+            <p>{{ faq.answer|safe }} </p>
         </div>
     </div>
 {% endblock content %}

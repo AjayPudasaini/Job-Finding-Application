@@ -91,6 +91,11 @@
                   <td> {{ mypost.Gender }}</td>
                 </tr>
 
+                <tr>
+                  <th scope="row">Deadline:</th>
+                  <td> {{ mypost.JobExpiryDate }}</td>
+                </tr>
+
 
                                             
               </table>
@@ -117,7 +122,11 @@
           <div class="row">
               
               <div class="col-sm-4">
-                  <a href="{{ mypost.ApplyLink   }}" class="btn" target="_blank">Drop your cv in {{ mypost.ApplyLink }}</a>
+              {% if not mypost.ApplyLink %}
+                Apply  link is not avaliable you can abalr ko apply this job in online
+              {% else %}
+                  <a href="{{ mypost.ApplyLink   }}" class="btn" target="_blank">Drop your cv this link {{ mypost.ApplyLink }}</a>
+                {% endif %}
               </div>
             </div>
         </div>
@@ -148,7 +157,9 @@
                 <a href="" class="btn disabled" aria-disabled="true"><i class="fa fa-eye"></i>Views({{ mypost.views }}) {{ clint_ip }}</a>
               </div>
               <div class="col-sm-4 ml-auto">
-              <a href="#" class="btn"><i class="fa fa-facebook fa-lg"></i></a>
+              <a href="https://www.facebook.com/sharer/sharer.php?u=http://127.0.0.1:8000/job/detail/{{ mypost.id }}" class="btn" target = "_blank"><i class="fa fa-facebook fa-lg"></i></a>
+              <a href="https://twitter.com/home?status=http://127.0.0.1:8000/job/detail/{{ mypost.id }}" class="btn" target = "_blank"><i class="fa fa-twitter fa-lg"></i></a>
+              <a href="https://www.linkedin.com/shareArticle?mini=true&url=http://127.0.0.1:8000/job/detail/{{ mypost.id }}&title=&summary=&source=" class="btn" target = "_blank"><i class="fa fa-linkedin fa-lg"></i></a>
               </div>
             </div>
         </div>

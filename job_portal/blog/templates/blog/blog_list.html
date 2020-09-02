@@ -6,18 +6,19 @@
     <main>
         
         <div class="container job-list bg-white mt-5 mb-5 p-3">
-            <article class="medias content-section mt-1 ">
-                {% for i in post %}
-                <div class="media-body">
-                    <div class="article-metadata d-flex">
-                        <p class="card-text text-muted h6">By <strong>{{ i.author }}</strong> | {{ i.created_on|date:"F d, Y"}} </p>
-                    </div>
+        <div class="row bg-white m-5">
+        {% if not post %}
+        Blog is not avaliable yet....
+        {% else %}
+            {% for i in post %}
+                <div class="col-6 p-5">
                     <h2><a class="article-title" href="{% url 'blog-detail' i.slug %}">{{i.title}}</a></h2>
-                    <p class="article-content">{{i.content|slice:":200"|safe}}...</p>
+                    <p class="article-content">{{i.content | slice:":200"}}...</p>
                 </div>
-                {% endfor %}
-                </article>
-                
+            {% endfor %}
+
+        {% endif %}
+        </div>
 
             <div class="container-fluid p-0 border footer">
                 <div class="row d-flex">

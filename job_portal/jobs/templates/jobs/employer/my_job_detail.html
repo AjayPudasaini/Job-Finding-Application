@@ -118,7 +118,9 @@
                 <a href="" class="btn disabled" aria-disabled="true"><i class="fa fa-eye"></i>Views({{ mypost.views }})</a>
               </div>
               <div class="col-sm-4 ml-auto">
-                <a href="#" class="btn"><i class="fa fa-facebook fa-lg"></i></a>
+                <a href="https://www.facebook.com/sharer/sharer.php?u=http://127.0.0.1:8000/job/detail/{{ mypost.id }}" class="btn" target = "_blank"><i class="fa fa-facebook fa-lg"></i></a>
+                <a href="https://twitter.com/home?status=http://127.0.0.1:8000/job/detail/{{ mypost.id }}" class="btn" target = "_blank"><i class="fa fa-twitter fa-lg"></i></a>
+                <a href="https://www.linkedin.com/shareArticle?mini=true&url=http://127.0.0.1:8000/job/detail/{{ mypost.id }}&title=&summary=&source=" class="btn" target = "_blank"><i class="fa fa-linkedin fa-lg"></i></a>
               </div>
             </div>
         </div>

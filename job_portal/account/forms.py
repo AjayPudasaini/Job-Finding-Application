@@ -84,7 +84,7 @@ class UserUpdateForm(forms.ModelForm):
 
 class JobseekerProfileUpdateForm(forms.ModelForm):
     ProfileImage = forms.ImageField(help_text='Only supports .png, .jpg, .jpeg', widget=forms.FileInput(
-        attrs={'class':'form-control'}), label='Upload Your CV')
+        attrs={'class':'form-control'}), label='Upload Profile Image')
     UploadCv = forms.FileField(help_text='Only supports .pdf, .doc, .docx', widget=forms.FileInput(
         attrs={'class':'form-control'}), label='Upload Your CV')
     class Meta():
