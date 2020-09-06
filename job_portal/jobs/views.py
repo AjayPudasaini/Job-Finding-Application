@@ -17,7 +17,7 @@ from jobs.decorators import complete_profile_required, complete_employer_profile
 
 
 class JobLists(ListView):
-    model = JobPost
+    queryset = JobPost.objects.filter(status=1)
     template_name = 'account/home.html'
     context_object_name = 'Jobs'
     paginate_by = 20
@@ -47,7 +47,7 @@ class JobPostCreateView(CreateView):
 
 @method_decorator([login_required, employer_required], name='dispatch')
 class EmployerDashboard(ListView):
-    model = JobPost
+    queryset = JobPost.objects.filter(status=1)
     template_name = 'account/Employer/dashboard.html'
     context_object_name = 'mypost'
     paginate_by = 10
@@ -136,7 +136,7 @@ def is_valid_queryparm(parm):
 
 
 def BrowseJobView(request):
-    jobs = JobPost.objects.all().order_by('-JobPostDate')
+    jobs = JobPost.objects.filter(status=1).order_by('-JobPostDate')
     print(jobs)
 
     # search jobs
@@ -174,7 +174,7 @@ def BrowseJobView(request):
 
 
 def BrowseJobDetail(request, id):
-    jobs = JobPost.objects.get(id = id)
+    jobs = get_object_or_404(JobPost, id=id)
     visitor_ip_address = request.META.get("REMOTE_ADDR")
     jobs.views = jobs.views + 1
     jobs.save()

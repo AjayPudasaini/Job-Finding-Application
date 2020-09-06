@@ -89,6 +89,11 @@ Gender = (
 )
 
 
+Job_SATUS_CHOOSE = (
+    (0, 'pending'),
+    (1, 'Approve'), 
+    (2, 'Reject'),
+)
 
 
 class JobPost(models.Model):
@@ -112,6 +117,9 @@ class JobPost(models.Model):
     ApplyLink = models.URLField(max_length=500, verbose_name='Job Apply Link', blank=True, null=True)
     HiringBanner = models.ImageField(default='DefaultHireBanner.jpg', upload_to='Employer/Hire Banners', null=True , blank=False, verbose_name='Hiring Banner')
     SaveJob = models.ManyToManyField(User, related_name='savejob', blank=True)
+    status = models.IntegerField(choices=Job_SATUS_CHOOSE, null=True, default=0)
+
+
     views = models.IntegerField(default=0)
 
 
