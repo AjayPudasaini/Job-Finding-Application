@@ -1,7 +1,8 @@
 # Job-Finding-Application
 
 
-do not migrate any apps, because these all are case sensative<br>
+do not migrate any apps
+
 1. Clone Repo  
 ``` https://github.com/AjayPudasaini/Job-Finding-Application.git```
 
