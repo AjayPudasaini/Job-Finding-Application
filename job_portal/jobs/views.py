@@ -17,7 +17,7 @@ from jobs.decorators import complete_profile_required, complete_employer_profile
 
 
 class JobLists(ListView):
-    queryset = JobPost.objects.filter(status=1)
+    queryset = JobPost.objects.filter(status='Approved')
     template_name = 'account/home.html'
     context_object_name = 'Jobs'
     paginate_by = 20
@@ -47,7 +47,7 @@ class JobPostCreateView(CreateView):
 
 @method_decorator([login_required, employer_required], name='dispatch')
 class EmployerDashboard(ListView):
-    queryset = JobPost.objects.filter(status=1)
+    queryset = JobPost.objects.all()
     template_name = 'account/Employer/dashboard.html'
     context_object_name = 'mypost'
     paginate_by = 10
@@ -136,7 +136,7 @@ def is_valid_queryparm(parm):
 
 
 def BrowseJobView(request):
-    jobs = JobPost.objects.filter(status=1).order_by('-JobPostDate')
+    jobs = JobPost.objects.filter(status='Approved').order_by('-JobPostDate')
     print(jobs)
 
     # search jobs
@@ -250,13 +250,6 @@ class AppliedJobListView(ListView):
 
 
 
-# def JobseekerProfileView(request):
-#     jobseeker = JobseekerProfile.objects.all()
-#     contex = {'jobseeker':jobseeker}
-#     return render(request, 'jobs/employer/jobseeker_list.html', contex)
-
-
-
 # visit jobseeker profile 
 @method_decorator([login_required], name='dispatch')
 class JobseekerProfileListView(ListView):
@@ -283,37 +276,6 @@ class EmployerProfileDetailView(DetailView):
     model = EmployerProfile
     template_name = 'jobs/jobseeker/employer_detail.html'
     context_object_name = 'profile'
-
-
-
-
-
-
-# class ApplicantDetailView(DetailView):
-#     model = JobApply
-#     template_name = 'jobs/employer/jobseeker_detail.html'
-#     context_object_name = 'profile'
-
-
-# def ApplicantDetailView(request, user_id):
-#     applicant = User.objects.filter(applyersname__user_id=user_id)
-#     print(applicant)
-#     contex = {'applicant':applicant}
-#     return render(request, 'jobs/employer/jobseeker_detail.html', contex)
-
-
-# class ApplicantsListView(DetailView):
-#     model = JobApply
-#     template_name = 'jobs/employer/jobseeker_detail.html'
-#     context_object_name = 'applicant'
-
-#     def get_queryset(self):
-#         # jobs = Job.objects.filter(user_id=self.request.user.id)
-#         return self.model.objects.filter(job__user_id=self.request.user.id)
-
-
-
-
 
 
 

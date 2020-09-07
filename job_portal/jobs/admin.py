@@ -5,7 +5,7 @@ from jobs.models import JobPost, JobApply
 # admin.site.register(JobPost)
 @admin.register(JobPost)
 class JobPostAdmin(admin.ModelAdmin):
-    list_display = ['id', 'JobTitle', 'user']
+    list_display = ['id', 'JobTitle', 'user', 'status']
 
 
 @admin.register(JobApply)

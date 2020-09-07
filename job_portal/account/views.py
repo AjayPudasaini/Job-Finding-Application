@@ -67,17 +67,6 @@ class EmployerSignupView(CreateView):
 
 
 
-
-# Employer Profiling
-
-# @login_required
-# @employer_required
-# def EmployerProfileDetailView(request, user_id):
-#     detail = EmployerProfile.objects.filter(user_id=user_id)
-#     contex = {'profile':detail}
-#     return render(request, 'account/Employer/employer_profile_detail.html', contex)
-
-
 class EmoloyerProfileDetailView(DetailView):
     model = EmployerProfile
     context_object_name = 'profile'
@@ -129,17 +118,6 @@ def EmployerPasswordChange(request):
             form = PasswordChangeForm(request.user)
     contex = {'form':form}
     return render(request, 'account/Employer/change_password.html', contex)
-
-
-
-
-# @login_required
-# @jobseeker_required
-# def JobseekerProfileDetailView(request, user_id):
-#     detail = JobseekerProfile.objects.filter(user_id=user_id)
-#     # print('names', detail)
-#     contex = {'profile':detail}
-#     return render(request, 'account/Jobseeker/profile_detail.html', contex)
 
 
 class JobseekerProfileDetailView(DetailView):
