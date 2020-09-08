@@ -56,7 +56,7 @@ class job_post_form(forms.ModelForm):
         fields = ['JobTitle','Location', 'NumberOfVacancies', 'SalaryStart',  
                     'EndSalary', 'RequiredExperience',  'JobLevel', 'AvaliableTime', 'RequiredSkill', 
                     'JobShift', 'RequiredEducation', 'RequiredExperience', 'JobCategory', 
-                    'Gender', 'JobDescreptions', 'JobSpecification', 'HiringBanner', 'JobExpiryDate']
+                    'Gender', 'JobDescreptions', 'JobSpecification', 'ApplyLink', 'HiringBanner', 'JobExpiryDate']
 
 
 

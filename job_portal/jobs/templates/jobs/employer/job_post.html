@@ -6,9 +6,11 @@
 {% block profilecontents %}
      <div class="container p-5">
       <div class="row">
-          <div class="col-12 bg-white">
+          <div class="col-2">
+          </div>
+            <div class="col-8 shadow-lg p-3 mb-5 bg-white rounded ">
                 <div class="container rounded">
-                    <form method = 'POST', autocomplete=off>
+                    <form method = 'POST', autocomplete=off novalidate>
                     {% csrf_token %}
                         <fieldset class="form-group">
                             <legend class="border-bottom mb-4">Job {{ post_type }}</legend>
@@ -18,10 +20,13 @@
                             </div>
                         </fieldset>
                         <div class="form-group">
-                            <button type="submit" class="btn btn-outline-info btn-block">Post Job</button>
+                            <button type="submit" class="btn btn-outline-info btn-block">Save and request to admin</button>
                         </div>
                     </form>
-                </div>                   
+                </div>
+             </div>                 
+          
+          <div class="col-2">
           </div>
       </div>
   </div>    

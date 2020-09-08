@@ -5,8 +5,11 @@
 {% block content %}
 
     <div class="container p-5">
-        {% comment %} <div class="mx-auto mt-5" style="width: 400px;"> {% endcomment %}
-            <div class="container border rounded bg-light">
+    <div class="row">
+        <div class="col-2">
+        </div>
+        <div class="col-8  border shadow-lg p-3 mb-5 bg-white rounded">
+            <div class="container ">
                 <form method = 'POST'>
                 {% csrf_token %}
                     <fieldset class="form-group">
@@ -19,6 +22,9 @@
                     </div>
                 </form>
             </div>
-        {% comment %} </div> {% endcomment %}
+        </div>
+        <div class="col-2">
+        </div>
+        </div>
     </div>
 {% endblock %}
