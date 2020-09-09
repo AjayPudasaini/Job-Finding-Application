@@ -10,7 +10,7 @@ admin.site.index_title = 'SmartKTM Jobs administration'
 admin.empty_value_display = '**Empty**'
 
 urlpatterns = [
-    path('a/', admin.site.urls),
+    path('smartktmadmin/', admin.site.urls),
     path('', include('account.urls')),
     path('', include('jobs.urls')),
     path('', include('contact.urls')),
