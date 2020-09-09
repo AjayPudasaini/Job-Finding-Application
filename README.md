@@ -32,3 +32,9 @@ It is our mission to bring the burgeoning Nepalese Internet and computing talent
 5. python manage.py runserver
 ```
 
+6. Accessing admin pannel
+```
+http://127.0.0.1:8000/smartktmadmin/
+username: 180345.smart.1530
+password: 180345.smart.1530
+```
