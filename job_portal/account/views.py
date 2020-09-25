@@ -63,7 +63,7 @@ class EmployerSignupView(CreateView):
     def form_valid(self, form):
         user = form.save()
         login(self.request, user)
-        return redirect('employer:employer_dashboard', username=request.user.username)
+        return redirect('employer:employer_dashboard', username=user.username)
 
 
 
@@ -191,7 +191,7 @@ def delete_acccount(request, id):
     uff = User.objects.get(id=id)
     if request.method == 'POST':
         uff.delete()
-        return redirect('../') 
+        return redirect('/') 
     contex = {'uff':uff}  
     return render(request, 'account/delete_account.html', contex)
 

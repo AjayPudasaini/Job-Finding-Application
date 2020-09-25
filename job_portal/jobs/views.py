@@ -256,6 +256,7 @@ class JobseekerProfileListView(ListView):
     model = JobseekerProfile
     template_name = 'jobs/employer/jobseeker_list.html'
     context_object_name = 'jobseeker'
+    
 @method_decorator([login_required], name='dispatch')
 class JobseekerProfileDetailView(DetailView):
     model = JobseekerProfile

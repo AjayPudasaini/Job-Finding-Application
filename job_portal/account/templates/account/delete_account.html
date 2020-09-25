@@ -15,7 +15,7 @@
             </div>
             <form method="POST">
                 {% csrf_token %}
-                    <a href="{% url 'jobseeker:jobseeker_dashboard'  %}" class="btn btn-outline-info">Cancel</a>
+                    <a href="{% url 'index' %}" class="btn btn-outline-info">Cancel</a>
                     <button type="submit" class="btn btn-danger">
                     Yes
                     </button>
