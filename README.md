@@ -35,6 +35,6 @@ It is our mission to bring the burgeoning Nepalese Internet and computing talent
 6. Accessing admin pannel
 ```
 http://127.0.0.1:8000/smartktmadmin/
-username: 180345.smart.1530
+username: smartktmjobs
 password: 180345.smart.1530
 ```
