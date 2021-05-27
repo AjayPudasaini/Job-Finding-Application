@@ -27,20 +27,23 @@ body{
     background-color: orange;
     color: white;
 }
+
+
 .div-car{
-    height: 800px;
-    width: 100%;
-    background-color: blue;
+    height: 800px !important;
+    width: 100% !important;
 }
-.div-car .carousel-inner .carousel-item img{
-    height: 800px;
-    width: 100%;
+
+
+.div-car .banner img{
+    height: 800px !important;
+    width: 100% !important;
 }
 
 .slider-content{
     position: absolute;
     top: 240px;
-    color: #f0e8e8;
+    color: #ffffff;
     /*margin-left: 100px;*/
     font-family: Calisto Mt;
     z-index: 1;
