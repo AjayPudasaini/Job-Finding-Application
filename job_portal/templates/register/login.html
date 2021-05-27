@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block dashboardnavbar %}
+{% endblock dashboardnavbar %}
+
+{% block content %}
+
+{% block profilenavbar %}
+{% endblock profilenavbar %}
+
+    <div class="container p-5">
+        <div class="mx-auto mt-5" style="width: 400px;">
+            <div class="container border rounded bg-white">
+                <form method = 'POST' novalidate>
+                {% csrf_token %}
+                    <fieldset class="form-group">
+                        <legend class="border-bottom mb-4">Login</legend>
+                        <input type="hidden" name="next" value="{{ next }}">
+
+                            {{ form|crispy }}
+
+                    </fieldset>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-outline-info btn-block">Log in</button>
+                    </div>
+                </form>
+                <div class="border-top pt-3">
+                    <small class="text-muted">I don't have an account <a class="ml-2" href="{% url 'register_as' %}"> Sign up! </a></small>
+                </div>
+                <div class="border-top pt-3 mb-2">
+                    <small class="text-muted"><a class="ml-2 " href="{% url 'password_reset' %}"> Forgot password ?</a></small>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

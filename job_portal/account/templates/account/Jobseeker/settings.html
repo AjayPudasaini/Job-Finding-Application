@@ -1,0 +1,19 @@
+{% extends 'account/jobseeker/profile.html' %}
+{% load static %}
+
+
+
+{% block profilecontent %}
+
+<div class="container mt-2">
+    <div class="card-header">
+        {{user.username}}
+    </div>
+    <div class="card-body">
+        <a href="{% url 'jobseeker:jobseeker_change_password' %}" class="btn btn-primary ">Change Password</a>
+        <a href="{% url 'delete_account' user.id %}" class="btn btn-danger ">Delete Account</a>
+    </div>
+
+
+</div>
+{% endblock profilecontent %}

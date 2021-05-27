@@ -1,0 +1,196 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+
+{% block content %}
+
+
+
+
+    <main>
+        <div class="container p-0 bg-white">
+            <div class="search-section ">
+                <div class="row pl-2 pr-2">                  
+                    <div class="col-md-12">
+                        <div class="search_forms" >
+                            <form action="{% url 'browse_job' %}" method='GET' class="search-job">
+                                <div class="d-flex flex-row search-job ">
+                                    <div class="form-group search-job-form">
+                                        <div class="form-field">
+                                            <input type="text" class="form-control" name='title' id='title' placeholder="eg. Garphic. Web Developer">
+                                        </div>
+                                    </div>
+                                    <div class="form-group search-job-form">
+                                        <div class="form-field">
+                                            <input type="text" class="form-control" name='location' id='location' placeholder="Location">
+                                        </div>
+                                    </div>
+                                    <div class="form-group search-job-form">
+                                        <div class="form-field">
+                                            <input type="text" class="form-control" name='yourskill' id='your skill' placeholder="your skill eg: Adobe Photodhop">
+                                        </div>
+                                    </div> 
+                                    <div class="form-group">
+                                        <div class="form-field">
+                                          <button type="submit" class="btn btn-primary ml-1">Search</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+        
+        <div class="container job-list bg-white p-5 mb-5">
+            
+            <div class="row mt-2 mb-3">
+                <div class="col-lg-3 job-list-filter border bg-light ">
+                    <div class="header">
+                        <h4>Filter by</h4>
+                    </div>
+                    <div class="main">
+                        <form action="{% url 'browse_job' %}" method='GET'>
+                            <div class="form-row  p-3">
+                                <div class="form-group">
+
+                                    {{ time.form|crispy }}
+
+                                </div>
+
+
+                            </div>
+                            <small>Filter by salary, "start salary" and "End Salary" </small><br>
+                            <div class="form-row mt-2 mb-3">
+                            
+                                <div class="form-group col-md-6">
+                                    <input type="text" class="form-control" name='startsalary' id='startsalary' placeholder="15000">
+                                </div>
+
+                                <div class="form-group col-md-6">
+                                    <input type="text" class="form-control" name='endsalary' id='endsalary' placeholder="25000">
+                                </div>
+                            </div>
+
+                            
+                            <button type="submit p-3" class="btn btn-primary">Filter</button>
+                        </form>
+                    </div>
+                </div>
+                <div class="col-lg-9 job-list-item">
+                    <div class="container-fluid p-0 border header">
+                            <div class="row d-flex">
+                                <div class="mr-auto ml-5 my-1">
+                                    {% if Jobs|length <= 0 %}
+                                        <strong style = "color:red"><i class="fa fa-info-circle"></i> your keyword was not found</strong>
+                                    {% endif %}
+                                </div>
+                                <div class="ml-auto">
+                                    <ul class="pagination mr-3">
+                                        {% if is_paginated %}
+                                        {% if Jobs.has_previous %}
+                                        <li class="page-item"><a class="page-link" href="?page=1">First</a></li>
+                                        <li class="page-item">
+                                            <a class="page-link" href="?page={{ Jobs.previous_page_number }}" aria-label="Previous">
+                                                <span aria-hidden="true">&laquo;</span>
+                                            </a>
+                                        </li>
+                                        {% endif %}
+                                        {% for num in Jobs.paginator.page_range %}
+                                        {% if Jobs.number == num %}
+                                            <li class="page-item"><a class="page-link" href="?page={{ num }}">{{ num }}</a></li>
+                                        {% elif num > Jobs.number|add:'-3' and num < Jobs.number|add:'3' %}
+                                            <li class="page-item"><a class="page-link" href="?page={{ num }}">{{ num }}</a></li>
+                                        {% endif %}
+                                        {% endfor %}
+                                    
+                                        {% if Jobs.has_next %}
+                                        <li class="page-item">
+                                            <a class="page-link" href="?page={{ Jobs.next_page_number }}" aria-label="Next">
+                                            <span aria-hidden="true">&raquo;</span>
+                                            </a>
+                                        </li>
+                                        <li class="page-item"><a class="page-link" href="?page={{ Jobs.paginator.num_pages }}">Last</a></li>
+                                        {% endif %}
+                                        {% endif %}
+                                    </ul>
+                                </div>
+                            </div>
+                       
+                    </div>
+                    <div class="container-fluid p-0 main">
+
+                        
+                        {% if not Jobs %}
+                            Jobs are not avaliable in this portal yet... please visit later, again. Thank you!
+                        {% else %}
+                        {% for jobs in Jobs %}
+                            <div class="job-post-item bg-light p-4 d-block d-md-flex align-items-center mb-4">               
+                              <div class="mb-4 mb-md-0 mr-5">
+                                <div class="job-post-item-header d-flex align-items-center">
+                                  <a href="{% url 'jobs_detail' jobs.id %}"><h2 class="mr-3 text-black h3">{{ jobs.JobTitle }}</h2></a>
+                                </div>
+                                <div class="job-post-item-body d-block d-md-flex">
+                                  <div class="mr-3"><i class="fa fa-building"></i><a href="{% url 'employer_detaillls' jobs.user.username jobs.user.id %}">{{ jobs.user.employerrprofile.CompanyName }}</a></div>
+                                  <div><i class="fa fa-map-marker"></i> <span>{{ jobs.Location }}</span></div>
+                                </div>
+                              </div>
+
+                              <div class="ml-auto d-flex">
+                                <span class="bg-secondary text-white badge py-2 px-3">{{ jobs.AvaliableTime }}</span>
+                              </div>
+                
+
+                        </div>
+                        {% endfor %}
+                        {% endif %}
+                    </div>
+                    <div class="container-fluid p-0 border footer">
+                        <div class="row d-flex">
+                            <div class="ml-auto mt-3">
+                                <ul class="pagination mr-5">
+                                {% if is_paginated %}
+                                    {% if Jobs.has_previous %}
+                                    <li class="page-item"><a class="page-link" href="?page=1">First</a></li>
+                                    <li class="page-item">
+                                        <a class="page-link" href="?page={{ Jobs.previous_page_number }}" aria-label="Previous">
+                                          <span aria-hidden="true">&laquo;</span>
+                                        </a>
+                                    </li>
+                                    {% endif %}
+                                    {% for num in Jobs.paginator.page_range %}
+                                    {% if Jobs.number == num %}
+                                        <li class="page-item"><a class="page-link" href="?page={{ num }}">{{ num }}</a></li>
+                                    {% elif num > Jobs.number|add:'-3' and num < Jobs.number|add:'3' %}
+                                        <li class="page-item"><a class="page-link" href="?page={{ num }}">{{ num }}</a></li>
+                                    {% endif %}
+                                    {% endfor %}
+                                    
+                                    {% if Jobs.has_next %}
+                                    <li class="page-item">
+                                        <a class="page-link" href="?page={{ Jobs.next_page_number }}" aria-label="Next">
+                                          <span aria-hidden="true">&raquo;</span>
+                                        </a>
+                                    </li>
+                                    <li class="page-item"><a class="page-link" href="?page={{ Jobs.paginator.num_pages }}">Last</a></li>
+                                    {% endif %}
+
+                                    {% endif %}
+                                    
+                                </ul>
+                            </div>
+                        </div>
+                   
+                </div>
+                </div>    
+            </div>
+        </div>
+    </main>
+
+{% endblock content %}
+

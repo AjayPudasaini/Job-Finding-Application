@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container p-5">
+        <div class="col-8">
+            <div class="container border rounded bg-light">
+                <h2>Sign up for a free account</h2>
+                <p class="lead">Select below the type of account you want to create</p>
+                <a href="{% url 'register-jobseeker' %}" class="btn btn-info btn-lg" role="button">I'm a Jobseeker</a>
+                <a href="{% url 'register-employer' %}" class="btn btn-primary btn-lg" role="button">I'm a Employer</a>
+            </div>
+        </div>
+    </div>
+{% endblock content %}

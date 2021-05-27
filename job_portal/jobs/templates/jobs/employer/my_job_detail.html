@@ -1,0 +1,189 @@
+{% extends 'account/Employer/employer_profile.html' %}
+{% load static %}
+{% comment %} {% load crispy_forms_tags %} {% endcomment %}
+
+
+{% block profilecontents %}
+
+
+
+<div class="container">
+   <div class="row mt-5">
+    <div class="col-md-7">
+      <div class="company-banner">
+        <img src="{{ mypost.HiringBanner.url }}" class="img-fluid">
+      </div>
+
+      <div class="company-profile mt-4 bg-white p-3">
+        <div class="row bg-white profile-section no-gutters">
+          <div class="col-md-3 mt-3 company-logo">
+            <img src="{{ object.user.employerrprofile.CompanyLogo.url }}" class="img-fluid rounded-circle">
+          </div>
+
+          <div class="col-md-9 mt-3 company-name">
+            <h4> {{ mypost.user.employerrprofile.CompanyName }}</h4>
+            <small>{{ mypost.user.employerrprofile.CompanyCategory }}</small><br>
+            <h6><i class="fa fa-map-marker"></i> {{ mypost.user.employerrprofile.CompanyAddress }}</h6>
+
+            <a href="{% url 'employer:employer_profile_detail' mypost.user.id %}" target="_blank" class="button-view-company-profile">View company Profile</a>
+          </div>
+        </div>
+      </div>
+
+      <div class=" mt-2 mb-5 job-section">
+        <div class="basic-job-information-section border mb-3 bg-white">
+        <h5 class="job-info p-3 border">{{ mypost.JobTitle }} <small><i class="fa fa-eye"></i> views({{ mypost.views }})</small></h5>
+          <h5 class="job-info p-3 border-bottom">Basic Job Information</h5>
+
+          <div class="container mb-5">
+              <table class="table table-hover table-responsive table-borderless border-0">
+                <tr>
+                  <th scope="row">Job Category:</th>
+                  <td>{{ mypost.JobCategory }}</td>
+                </tr>
+                <tr>
+                  <th scope="row"> Location :</th>
+                  <td>{{ mypost.Location }}</td>
+                </tr>
+                <tr>
+                  <th scope="row">Number Of Vacancies:</th>
+                  <td>{{ mypost.NumberOfVacancies }}</td>
+                </tr>
+                <tr>
+                  <th scope="row">Job Level:</th>
+                  <td>{{ mypost.JobLevel }}</td>
+                </tr>
+                <tr>
+                  <th scope="row">Time:</th>
+                  <td>{{ mypost.AvaliableTime }}</td>
+                </tr>
+
+                <tr>
+                  <th scope="row">Salary:</th>
+                  <td> {% if mypost.SalaryStart and mypost.EndSalary > 0 %} Rs. {{ mypost.SalaryStart }} - {{ mypost.EndSalary }} Monthly {% else %} Negotiable {% endif %}</td>
+                </tr>
+
+                <tr>
+                  <th scope="row">Shift:</th>
+                  <td> {{ mypost.JobShift }}</td>
+                </tr>
+
+                <tr>
+                  <th scope="row">Required Education:</th>
+                  <td> {{ mypost.RequiredEducation }} year</td>
+                </tr>
+
+                <tr>
+                  <th scope="row">Required Experience:</th>
+                  <td> {{ mypost.RequiredExperience }}</td>
+                </tr>
+                
+
+                <tr>
+                  <th scope="row">Required Skill:</th>
+                  <td> {{ mypost.RequiredSkill }}</td>
+                </tr>
+
+                <tr>
+                  <th scope="row">Gender:</th>
+                  <td> {{ mypost.Gender }}</td>
+                </tr>
+
+
+                                            
+              </table>
+          </div>
+        </div>
+            
+
+        <div class="job-description border mb-3 bg-white">
+          <h3 class="job-info p-3 border-bottom">Job Descriptions</h3>
+          <div class="container mb-5">
+            {{ mypost.JobDescreptions|safe }}
+          </div>
+        </div>
+
+
+        <div class="job-specification border mb-2 bg-white">
+          <h3 class="job-info p-3 border-bottom">Job Specification</h3>
+          <div class="container mb-5">
+            {{ mypost.JobSpecification|safe }}
+          </div>
+        </div>
+
+        <div class="job-specification border mb-5 bg-white">
+          <div class="row">
+              
+              <div class="col-sm-4">
+                <a href="" class="btn disabled" aria-disabled="true"><i class="fa fa-eye"></i>Views({{ mypost.views }})</a>
+              </div>
+              <div class="col-sm-4 ml-auto">
+                <a href="https://www.facebook.com/sharer/sharer.php?u=http://127.0.0.1:8000/job/detail/{{ mypost.id }}" class="btn" target = "_blank"><i class="fa fa-facebook fa-lg"></i></a>
+                <a href="https://twitter.com/home?status=http://127.0.0.1:8000/job/detail/{{ mypost.id }}" class="btn" target = "_blank"><i class="fa fa-twitter fa-lg"></i></a>
+                <a href="https://www.linkedin.com/shareArticle?mini=true&url=http://127.0.0.1:8000/job/detail/{{ mypost.id }}&title=&summary=&source=" class="btn" target = "_blank"><i class="fa fa-linkedin fa-lg"></i></a>
+              </div>
+            </div>
+        </div>
+
+        
+
+      </div>
+
+    </div>
+    <div class="col-md-5">
+      <div class="sidebar">
+        <div class="container-fluid">
+          <div class="job-action border bg-white p-3">
+            <h6 class="border-bottom p-0">Job Action</h6>
+            <div class="btns d-flex mt-4">
+            {% if mypost.user == user %}
+                <a href="{% url 'jobs_employer:my_job_delete' mypost.id %}" class="btn button-apply-job"><i class="fa fa-trash"></i> Delete</a>
+                <a href="{% url 'jobs_employer:my_job_update' mypost.id %}" class="btn button-save-job"><i class="fa fa-edit"></i> Edit</a>
+            {% endif %}
+            </div>
+            
+            <div class="btns d-flex mt-4">
+                <a href="" class="btn button-apply-job disabled" aria-disabled="true"><i class="fa fa-plus"></i> Apply Job</a>
+                <a href="" class="btn button-save-job disabled" aria-disabled="true"><i class="fa fa-save"></i> Save Job</a>
+            </div>
+            <div class="btns d-flex mt-4">
+            Notes*:<br>
+            1.this page for public preview and edit and delete if you want<br>
+            2.this job applicants shows in below
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+      <div class="job-applied container border mb-5 bg-white">
+        <div class = "applicant-section border-bottom">
+          <h2 class="article-title ml-5 mt-3">Applicants</h2>
+        </div>
+          <div class="container pl-5 mt-3 pr-5 mb-3">
+                <article class="media-comment content-section mt-1">
+                  <div class="media-body">
+                    {% if not mypost.jobapplys.all %}
+                      No applicants yet..
+                      {% else %}
+                      {% for applicant in mypost.jobapplys.all %}
+                        <div class="article-metadata-username border-bottom">
+                          <img class="rounded-circle account-img mb-2" src="{{ applicant.user.jobseekerprofile.ProfileImage.url }}" alt='applied by user'/>
+                          <a class="ml-2 " href="{% url 'jobseeker_detaillls' applicant.user.username applicant.user.id %}">{{ applicant.user.jobseekerprofile.FirstName }} {{ applicant.user.jobseekerprofile.LastName }}</a>
+                          <a href="{{ applicant.user.jobseekerprofile.UploadCv.url }}" class="btn button-apply-job" target="_blank"><i class="fa fa-download"></i> Download Cv </a>
+                          <small class="text-muted ml-2">{{ applicant.ApplydDate|timesince }}</small>            
+                        </div>
+                        <h3 class="article-title">Why he/she choose this job</h3>
+                        <p class="article-content">{{ applicant.JobApplyReason|safe }}</p><hr><br>
+                        
+                      {% endfor %}
+                    {% endif %}  
+                  </div>
+                </article>
+          </div>
+  </div>
+  </div>
+ </div>
+
+{% endblock profilecontents %}

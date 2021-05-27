@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+    <div class="container p-5">
+    <div class="row">
+        <div class="col-2">
+        </div>
+        <div class="col-8  border shadow-lg p-3 mb-5 bg-white rounded">
+            <div class="container ">
+                <form method = 'POST'>
+                {% csrf_token %}
+                    <fieldset class="form-group">
+                        <legend class="border-bottom mb-4">Register as {{ user_type }}</legend>
+                        <input type="hidden" name="next" value="{{ next }}">
+                            {{ form|crispy }}
+                    </fieldset>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-outline-info btn-block">Sign up</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="col-2">
+        </div>
+        </div>
+    </div>
+{% endblock %}

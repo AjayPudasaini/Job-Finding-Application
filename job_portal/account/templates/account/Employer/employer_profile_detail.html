@@ -1,0 +1,133 @@
+{% extends 'account/Employer/employer_profile.html' %}
+{% load static %}
+
+
+{% block profilecontents %}
+   <div class="container border bg-white p-5 mt-5 mb-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-4">
+                    <div class="border rounded bg-light profile-pic-section">
+    
+                        <div class="profile-pic pt-4 justify-content-center d-flex ">
+                            <img src=" {{ user.employerrprofile.CompanyLogo.url }} " class="rounded-circle inf-fluid" alt="logo">
+                        </div>
+                        
+                        <div class="username-online-acc border-top mt-3 w-100">
+                            
+                            <h6 class="username justify-content-center d-flex mt-1"><i class="fa fa-user pr-2"></i> {{ user.username }}</h6>
+                            <h6 class="username justify-content-center d-flex mt-1"><i class="fa fa-envelope pr-2"></i> {{ user.email }}</h6>
+                            <div class="justify-content-center d-flex">
+                                {% if not profile.Facebook %}
+                                
+                                {% else %}
+                                    <div class="p-2">
+                                        <a href="{{ profile.Facebook }}"><i class="fa fa-facebook"></i></a>
+                                    </div>
+                                    {% endif %}
+                                    {% if not profile.Twitter %}
+                                    {% else %}
+                                        <div class="p-2">
+                                            <a href="{{ profile.Twitter }}"><i class="fa fa-twitter"></i></a>
+                                        </div>
+                                    {% endif %}
+                                    {% if not profile.Instagram %}
+                                    {% else %}
+                                        <div class="p-2">
+                                            <a href="{{ profile.Instagram }}"><i class="fa fa-instagram"></i></a>
+                                        </div>
+                                    {% endif %}
+                                </div>
+                           
+                        </div>
+
+
+
+                               
+                    </div>
+
+                    <div class="card mt-5 bg-light">
+                        <div class="card-body p-0">
+                            <h5 class="card-title border-bottom justify-content-center d-flex">About Company</h5>
+                            <p class="card-text pl-2 pr-2 pb-2">{{ profile.AboutCompany|safe }}</p>
+                        </div>
+                    </div> 
+
+                    <div class="card mt-5 bg-light">
+                        <div class="card-body p-3">
+                            <h5 class="card-title border-bottom justify-content-center d-flex">Company Profile Value</h5>
+                            <div class="progress">
+                                <div class="progress-bar bg-success" role="progressbar" style="width: {{ profile.Company_percentage_complete }}%;" aria-valuenow="{{ profile.Company_percentage_complete }}" aria-valuemin="0" aria-valuemax="100">{{ profile.Company_percentage_complete }}%</div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+    
+                <div class="col-8">
+                    <div class="container">
+                        <div class="table-heading d-flex">
+                            <h6 class="mr-auto">Account Detail</h6>
+                            <a href="{% url 'employer:employer_profile_update_detail' %}" class="btn ml-auto">Edit Account</a>
+                        </div>
+                        
+                        <table class="table table-hover table-responsive table-borderless border-0">
+                                <tr>
+                                    <th scope="row">Company Name:</th>
+                                    <td>{{ profile.CompanyName }}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Company Category:</th>
+                                    <td>{{ profile.CompanyCategory }}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Company Ownership:</th>
+                                    <td>{{ profile.CompanyOwnership }}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Company Website:</th>
+                                    <td> <a href="{{ profile.CompanyWebsite }}"><i class="fa fa-web"></i>{{ profile.CompanyWebsite }}</a></td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Company Establish Date:</th>
+                                    <td>{{ profile.CompanyEstablishDate }}</td>
+                                </tr>
+                                
+                                <tr>
+                                    <th scope="row">Company Address:</th>
+                                    <td>{{ profile.CompanyAddress }}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Telphone Number:</th>
+                                    <td>{{ profile.TelNo }}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Offical MObile no:</th>
+                                    <td>{{ profile.MobileNo }}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Person Full Name:</th>
+                                    <td>{{ profile.FirstName }} {{ profile.LastName }} </td>
+                                </tr>
+
+                                <tr>
+                                    <th scope="row">Personal mobile no:</th>
+                                    <td>{{ profile.PhoneNumber }}</td>
+                                </tr>
+
+                                <tr>
+                                    <th scope="row">Email:</th>
+                                    <td>{{ profile.Email }}</td>
+                                </tr>
+                            
+                        </table>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+    
+
+{% endblock profilecontents %}

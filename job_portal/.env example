@@ -1,0 +1,13 @@
+SECRET_KEY = 
+DEBUG = 
+
+
+
+EMAIL_BACKEND = 
+EMAIL_HOST = 
+EMAIL_PORT = 
+EMAIL_USE_TLS = 
+EMAIL_HOST_USER =  yourgmailaddress
+EMAIL_HOST_PASSWORD =  your gmail password
+
+fillout these without any cotes

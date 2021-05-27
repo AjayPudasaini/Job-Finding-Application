@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+
+{% block content %}
+        <section class="jumbotron text-center">
+        <div class="container">
+            <h1 class="jumbotron-heading">Get in touch</h1>
+            <p class="lead text-muted mb-0">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque consequuntur dignissimos expedita inventore, natus quibusdam! Accusamus amet deserunt eveniet obcaecati, officia praesentium quisquam sint totam! Adipisci at consequuntur culpa excepturi.</p>
+        </div>
+    </section>
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="base.html">Home</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Contact</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </div>
+    <div class="container p-5">
+        <div class="row">
+            <div class="col-lg-7">
+                <div class="card">
+                    <div class="card-header bg-primary text-white"><i class="fa fa-envelope"></i> Contact us.
+                    </div>
+                    <div class="card-body">
+                        <form method="post">
+                            {% csrf_token %}
+                               {{ form|crispy }}
+                                <div class="mx-auto">
+                                <button type="submit" class="btn btn-primary text-right" name="submit">send</button></div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-5">
+                <div class="card bg-light mb-3">
+                    <div class="card-header bg-success text-white text-uppercase"><i class="fa fa-home"></i> Address</div>
+                    <div class="card-body">
+    
+                        <p>44600, Dillibazar</p>
+                        <p>Kathmandu, Nepal</p>
+                        <p>Email : smartltm@gmail.com</p>
+                        <p>Tel. +977-9843809941</p>    
+                    </div>
+    
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock content %}

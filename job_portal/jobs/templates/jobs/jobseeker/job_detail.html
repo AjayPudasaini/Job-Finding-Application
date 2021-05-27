@@ -1,0 +1,194 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load is_already_applied %}
+
+{% block content %}
+
+{% if request.user.is_authenticated %}      
+  {% is_already_applied mypost request.user as is_applied %} 
+{% endif %}
+
+
+<div class="container">
+   <div class="row mt-5">
+    <div class="col-md-7">
+      <div class="company-banner">
+        <img src="{{ mypost.HiringBanner.url }}" class="img-fluid">
+      </div>
+
+      <div class="company-profile mt-4 bg-white p-3">
+        <div class="row bg-white profile-section no-gutters">
+          <div class="col-md-3 mt-3 company-logo">
+            <img src="{{ mypost.user.employerrprofile.CompanyLogo.url }}" class="img-fluid rounded-circle">
+          </div>
+
+          <div class="col-md-9 mt-3 company-name">
+            <h4> {{ mypost.user.employerrprofile.CompanyName }}</h4>
+            <small>{{ mypost.user.employerrprofile.CompanyCategory }}</small><br>
+            <h6><i class="fa fa-map-marker"></i> {{ mypost.user.employerrprofile.CompanyAddress }}</h6>
+
+            <a href="{% url 'employer_detaillls' mypost.user.username mypost.user.id %}" target="_blank" class="button-view-company-profile">View company Profile</a>
+          </div>
+        </div>
+      </div>
+
+      <div class=" mt-2 mb-5 job-section">
+        <div class="basic-job-information-section border mb-3 bg-white">
+        <h5 class="job-info p-3 border">{{ mypost.JobTitle }} <small><i class="fa fa-eye"></i> views(200)</small></h5> 
+          <h5 class="job-info p-3 border-bottom">Basic Job Information</h5>
+
+          <div class="container mb-5">
+              <table class="table table-hover table-responsive table-borderless border-0">
+                <tr>
+                  <th scope="row">Job Category:</th>
+                  <td>{{ mypost.JobCategory }}</td>
+                </tr>
+                <tr>
+                  <th scope="row"> Location :</th>
+                  <td>{{ mypost.Location }}</td>
+                </tr>
+                <tr>
+                  <th scope="row">Number Of Vacancies:</th>
+                  <td>{{ mypost.NumberOfVacancies }}</td>
+                </tr>
+                <tr>
+                  <th scope="row">Job Level:</th>
+                  <td>{{ mypost.JobLevel }}</td>
+                </tr>
+                <tr>
+                  <th scope="row">Time:</th>
+                  <td>{{ mypost.AvaliableTime }}</td>
+                </tr>
+
+                <tr>
+                  <th scope="row">Salary:</th>
+                  <td>Rs. {{ mypost.SalaryStart }} - {{ mypost.EndSalary }}</td>
+                </tr>
+
+                <tr>
+                  <th scope="row">Shift:</th>
+                  <td> {{ mypost.JobShift }}</td>
+                </tr>
+
+                <tr>
+                  <th scope="row">Required Education:</th>
+                  <td> {{ mypost.RequiredEducation }}</td>
+                </tr>
+
+                <tr>
+                  <th scope="row">Required Experience:</th>
+                  <td> {{ mypost.RequiredExperience }} year.</td>
+                </tr>
+                
+
+                <tr>
+                  <th scope="row">Required Skill:</th>
+                  <td> {{ mypost.RequiredSkill }}</td>
+                </tr>
+
+                <tr>
+                  <th scope="row">Gender:</th>
+                  <td> {{ mypost.Gender }}</td>
+                </tr>
+
+                <tr>
+                  <th scope="row">Deadline:</th>
+                  <td> {{ mypost.JobExpiryDate }}</td>
+                </tr>
+
+
+                                            
+              </table>
+          </div>
+        </div>
+            
+
+        <div class="job-description border mb-3 bg-white">
+          <h3 class="job-info p-3 border-bottom">Job Descriptions</h3>
+          <div class="container mb-5">
+            {{ mypost.JobDescreptions|safe }}
+          </div>
+        </div>
+
+
+        <div class="job-specification border mb-2 bg-white">
+          <h3 class="job-info p-3 border-bottom">Job Specification</h3>
+          <div class="container mb-5">
+            {{ mypost.JobSpecification|safe }}
+          </div>
+        </div>
+
+        <div class="job-specification border mb-2 bg-white">
+          <div class="row">
+              
+              <div class="col-sm-4">
+              {% if not mypost.ApplyLink %}
+                Apply  link is not avaliable you can abale ko apply this job in online
+              {% else %}
+                  <a href="{{ mypost.ApplyLink   }}" class="btn" target="_blank">Drop your cv this link {{ mypost.ApplyLink }}</a>
+                {% endif %}
+              </div>
+            </div>
+        </div>
+        
+        <div class="job-specification border mb-2 bg-white">
+          <div class="row p-2 d-flex">
+            
+            {% if is_applied %}
+              <input type="button" class="btn btn-secondary ml-5" value="Already applied"/>
+            {% else %}
+              <a href="{% url 'job_apply' mypost.pk %}" class="btn button-apply-job"><i class="fa fa-plus"></i> Apply Now</a>
+            {% endif %}
+
+            {% if is_save %}
+              <a href="{% url 'save_jobs' mypost.id %}" class="btn btn-secondary ml-5"><i class="fa fa-save"></i> Saved Job</a>
+            {% else %}
+              <a href="{% url 'save_jobs' mypost.id %}" class="btn button-save-job"><i class="fa fa-save"></i> Save Job</a>
+            {% endif %}
+          </div>
+        </div>
+
+        
+
+        <div class="job-specification border mb-5 bg-white">
+          <div class="row">
+              
+              <div class="col-sm-4">
+                <a href="" class="btn disabled" aria-disabled="true"><i class="fa fa-eye"></i>Views({{ mypost.views }}) {{ clint_ip }}</a>
+              </div>
+              <div class="col-sm-4 ml-auto">
+              <a href="https://www.facebook.com/sharer/sharer.php?u=http://127.0.0.1:8000/job/detail/{{ mypost.id }}" class="btn" target = "_blank"><i class="fa fa-facebook fa-lg"></i></a>
+              <a href="https://twitter.com/home?status=http://127.0.0.1:8000/job/detail/{{ mypost.id }}" class="btn" target = "_blank"><i class="fa fa-twitter fa-lg"></i></a>
+              <a href="https://www.linkedin.com/shareArticle?mini=true&url=http://127.0.0.1:8000/job/detail/{{ mypost.id }}&title=&summary=&source=" class="btn" target = "_blank"><i class="fa fa-linkedin fa-lg"></i></a>
+              </div>
+            </div>
+        </div>
+
+      </div>
+
+    </div>
+    <div class="col-md-5">
+      <div class="sidebar">
+        <div class="container-fluid">
+          <div class="job-action border bg-white p-3">
+            <h6 class="border-bottom p-0">Job Action</h6>
+            <div class="btns d-flex mt-4">
+            {% if is_applied %}
+              <input type="button" class="btn btn-secondary" value="Already applied"/>
+            {% else %}
+              <a href="{% url 'job_apply' mypost.pk %}" class="btn button-apply-job"><i class="fa fa-plus"></i> Apply Now</a>
+            {% endif %}
+                {% if is_save %}
+                  <a href="{% url 'save_jobs' mypost.id %}" class="btn btn-secondary ml-5"><i class="fa fa-save"></i> Saved Job</a>
+                {% else %}
+                  <a href="{% url 'save_jobs' mypost.id %}" class="btn button-save-job"><i class="fa fa-save"></i> Save Job</a>
+                {% endif %}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+ </div>
+
+{% endblock content %}

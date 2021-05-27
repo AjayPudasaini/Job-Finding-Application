@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+
+<main class="about_content">
+    <div class="pics">
+      <img src="{% static 'Image/bg1.jpg' %}" class="d-block w-100 img-fluid" alt="...">
+      <div class="tops">
+        <h1 >We take care of everything <br> - that's a bonus</h1>
+        <p>We have combined artificial intelligence with the blockchain to bring the best jobseekers and great companies together,  led by a team of experienced and innovative recruitment professionals.</p>
+    
+    </div>
+    </div>
+    
+
+<section class="sectionsss">
+  <nav>
+    <img src="{% static 'Image/job.png' %}" alt="jon search picture">
+    
+  </nav>
+  
+  <article>
+    <h1>SmartKTM jobs is evolving the traditional recruitment model using  technology, enhanced job posting, job finding and feedback </h1> <br/>
+<p>This powerful utilization of technology will fulfill our mission to realign the industry away from costly middlemen towards a decentralized, technology-based community for the jobseeker and job provider of the kathmandu.</p>
+ <a href="{% url 'jobs_employer:job_post' %}" class="btn btn-post-job">Post a Job</a>
+  
+  </article>
+</section>
+
+<div class="rows p-0">
+
+   <h1 class="mt-2 mb-3">Our recruiting platform allows you to attract <br/>and hire the top talent, assisting you every<br/> step of the way.</h1>
+   <div class="columns" style="background-color:white;">
+
+    <h2>Expertise</h2>
+    <p>
+
+Our platform has been built to optimize the hiring process for both candidate and employer, led by a team of experienced and innovative recruitment professionals.</p>
+  </div>
+  <div class="columns" style="background-color:white;">
+    <h2>Efficiency</h2>
+    <p>Our leading technology works to screen and present employers with the most relevant candidate applications while keeping active job seekers alert to new top jobs.</p>
+  </div>
+  <div class="columns" style="background-color:white;">
+    <h2>Trust</h2>
+    <p>We believe that transparency between candidate and employer makes for successful recruitment, therefore our platform encourages relevant information to be displayed within our secure cloud-based system.</p>
+
+  </div>
+
+   <div class="columns" style="background-color:white;">
+    <h2>Outreach</h2>
+    <p>We utilize all the top channels for quality hires to ensure your jobs attract the right candidates.</p>
+  </div>
+  <div class="columns" style="background-color:white;">
+    <h2>Feeadback</h2>
+    <p>Our internal messaging system solves the breakdown in communication between candidates and employers and creates a channel for direct feedback.</p>
+  </div>
+  <div class="columns" style="background-color:white;">
+    <h2>Fraud detect</h2>
+    <p>We have a group of experties who constantly monitors the new member registration , new job vacancy post etc. We immediately delete the user or the jobpost if found fake</p>
+    
+  </div>
+</div>
+</main>
+
+{% endblock content %}

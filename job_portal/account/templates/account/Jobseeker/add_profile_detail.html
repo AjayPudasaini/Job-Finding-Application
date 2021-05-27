@@ -1,0 +1,36 @@
+{% extends 'account/jobseeker/profile.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+
+{% block profilecontent %}
+     <div class="container p-5">
+      <div class="row">
+          <div class="col-8">
+                <div class="border border shadow-lg p-3 mb-5 bg-white rounded">
+                    <form method = 'POST' novalidate enctype="multipart/form-data">
+                    {% csrf_token %}
+                        <fieldset class="form-group">
+                            <legend class="border-bottom mb-4">Update Your Profile</legend>
+                            <div class = "container">
+                                {{ u_form|crispy }}
+                                {{ p_form.media }}
+                                {{ p_form|crispy }}
+                            </div>
+                        </fieldset>
+                        <div class="form-group pl-3 pr-3">
+                            <button type="submit" class="btn btn-outline-info btn-block">Save</button>
+                        </div>
+                    </form>
+                </div>                   
+          </div>
+
+          <div class="col-4 bg-white p-3">
+            <p> Note* : Every fields have an an value so, you will required complete all fields and then you can able ko  apply any job online </p>
+          </div>
+
+
+      </div>
+    </div>    
+  
+{% endblock profilecontent %}

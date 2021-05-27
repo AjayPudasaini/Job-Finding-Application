@@ -1,0 +1,222 @@
+{% extends 'account/jobseeker/profile.html' %}
+{% load static %}
+
+
+{% block profilecontent %}
+   <div class="container border bg-white p-5 mt-5 mb-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="border rounded bg-light profile-pic-section">
+    
+                        <div class="profile-pic pt-4 justify-content-center d-flex ">
+                            <img src=" {{ user.jobseekerprofile.ProfileImage.url }} " class="rounded-circle inf-fluid" alt="profile-pic">
+                        </div>
+                        
+                        <div class="username-online-acc border-top mt-3 w-100">
+                            
+                            <h6 class="username justify-content-center d-flex mt-1"><i class="fa fa-user pr-2"></i> {{ user.username }}</h6>
+                            <h6 class="username justify-content-center d-flex mt-1"><i class="fa fa-envelope pr-2"></i>{{ user.email }}</h6>
+
+                                
+                                    <div class="justify-content-center d-flex">
+                                            {% if not profile.Facebook %}
+                             
+                                            {% else %}
+                                                <div class="p-2">
+                                                    <a href="{{ profile.Facebook }}"><i class="fa fa-facebook"></i></a>
+                                                </div>
+                                            {% endif %}
+                                            {% if not profile.Twitter %}
+                                            {% else %}
+                                                <div class="p-2">
+                                                    <a href="{{ profile.Twitter }}"><i class="fa fa-twitter"></i></a>
+                                                </div>
+                                            {% endif %}
+                                            {% if not profile.Instagram %}
+                                            {% else %}
+                                                <div class="p-2">
+                                                    <a href="{{ profile.Instagram }}"><i class="fa fa-instagram"></i></a>
+                                                </div>
+                                            {% endif %}
+                                    </div>
+                                
+
+                        </div>   
+                    </div>
+
+                   
+                        
+                    <div class="card mt-5 bg-light">
+                        <div class="card-body p-0">
+                            <h5 class="card-title border-bottom justify-content-center d-flex">About Me</h5>
+                            <p class="card-text pl-2 pr-2 pb-2">{{ profile.AboutMe|safe }}</p>
+                        </div>
+                    </div>
+
+
+                    {% if user.is_authenticated %}
+                        {% if user.is_jobseeker %}
+
+                        <div class="card mt-5 bg-light">
+                            <div class="card-body p-3">
+                                <h5 class="card-title border-bottom justify-content-center d-flex">My Profile</h5>
+                                <div class="progress">
+                                    <div class="progress-bar bg-success" role="progressbar" style="width: {{ profile.percentage_complete }}%;" aria-valuenow="{{ profile.percentage_complete }}" aria-valuemin="0" aria-valuemax="100">{{ profile.percentage_complete }}%</div>
+                                </div>
+                            </div>
+                        </div>
+                        {% endif %}
+                    {% endif %}
+
+
+                    {% if user.is_authenticated %}
+                        {% if user.is_jobseeker %}
+                        <div class="card mt-5 bg-light">
+                            <div class="card-body p-3">
+                                <h5 class="card-title border-bottom justify-content-center d-flex">My Cv</h5>
+                                <div class="">
+                                {% if not profile.UploadCv %}
+                                    You have not uploaded cv please upload first!
+                                {% else %}
+                                    <a href="{{ profile.UploadCv.url }}" class="btn button-apply-job" target="_blank"><i class="fa fa-download"></i> Download Cv </a>
+                                {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                        {% endif %}
+                    {% endif %}
+
+
+                    
+                </div>
+    
+                <div class="col-md-8">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-12">
+                                <table class="table table-hover table-responsive table-borderless border-0">
+                                    <div class="table-heading d-flex">
+                                        <h6 class="mr-auto">Account Detail</h6>
+                                        {% if user.is_authenticated %}
+                                            {% if user.is_jobseeker %}
+
+                                            <a href="{% url 'jobseeker:jobseeker_profile_add_detail' %}" class="btn ml-auto">Edit Account</a>
+                                            {% endif %}
+
+                                        {% endif %}
+                                    </div>
+        
+                                    
+                                        <tr>
+                                            <th scope="row">First Name:</th>
+                                            <td>{{ profile.FirstName }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">Last Name:</th>
+                                            <td>{{ profile.LastName }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">Gender:</th>
+                                            <td>{{ profile.Gender }}</td>
+                                        </tr>
+                                        
+                                        <tr>
+                                            <th scope="row">Marriage Status:</th>
+                                            <td>{{ profile.MarrigeStatus }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">Religion:</th>
+                                            <td>{{ profile.Religion }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">Phone Number:</th>
+                                            <td>{{ profile.PhoneNumber }}</td>
+                                        </tr>
+
+                                        <tr>
+                                            <th scope="row">Nationality:</th>
+                                            <td>{{ profile.Nationality }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">Current Address:</th>
+                                            <td>{{ profile.CurrentAddress }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">Pernament Address:</th>
+                                            <td>{{ profile.PernamentAddress }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">Education:</th>
+                                            <td>{{ profile.Education }}</td>
+                                        </tr>
+        
+                                        <tr>
+                                            <th scope="row">Education Program:</th>
+                                            <td>{{ profile.EducationProgram }}</td>
+                                        </tr>
+        
+                                        <tr>
+                                            <th scope="row">Education Board:</th>
+                                            <td>{{ profile.EducationBoard }}</td>
+                                        </tr>
+        
+                                        <tr>
+                                            <th scope="row">Name Of Institute:</th>
+                                            <td>{{ profile.NameOfInstitute }}</td>
+                                        </tr>
+        
+                                        <tr>
+                                            <th scope="row">Education:</th>
+                                            <td>{{ profile.Education }}</td>
+                                        </tr>
+        
+                                        <tr>
+                                            <th scope="row">My Skill:</th>
+                                            <td>{{ profile.MySkill }}</td>
+                                        </tr>
+        
+                                        <tr>
+                                            <th scope="row">Working Experience:</th>
+                                            <td>{{ profile.WorkingExperience }}</td>
+                                        </tr>
+        
+                                        <tr>
+                                            <th scope="row">Worked Field:</th>
+                                            <td>{{ profile.WorkedField }}</td>
+                                        </tr>
+        
+                                        <tr>
+                                            <th scope="row">Worked Company Name:</th>
+                                            <td>{{ profile.WorkedCompanyName }}</td>
+                                        </tr>
+        
+                                        <tr>
+                                            <th scope="row">WorkedCompanyWebsite:</th>
+                                            <td>{{ profile.WorkedCompanyWebsite }}</td>
+                                        </tr>
+        
+                                        <tr>
+                                            <th scope="row">Job Category:</th>
+                                            <td>{{ profile.JobCategory }}</td>
+                                        </tr>
+        
+                                        <tr>
+                                            <th scope="row">Language:</th>
+                                            <td>{{ profile.Language }}</td>
+                                        </tr>
+        
+        
+
+                                    
+                                    
+                                </table>
+                            </div>
+                        </div>                       
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+{% endblock profilecontent %}

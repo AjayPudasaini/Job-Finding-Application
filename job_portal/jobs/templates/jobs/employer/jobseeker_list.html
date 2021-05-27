@@ -1,0 +1,18 @@
+{% extends 'account/Employer/employer_profile.html' %}
+{% load static %}
+
+{% block profilecontents %}
+    <div class="container">
+        <div class="row bg-white m-5">
+        {% if not jobseeker %}
+            Jobseeker are not avaliable yet...
+        {% else %}
+            {% for jobseeker in jobseeker %}
+                <div class="col-4 mt-5 mb-5 ">
+                    <a class="p-5" href="{% url 'jobseeker_detaillls' jobseeker.user.username jobseeker.user.id %}">{{ jobseeker.user.jobseekerprofile.FirstName }} {{ jobseeker.user.jobseekerprofile.LastName }}</a>       
+                </div>
+            {% endfor %}
+        {% endif %}
+        </div>
+    </div>
+{% endblock profilecontents %}  
